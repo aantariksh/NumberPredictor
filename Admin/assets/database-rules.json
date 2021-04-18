@@ -1,0 +1,34 @@
+{
+  "rules":{
+     "Teqmo":{
+       "Details":{
+         ".read": true,
+         "weeks": {
+            ".write": "auth.uid === 'evZY5WGbFaawPkoC0CHVTMoEDHl1' || auth.uid === 'pFCPmdYMeSOB4EFEMFTtDArVhQx2'",
+            ".validate": "newData.hasChildren()"
+         }
+       },
+       "Numbers":{
+         ".read": true,
+         ".write":true,
+         ".validate": "newData.hasChildren()"
+       },
+       "Stores":{
+          "$uid": {
+            ".read": "$uid === auth.uid || auth.uid === 'evZY5WGbFaawPkoC0CHVTMoEDHl1' || auth.uid === 'pFCPmdYMeSOB4EFEMFTtDArVhQx2'",
+            ".write": "$uid === auth.uid || auth.uid === 'evZY5WGbFaawPkoC0CHVTMoEDHl1' || auth.uid === 'pFCPmdYMeSOB4EFEMFTtDArVhQx2'"
+          },
+          ".read": "auth.uid === 'evZY5WGbFaawPkoC0CHVTMoEDHl1' || auth.uid === 'pFCPmdYMeSOB4EFEMFTtDArVhQx2'",
+          ".write": "auth.uid === 'evZY5WGbFaawPkoC0CHVTMoEDHl1' || auth.uid === 'pFCPmdYMeSOB4EFEMFTtDArVhQx2'"
+        },
+       "Winners":{
+          "$uid": {
+            ".read": "$uid === auth.uid || auth.uid === 'evZY5WGbFaawPkoC0CHVTMoEDHl1' || auth.uid === 'pFCPmdYMeSOB4EFEMFTtDArVhQx2'",
+            ".write": "$uid === auth.uid || auth.uid === 'evZY5WGbFaawPkoC0CHVTMoEDHl1' || auth.uid === 'pFCPmdYMeSOB4EFEMFTtDArVhQx2'"
+          },
+          ".read": "auth.uid === 'evZY5WGbFaawPkoC0CHVTMoEDHl1' || auth.uid === 'pFCPmdYMeSOB4EFEMFTtDArVhQx2'",
+          ".write": "auth.uid === 'evZY5WGbFaawPkoC0CHVTMoEDHl1' || auth.uid === 'pFCPmdYMeSOB4EFEMFTtDArVhQx2'"
+        }
+     }
+  }
+}

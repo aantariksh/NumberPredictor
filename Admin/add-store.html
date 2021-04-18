@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Admin | Number Predictor by TeqmoMedia</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="./assets/css/vendor.min.css">
+    <link rel="stylesheet" href="./assets/vendor/icon-set/style.css">
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="./assets/css/theme.min.css">
+
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <!--Firebase Config-->
+    <Script src="./assets/firebase/auth.js"></Script>
+  </head>
+
+  <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
+
+    <!-- Header Starts -->
+    <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container" style="background-color: mediumvioletred;">
+      <div class="navbar-nav-wrap">
+
+        <div class="navbar-nav-wrap-content-left">
+          <!-- Navbar Vertical Toggle -->
+          <button type="button" class="js-navbar-vertical-aside-toggle-invoker close mr-3 d-lg-none">
+            <i class="tio-first-page navbar-vertical-aside-toggle-short-align" data-toggle="tooltip" data-placement="right" title="Collapse"></i>
+            <i class="tio-last-page navbar-vertical-aside-toggle-full-align" data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-toggle="tooltip" data-placement="right" title="Expand"></i>
+          </button>
+          <!-- End Navbar Vertical Toggle -->
+        </div>
+
+        <div class="mx-auto px-auto">
+          <h1>Hot Number Predictor</h1>
+        </div>
+
+        <!-- Secondary Content -->
+        <div class="navbar-nav-wrap-content-right">
+          <!-- Navbar -->
+          <ul class="navbar-nav align-items-center flex-row">
+
+            <li class="nav-item">
+              <!-- Account -->
+              <div class="hs-unfold">
+                <a class="js-hs-unfold-invoker navbar-dropdown-account-wrapper" href="javascript:;"
+                  data-hs-unfold-options='{
+                    "target": "#accountNavbarDropdown",
+                    "type": "css-animation"
+                  }'>
+                  <i class="tio-account-circle" id="profileImage" style="font-size: 40px;"></i>
+                </a>
+
+                <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
+                  <div class="dropdown-item-text">
+                    <div class="media align-items-center">
+                      <div class="avatar avatar-sm avatar-circle mr-2">
+                        <img class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
+                      </div>
+                      <div class="media-body">
+                        <span class="card-title h5" id="profileName">Welcome</span>
+                        <span class="card-text" id="profileEmail">welcome@example.com</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
+                    <span class="text-truncate pr-2" title="Sign out">Sign out</span>
+                  </a>
+                </div>
+              </div>
+              <!-- End Account -->
+            </li>
+          </ul>
+          <!-- End Navbar -->
+        </div>
+        <!-- End Secondary Content -->
+      </div>
+    </header>
+    <!-- Header Ends -->
+
+    <!-- SideBar Starts -->
+    <aside class="js-navbar-vertical-aside navbar navbar-dark navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl">
+      <div class="navbar-vertical-container">
+        <div class="navbar-vertical-footer-offset">
+          <div class="navbar-brand-wrapper justify-content-between" style="background-color: mediumvioletred;">
+            <!-- Navbar Vertical Toggle -->
+            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-vertical-aside-toggle btn btn-icon btn-xs btn-ghost-dark">
+              <i class="tio-clear tio-lg"></i>
+            </button>
+            <!-- End Navbar Vertical Toggle -->
+          </div>
+
+          <!-- Content -->
+          <div class="navbar-vertical-content">
+            <ul class="navbar-nav navbar-nav-lg nav-tabs">
+              <!-- Logo -->
+              <li class="nav-item text-center" style="padding: 22px 0;">
+                <a class="navbar-brand" href="./index.html">
+                  <img class="navbar-brand-logo" src="./assets/img/logo-dark.png" style="width: 75%;margin: 0 auto;">
+                  <img class="navbar-brand-logo-mini" src="./assets/img/favicon.png" alt="Logo">
+                </a>
+              </li>
+              <!-- Dashboards -->
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link" href="./index.html" title="Dashboard" data-placement="left">
+                  <i class="tio-home-vs-1-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Dashboard</span>
+                </a>
+              </li>
+              <!-- End Dashboards -->
+
+              <!-- Stores -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Stores</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-stores.html" title="Sales Report" data-placement="left">
+                  <i class="tio-shop-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Stores</span>
+                </a>
+              </li>
+
+              <li class="nav-item active">
+                <a class="js-nav-tooltip-link nav-link " href="./add-store.html" data-placement="left">
+                  <i class="tio-add-square-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Add Store</span>
+                </a>
+              </li>
+              <!-- End Stores -->
+
+              <!-- Payments -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle">Payments</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./generate-bill.html" title="Layouts" data-placement="left">
+                  <i class="tio-credit-cards nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Generate Bill</span>
+                </a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link " href="./all-bills.html" title="Layouts" data-placement="left">
+                  <i class="tio-receipt-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Bills</span>
+                </a>
+              </li>
+              <!-- End Payments -->
+
+              <!-- Winners -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Winners</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./check-winners.html" title="Sales Report" data-placement="left">
+                  <i class="tio-search nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Check Winners</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-winners.html" data-placement="left">
+                  <i class="tio-smile nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Winners</span>
+                </a>
+              </li>
+              <!-- End Winners -->
+
+              <!-- Account -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link" data-placement="left" href="javascript:void(0);" onclick="logout()">
+                  <i class="tio-turn-off nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Logout</span>
+                </a>
+              </li>
+              <!-- End Account -->
+
+            </ul>
+          </div>
+          <!-- End Content -->
+        </div>
+      </div>
+    </aside>
+    <!-- SideBar Ends -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+
+    <main id="content" role="main" class="main">
+      <!-- Step Form -->
+      <form class="js-step-form py-md-5"
+            data-hs-step-form-options='{
+              "progressSelector": "#addUserStepFormProgress",
+              "stepsSelector": "#addUserStepFormContent",
+              "endSelector": "#addUserFinishBtn",
+              "isValidate": false
+            }'>
+        <div class="row justify-content-lg-center">
+          <div class="col-lg-8">
+            <!-- Step -->
+            <ul id="addUserStepFormProgress" class="js-step-progress step step-sm step-icon-sm step step-inline step-item-between mb-3 mb-md-5">
+              <li class="step-item">
+                <a class="step-content-wrapper" href="javascript:;"
+                    data-hs-step-form-next-options='{
+                    "targetSelector": "#addUserStepProfile"
+                  }'>
+                  <span class="step-icon step-icon-soft-dark">1</span>
+                  <div class="step-content">
+                    <span class="step-title">Profile</span>
+                  </div>
+                </a>
+              </li>
+
+              <li class="step-item" onclick="checkpass()">
+                <a class="step-content-wrapper" href="javascript:;"
+                    data-hs-step-form-next-options='{
+                    "targetSelector": "#addUserStepBillingAddress"
+                  }'>
+                  <span class="step-icon step-icon-soft-dark">2</span>
+                  <div class="step-content">
+                    <span class="step-title">Other Details</span>
+                  </div>
+                </a>
+              </li>
+
+              <li class="step-item" onclick="confirmpage(),checkpass()">
+                <a class="step-content-wrapper" href="javascript:;"
+                    data-hs-step-form-next-options='{
+                    "targetSelector": "#addUserStepConfirmation"
+                  }'>
+                  <span class="step-icon step-icon-soft-dark">3</span>
+                  <div class="step-content">
+                    <span class="step-title">Confirmation</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <!-- End Step -->
+
+            <!-- Content Step Form -->
+            <div id="addUserStepFormContent">
+              <!-- Card -->
+              <div id="addUserStepProfile" class="card card-lg active border-primary shadow-lg">
+                <!-- Body -->
+                <div class="card-body">
+                  <div class="row form-group">
+                    <label class="col-sm-3 col-form-label input-label">Full name</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="fullName" placeholder="Full Name">
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label for="email" class="col-sm-3 col-form-label input-label">Email</label>
+
+                    <div class="col-sm-9">
+                      <input type="email" class="form-control" id="email" placeholder="abc@example.com" aria-label="clarice@example.com">
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label for="passwordLabel" class="col-sm-3 col-form-label input-label">Password <span class="input-label-secondary">(Minimum length 8)</span></label>
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" aria-label="Enter password">
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label class="col-sm-3 col-form-label input-label">Confirm Password</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="confirmPassword" placeholder="Re-enter password">
+                    </div>
+                  </div>
+                
+                  <div class="row form-group">
+                    <label class="col-sm-3 col-form-label input-label">Phone <span class="input-label-secondary">(Optional)</span></label>
+
+                    <div class="col-sm-9">
+                      <div class="input-group input-group-sm-down-break align-items-center">
+                        <input type="text" class="js-masked-input form-control" name="phone" id="phone" placeholder="+x(xxx)xxx-xx-xx">
+                        <div class="input-group-append">
+                          <div class="select2-custom">
+                            <select class="js-select2-custom custom-select" size="1" style="opacity: 0;" name="phoneSelect"
+                                  data-hs-select2-options='{
+                                    "minimumResultsForSearch": "Infinity",
+                                    "dropdownAutoWidth": true,
+                                    "width": "6rem"
+                                  }'>
+                              <option value="Mobile" selected>Mobile</option>
+                              <option value="Home">Home</option>
+                              <option value="Work">Work</option>
+                              <option value="Fax">Fax</option>
+                              <option value="Direct">Direct</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label for="storeName" class="col-sm-3 col-form-label input-label">Store Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="store" id="storeName" placeholder="Enter the Store name">
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label for="companyLabel" class="col-sm-3 col-form-label input-label">Company Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="company" id="companyName" placeholder="Enter the Company name">
+                    </div>
+                  </div>
+
+                </div>
+                <!-- End Body -->
+
+                <!-- Footer -->
+                <div class="card-footer d-flex justify-content-end align-items-center">
+                  <button type="button" class="btn btn-primary" onclick="checkpass()" 
+                          data-hs-step-form-next-options='{
+                            "targetSelector": "#addUserStepBillingAddress"
+                          }'>
+                    Next <i class="tio-chevron-right"></i>
+                  </button>
+                </div>
+                <!-- End Footer -->
+              </div>
+              <!-- End Card -->
+
+              <div id="addUserStepBillingAddress" class="card card-lg border-primary shadow-lg" style="display: none;">
+                <!-- Body -->
+                <div class="card-body">
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="screenLabel" class="col-sm-3 col-form-label input-label">Number of Screens</label>
+
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" name="screens" id="screenLabel" placeholder="Enter number of screens" aria-label="Human resources">
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label for="addressLine1Label" class="col-sm-3 col-form-label input-label">Address line 1</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="addressLine1" id="addressLine1Label" placeholder="Your address" aria-label="Your address">
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label for="addressLine2Label" class="col-sm-3 col-form-label input-label">Address line 2 <span class="input-label-secondary">(Optional)</span></label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="addressLine2" id="addressLine2Label" placeholder="Your address" aria-label="Your address">
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label for="locationLabel" class="col-sm-3 col-form-label input-label">Location</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control mb-3" name="city" id="cityLabel" placeholder="City" aria-label="City">
+                      <input type="text" class="form-control" name="state" id="stateLabel" placeholder="State" aria-label="State">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <label for="zipCodeLabel" class="col-sm-3 col-form-label input-label">Zip Code</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="js-masked-input form-control" name="zipCode" id="zipCodeLabel" placeholder="Your zip code">
+                    </div>
+                  </div>
+
+                </div>
+                <!-- End Body -->
+
+                <!-- Footer -->
+                <div class="card-footer d-flex align-items-center">
+                  <button type="button" class="btn btn-ghost-secondary"
+                      data-hs-step-form-prev-options='{
+                        "targetSelector": "#addUserStepProfile"
+                      }'>
+                    <i class="tio-chevron-left"></i> Previous step
+                  </button>
+
+                  <div class="ml-auto">
+                    <button type="button" class="btn btn-primary" onclick="confirmpage(),checkpass()" 
+                            data-hs-step-form-next-options='{
+                              "targetSelector": "#addUserStepConfirmation"
+                            }'>
+                      Next <i class="tio-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- End Footer -->
+              </div>
+
+              <div id="addUserStepConfirmation" class="card card-lg border-primary shadow-lg" style="display: none;">
+                <!-- Profile Cover -->
+                <div class="profile-cover">
+                  <div class="profile-cover-img-wrapper">
+                    <img class="profile-cover-img" src="./assets/img/1920x400/img1.jpg" alt="Image Description">
+                  </div>
+                </div>
+                <!-- End Profile Cover -->
+
+                <!-- Avatar -->
+                <div class="avatar avatar-xxl avatar-circle avatar-border-lg profile-cover-avatar">
+                  <img class="avatar-img" id="myImg" 
+                  src="./assets/img/160x160/img1.jpg" 
+                  alt="Image Description">
+                </div>
+                <!-- End Avatar -->
+
+                <!-- Body -->
+                <div class="card-body">
+                  <dl class="row">
+                    <dt class="col-sm-6 text-sm-right">Full name:</dt>
+                    <dd class="col-sm-6" id="fullName2"></dd>
+
+                    <dt class="col-sm-6 text-sm-right">Email:</dt>
+                    <dd class="col-sm-6" id="email2"></dd>
+
+                    <dt class="col-sm-6 text-sm-right">Phone:</dt>
+                    <dd class="col-sm-6" id="phone2"></dd>
+
+                    <dt class="col-sm-6 text-sm-right">Store Name:</dt>
+                    <dd class="col-sm-6" id="sn"></dd>
+
+                    <dt class="col-sm-6 text-sm-right">Company Name:</dt>
+                    <dd class="col-sm-6" id="cn"></dd>
+
+                    <dt class="col-sm-6 text-sm-right" id="nsdt">Number of Screens:</dt>
+                    <dd class="col-sm-6" id="ns"></dd>
+
+                    <dt class="col-sm-6 text-sm-right">City:</dt>
+                    <dd class="col-sm-6" id="city2"></dd>
+
+                    <dt class="col-sm-6 text-sm-right">State:</dt>
+                    <dd class="col-sm-6" id="state2"></dd>
+
+                    <dt class="col-sm-6 text-sm-right">Address line 1:</dt>
+                    <dd class="col-sm-6" id="addr1"></dd>
+
+                    <dt class="col-sm-6 text-sm-right">Address line 2:</dt>
+                    <dd class="col-sm-6" id="addr2"></dd>
+
+                    <dt class="col-sm-6 text-sm-right">Zip code:</dt>
+                    <dd class="col-sm-6" id="zc"></dd>
+                  </dl>
+                  <!-- End Row -->
+                </div>
+                <!-- End Body -->
+
+                <!-- Footer -->
+                <div class="card-footer d-sm-flex align-items-sm-center">
+                  <button type="button" class="btn btn-ghost-secondary mb-2 mb-sm-0"
+                      data-hs-step-form-prev-options='{
+                        "targetSelector": "#addUserStepBillingAddress"
+                      }'>
+                    <i class="tio-chevron-left"></i> Previous step
+                  </button>
+
+                  <div class="ml-auto">
+                    <!-- <button type="button" class="btn btn-white mr-2">Save in drafts</button> -->
+                    <button id="addUserFinishBtn" type="button" onclick="signUp()" class="btn btn-primary">Confirm Details</button>
+                  </div>
+                </div>
+                <!-- End Footer -->
+              </div>
+            </div>
+            <!-- End Content Step Form -->
+
+            <!-- Message Body -->
+            <div id="successMessageContent" style="display:none;">
+              <div class="text-center">
+                <img class="img-fluid mb-3" src="./assets/svg/illustrations/success.svg" alt="Image Description" style="max-width: 15rem;">
+
+                <div class="mb-4">
+                  <h2>Successful!</h2>
+                  <p>New user has been successfully created.</p>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <a class="btn btn-white mr-3" href="index.html">
+                    <i class="tio-chevron-left ml-1"></i> Back to dashboard
+                  </a>
+                  <a class="btn btn-primary" href="add-store.html">
+                    <i class="tio-user-add mr-1"></i> Add new user
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- End Message Body -->
+            <!-- Message Body -->
+            <div id="failureMessageContent" style="display:none;">
+              <div class="text-center">
+                <img class="img-fluid mb-3" src="./assets/svg/illustrations/fail.svg" alt="Image Description" style="max-width: 15rem;">
+
+                <div class="mb-4">
+                  <h2>Failed!</h2>
+                  <p>Error in creating new user!!</p>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <a class="btn btn-white mr-3" href="index.html">
+                    <i class="tio-chevron-left ml-1"></i> Back to dashboard
+                  </a>
+                  <a class="btn btn-primary" href="add-store.html">
+                    <i class="tio-user-add mr-1"></i> Add new user
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- End Message Body -->
+          </div>
+        </div>
+        <!-- End Row -->
+      </form>
+      <!-- End Step Form -->
+
+      <!-- Footer -->
+        <div class="footer">
+          <div class="row justify-content-between align-items-center">
+            <div class="col">
+              <p class="font-size-sm mb-0">&copy; NumberPredictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
+            </div>
+            <div class="col-auto">
+              <div class="d-flex justify-content-end">
+                <!-- List Dot -->
+                <ul class="list-inline list-separator">
+                  <li class="list-inline-item">
+                    <a class="list-separator-link" href="#">FAQ</a>
+                  </li>
+
+                  <li class="list-inline-item">
+                    <a class="list-separator-link" href="#">License</a>
+                  </li>
+                </ul>
+                <!-- End List Dot -->
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- End Footer -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- JS Implementing Plugins -->
+    <script src="./assets/js/vendor.min.js"></script>
+    <script src="./assets/js/theme.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <!-- Firebase -->
+    <script src="./assets/firebase/common.js"></script>
+    <script src="./assets/firebase/add-store.js"></script>
+
+    <!-- JS Plugins Init. -->
+    <script>
+      $(document).on('ready', function () {
+        // INITIALIZATION OF STEP FORM
+        // =======================================================
+        $('.js-step-form').each(function () {
+          var stepForm = new HSStepForm($(this), {
+            finish: function() {
+              $("#addUserStepFormProgress").hide();
+              $("#addUserStepFormContent").hide();
+              // $("#successMessageContent").show();
+            }
+          }).init();
+        });
+
+        // INITIALIZATION OF MASKED INPUT
+        // =======================================================
+        $('.js-masked-input').each(function () {
+          var mask = $.HSCore.components.HSMask.init($(this));
+        });
+
+        // INITIALIZATION OF SELECT2
+        // =======================================================
+        $('.js-select2-custom').each(function () {
+          var select2 = $.HSCore.components.HSSelect2.init($(this));
+        });
+
+        // INITIALIZATION OF ADD INPUT FILED
+        // =======================================================
+        $('.js-add-field').each(function () {
+          new HSAddField($(this), {
+            addedField: function() {
+              $('.js-add-field .js-select2-custom-dynamic').each(function () {
+                var select2dynamic = $.HSCore.components.HSSelect2.init($(this));
+              });
+            }
+          }).init();
+        });
+      });
+    </script>
+  </body>
+</html>

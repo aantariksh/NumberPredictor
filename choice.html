@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Number Predictor by TeqmoMedia</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/common.css" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <!-- Firebase Config -->
+    <script src="./assets/firebase/auth.js"></script>
+
+    <style>
+      .bg {
+        /* The image used */
+        background-image: url('./assets/img/background.jpg');
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100vw 100vh;
+      }
+
+      @keyframes bounce {
+        0%, 100%, 20%, 50%, 80% {
+          -webkit-transform: translateY(0);
+          -ms-transform:     translateY(0);
+          transform:         translateY(0)
+        }
+        40% {
+          -webkit-transform: translateY(-30px);
+          -ms-transform:     translateY(-30px);
+          transform:         translateY(-30px)
+        }
+        60% {
+          -webkit-transform: translateY(-15px);
+          -ms-transform:     translateY(-15px);
+          transform:         translateY(-15px)
+        }
+      }
+      .coins { 
+        cursor: pointer; 
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        -webkit-animation-iteration-count: infinite;
+      }
+      .coins:hover {
+        cursor: pointer;
+        animation-name: bounce;
+        -moz-animation-name: bounce;
+      }
+    </style>
+  </head>
+  <body class="bg">
+    <div class="container center">
+      <div class="row text-center">
+
+        <!-- Text -->
+        <div class="col-12">
+          <img src="./assets/img/text1.png" style="width: 75%;">
+        </div>
+        <div class="col-12 mb-5">
+          <img src="./assets/img/text2.png" style="width: 75%;">
+        </div>
+
+        <!-- Buttons -->
+        <div class="col-lg-6 text-center">
+          <img class="coins" src="./assets/img/teqmo3.png" style="width: 50%" onclick="location.href='game.html?digit=3'">
+        </div>
+        <div class="col-lg-6 text-center">
+          <img class="coins" src="./assets/img/teqmo4.png" style="width: 50%" onclick="location.href='game.html?digit=4'">
+        </div>
+
+      </div>
+    </div>
+
+    <script src="./assets/vendor/jquery-3.5.1.slim.min.js"></script>
+    <script src="./assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

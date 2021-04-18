@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Number Predictor | Store Dashboard</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="./assets/css/vendor.min.css">
+    <link rel="stylesheet" href="./assets/vendor/icon-set/style.css">
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="./assets/css/theme.min.css">
+
+    <!--Sweet alert library-->
+    <script src="./assets/vendor/sweetalert2@10.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <!-- Configuration -->
+    <script src="./assets/firebase/auth.js"></script>
+  </head>
+
+  <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
+    <!-- Header Starts -->
+    <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container" style="background-color: mediumvioletred;">
+      <div class="navbar-nav-wrap">
+
+        <div class="navbar-nav-wrap-content-left">
+          <!-- Navbar Vertical Toggle -->
+          <button type="button" class="js-navbar-vertical-aside-toggle-invoker close mr-3 d-lg-none">
+            <i class="tio-first-page navbar-vertical-aside-toggle-short-align" data-toggle="tooltip" data-placement="right" title="Collapse"></i>
+            <i class="tio-last-page navbar-vertical-aside-toggle-full-align" data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-toggle="tooltip" data-placement="right" title="Expand"></i>
+          </button>
+          <!-- End Navbar Vertical Toggle -->
+        </div>
+
+        <div class="mx-auto px-auto">
+          <h1>Hot Number Predictor</h1>
+        </div>
+
+        <!-- Secondary Content -->
+        <div class="navbar-nav-wrap-content-right">
+          <!-- Navbar -->
+          <ul class="navbar-nav align-items-center flex-row">
+
+            <li class="nav-item">
+              <!-- Account -->
+              <div class="hs-unfold">
+                <a class="js-hs-unfold-invoker navbar-dropdown-account-wrapper" href="javascript:;"
+                  data-hs-unfold-options='{
+                    "target": "#accountNavbarDropdown",
+                    "type": "css-animation"
+                  }'>
+                  <i class="tio-account-circle" id="profileImage" style="font-size: 40px;"></i>
+                </a>
+
+                <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
+                  <div class="dropdown-item-text">
+                    <div class="media align-items-center">
+                      <div class="media-body">
+                        <span class="card-title h5" id="profileName">Welcome</span>
+                        <span class="card-text" id="profileEmail">welcome@example.com</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item" href="profile.html">
+                    <span class="text-truncate pr-2">Profile details</span>
+                  </a>
+
+                  <!-- <a class="dropdown-item" href="#">
+                    <span class="text-truncate pr-2" title="Settings">Settings</span>
+                  </a> -->
+
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
+                    <span class="text-truncate pr-2" title="Sign out">Sign out</span>
+                  </a>
+                </div>
+              </div>
+              <!-- End Account -->
+            </li>
+          </ul>
+          <!-- End Navbar -->
+        </div>
+        <!-- End Secondary Content -->
+      </div>
+    </header>
+    <!-- Header Ends -->
+
+    <!-- SideBar Starts -->
+    <aside class="js-navbar-vertical-aside navbar navbar-dark navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl">
+      <div class="navbar-vertical-container">
+        <div class="navbar-vertical-footer-offset">
+          <div class="navbar-brand-wrapper justify-content-between" style="background-color: mediumvioletred;">
+            <!-- Navbar Vertical Toggle -->
+            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-vertical-aside-toggle btn btn-icon btn-xs btn-ghost-dark">
+              <i class="tio-clear tio-lg"></i>
+            </button>
+            <!-- End Navbar Vertical Toggle -->
+          </div>
+
+          <!-- Content -->
+          <div class="navbar-vertical-content">
+            <ul class="navbar-nav navbar-nav-lg nav-tabs">
+              <!-- Logo -->
+              <li class="nav-item text-center" style="padding: 22px 0;">
+                <a class="navbar-brand" href="./index.html">
+                  <img class="navbar-brand-logo" src="./assets/img/logo-dark.png" style="width: 75%;margin: 0 auto;">
+                  <img class="navbar-brand-logo-mini" src="./assets/img/favicon.png" alt="Logo">
+                </a>
+              </li>
+              <!-- Dashboards -->
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link" href="./index.html" title="Dashboard" data-placement="left">
+                  <i class="tio-home-vs-1-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Dashboard</span>
+                </a>
+              </li>
+              <!-- End Dashboards -->
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Reports</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./sales-report.html" title="Sales Report" data-placement="left">
+                  <i class="tio-chart-line-up nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Sales Report</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./winners.html" title="Winners" data-placement="left">
+                  <i class="tio-award-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Winners</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle">Payments</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link " href="./all-bills.html" title="All Bills" data-placement="left">
+                  <i class="tio-receipt-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Bills</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <div class="nav-divider"></div>
+              </li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle">My Account</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item active">
+                <a class="js-nav-tooltip-link nav-link" href="./profile.html" title="Profile Details" data-placement="left">
+                  <i class="tio-account-circle nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Profile Details</span>
+                </a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link" onclick="logout()" title="Sign Out" data-placement="left">
+                  <i class="tio-turn-off nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Sign Out</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+          <!-- End Content -->
+        </div>
+      </div>
+    </aside>
+    <!-- SideBar Ends -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main" class="main">
+      <!-- Content -->
+      <div class="content container-fluid">
+        <div class="row justify-content-lg-center">
+          <div class="col-lg-10">
+            <!-- Profile Cover -->
+            <div class="profile-cover">
+              <div class="profile-cover-img-wrapper">
+                <img id="profileCoverImg" class="profile-cover-img" src="./assets/img/1920x400/img1.jpg" alt="Image Description">
+              </div>
+            </div>
+            <!-- End Profile Cover -->
+
+            <!-- Profile Header -->
+            <div class="text-center mb-5">
+              <!-- Avatar -->
+              <label class="avatar avatar-xxl avatar-circle avatar-border-lg avatar-uploader profile-cover-avatar" for="avatarUploader">
+                <img id="avatarImg" class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
+
+                <!-- Image input from user -->
+                <input type="file" class="js-file-attach avatar-uploader-input" id="avatarUploader"
+                       data-hs-file-attach-options='{
+                          "textTarget": "#avatarImg",
+                          "mode": "image",
+                          "targetAttr": "src",
+                          "allowTypes": [".png", ".jpeg", ".jpg"]
+                       }'>
+
+                <span class="avatar-uploader-trigger">
+                  <i class="tio-edit avatar-uploader-icon shadow-soft"></i>
+                </span>
+              </label>
+              <!-- End Avatar -->
+
+              <h1 class="page-header-title" id="headerName">
+                <i class="tio-verified tio-lg text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i>
+              </h1>
+
+              <!-- List -->
+              <ul class="list-inline list-inline-m-1">
+                <li class="list-inline-item">
+                  <i class="tio-shop mr-1"></i>
+                  <span id="headerStoreName">Store Name</span>
+                </li>
+
+                <li class="list-inline-item">
+                  <i class="tio-poi-outlined mr-1"></i>
+                  <span id="headerCity">City, </span>
+                  <span id="headerState">State</span>
+                </li>
+
+                <li class="list-inline-item">
+                  <i class="tio-date-range mr-1"></i>
+                  <span id="joinDate">Joined April 2021</span>
+                </li>
+              </ul>
+              <!-- End List -->
+            </div>
+            <!-- End Profile Header -->
+
+            <!-- Profile Details -->
+            <div class="card mb-3 mb-lg-5 border-primary shadow-lg">
+              <div class="card-header">
+                <h2 class="card-title h4">Basic information</h2>
+              </div>
+
+              <!-- Body -->
+              <div class="card-body">
+                <!-- Form -->
+                <div>
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="name" class="col-sm-3 col-form-label input-label">Full name</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="email" id="name">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="email" class="col-sm-3 col-form-label input-label">Email</label>
+                    <div class="col-sm-9">
+                      <input type="email" disabled style="color:grey;" class="form-control" name="email" id="email">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="phone" class="col-sm-3 col-form-label input-label">Phone <span class="input-label-secondary"></span></label>
+                    <div class="col-sm-9">
+                      <input type="text" class="js-masked-input form-control" name="phone" id="phone">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="storeName" class="col-sm-3 col-form-label input-label">Store Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="storeName">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="companyName" class="col-sm-3 col-form-label input-label">Company Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="companyName">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="addressLabel" class="col-sm-3 col-form-label input-label">Address</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="address">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="cityLabel" class="col-sm-3 col-form-label input-label">City</label>
+                    
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="city">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="stateLabel" class="col-sm-3 col-form-label input-label">State</label>
+                    
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="state">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="zipCodeLabel" class="col-sm-3 col-form-label input-label">Zip code</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="js-masked-input form-control" id="zipCode">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" disabled id="save-changes-btn" onclick="updateProfileDetails()" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div> 
+                <!-- End Form -->
+              </div>
+              <!-- End Body -->
+            </div>
+            <!-- Profile Details End -->
+
+            <!-- Change Password -->
+            <div id="passwordSection" class="card mb-3 mb-lg-5 border-primary shadow-lg">
+              <div class="card-header">
+                <h4 class="card-title">Change your password</h4>
+              </div>
+
+              <!-- Body -->
+              <div class="card-body">
+                <!-- Form -->
+                <div id="changePasswordForm">
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="currentPassword" class="col-sm-3 col-form-label input-label">Current password</label>
+
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" name="currentPassword" id="currentPassword" placeholder="Enter current password" aria-label="Enter current password">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="newPassword" class="col-sm-3 col-form-label input-label">New password</label>
+
+                    <div class="col-sm-9">
+                      <input type="password" class="js-pwstrength form-control" name="newPassword" id="newPassword" placeholder="Enter new password" aria-label="Enter new password" data-hs-pwstrength-options="{
+                               &quot;ui&quot;: {
+                                 &quot;container&quot;: &quot;#changePasswordForm&quot;,
+                                 &quot;viewports&quot;: {
+                                   &quot;progress&quot;: &quot;#passwordStrengthProgress&quot;,
+                                   &quot;verdict&quot;: &quot;#passwordStrengthVerdict&quot;
+                                 }
+                               }
+                             }">
+
+                      <p id="passwordStrengthVerdict" class="form-text mb-2"><span class="password-verdict"></span></p>
+
+                      <div id="passwordStrengthProgress"><div class="progress false"><div class="progress-bar bg-danger" style="min-width: 1px; width: 1%;"></div></div></div>
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="confirmNewPassword" class="col-sm-3 col-form-label input-label">Confirm new password</label>
+
+                    <div class="col-sm-9">
+                      <div class="mb-3">
+                        <input type="password" class="form-control" name="confirmNewPassword" id="confirmNewPassword" placeholder="Confirm your new password" aria-label="Confirm your new password">
+                      </div>
+
+                      <h5>Password requirements:</h5>
+
+                      <p class="font-size-sm mb-2">Ensure that these requirements are met:</p>
+
+                      <ul class="font-size-sm">
+                        <li>Minimum 8 characters long - the more, the better</li>
+                        <li>At least one character</li>
+                        <li>At least one number</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" onclick="updatePassword()" class="btn btn-primary">Update Password</button>
+                  </div>
+                </div>
+                <!-- End Form -->
+              </div>
+              <!-- End Body -->
+            </div>
+            <!-- Change Password End -->
+          </div>
+        </div>
+        <!-- End Row -->
+      </div>
+      <!-- End Content -->
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="row justify-content-between align-items-center">
+          <div class="col">
+            <p class="font-size-sm mb-0">&copy; Number Predictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
+          </div>
+          <div class="col-auto">
+            <div class="d-flex justify-content-end">
+              <!-- List Dot -->
+              <ul class="list-inline list-separator">
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">FAQ</a>
+                </li>
+
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">License</a>
+                </li>
+
+                <li class="list-inline-item">
+                  <!-- Keyboard Shortcuts Toggle -->
+                  <div class="hs-unfold">
+                    <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;"
+                        data-hs-unfold-options='{
+                            "target": "#keyboardShortcutsSidebar",
+                            "type": "css-animation",
+                            "animationIn": "fadeInRight",
+                            "animationOut": "fadeOutRight",
+                            "hasOverlay": true,
+                            "smartPositionOff": true
+                            }'>
+                      <i class="tio-command-key"></i>
+                    </a>
+                  </div>
+                  <!-- End Keyboard Shortcuts Toggle -->
+                </li>
+              </ul>
+              <!-- End List Dot -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Footer -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- JS Implementing Plugins -->
+    <script src="./assets/js/vendor.min.js"></script>
+    <script src="./assets/js/theme.js"></script>
+
+    <script>
+      $(document).on('ready', function () {
+        // INITIALIZATION OF PASSWORD STRENGTH MODULE
+        // =======================================================
+        $('.js-pwstrength').each(function () {
+          var pwstrength = $.HSCore.components.HSPWStrength.init($(this));
+        });
+      });
+    </script>
+    <!-- Firebase -->
+    <script src="./assets/firebase/common.js"></script>
+    <script src="./assets/firebase/profile.js"></script>
+  </body>
+</html>

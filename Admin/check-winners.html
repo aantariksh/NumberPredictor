@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Admin | Number Predictor by TeqmoMedia</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="./assets/css/vendor.min.css">
+    <link rel="stylesheet" href="./assets/vendor/icon-set/style.css">
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="./assets/css/theme.min.css">
+
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <!--Firebase Config-->
+    <Script src="./assets/firebase/auth.js"></Script>
+  </head>
+
+  <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
+
+    <!-- Header Starts -->
+    <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container" style="background-color: mediumvioletred;">
+      <div class="navbar-nav-wrap">
+
+        <div class="navbar-nav-wrap-content-left">
+          <!-- Navbar Vertical Toggle -->
+          <button type="button" class="js-navbar-vertical-aside-toggle-invoker close mr-3 d-lg-none">
+            <i class="tio-first-page navbar-vertical-aside-toggle-short-align" data-toggle="tooltip" data-placement="right" title="Collapse"></i>
+            <i class="tio-last-page navbar-vertical-aside-toggle-full-align" data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-toggle="tooltip" data-placement="right" title="Expand"></i>
+          </button>
+          <!-- End Navbar Vertical Toggle -->
+        </div>
+
+        <div class="mx-auto px-auto">
+          <h1>Hot Number Predictor</h1>
+        </div>
+
+        <!-- Secondary Content -->
+        <div class="navbar-nav-wrap-content-right">
+          <!-- Navbar -->
+          <ul class="navbar-nav align-items-center flex-row">
+
+            <li class="nav-item">
+              <!-- Account -->
+              <div class="hs-unfold">
+                <a class="js-hs-unfold-invoker navbar-dropdown-account-wrapper" href="javascript:;"
+                  data-hs-unfold-options='{
+                    "target": "#accountNavbarDropdown",
+                    "type": "css-animation"
+                  }'>
+                  <i class="tio-account-circle" id="profileImage" style="font-size: 40px;"></i>
+                </a>
+
+                <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
+                  <div class="dropdown-item-text">
+                    <div class="media align-items-center">
+                      <div class="avatar avatar-sm avatar-circle mr-2">
+                        <img class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
+                      </div>
+                      <div class="media-body">
+                        <span class="card-title h5" id="profileName">Welcome</span>
+                        <span class="card-text" id="profileEmail">welcome@example.com</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
+                    <span class="text-truncate pr-2" title="Sign out">Sign out</span>
+                  </a>
+                </div>
+              </div>
+              <!-- End Account -->
+            </li>
+          </ul>
+          <!-- End Navbar -->
+        </div>
+        <!-- End Secondary Content -->
+      </div>
+    </header>
+    <!-- Header Ends -->
+
+    <!-- SideBar Starts -->
+    <aside class="js-navbar-vertical-aside navbar navbar-dark navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl">
+      <div class="navbar-vertical-container">
+        <div class="navbar-vertical-footer-offset">
+          <div class="navbar-brand-wrapper justify-content-between" style="background-color: mediumvioletred;">
+            <!-- Navbar Vertical Toggle -->
+            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-vertical-aside-toggle btn btn-icon btn-xs btn-ghost-dark">
+              <i class="tio-clear tio-lg"></i>
+            </button>
+            <!-- End Navbar Vertical Toggle -->
+          </div>
+
+          <!-- Content -->
+          <div class="navbar-vertical-content">
+            <ul class="navbar-nav navbar-nav-lg nav-tabs">
+              <!-- Logo -->
+              <li class="nav-item text-center" style="padding: 22px 0;">
+                <a class="navbar-brand" href="./index.html">
+                  <img class="navbar-brand-logo" src="./assets/img/logo-dark.png" style="width: 75%;margin: 0 auto;">
+                  <img class="navbar-brand-logo-mini" src="./assets/img/favicon.png" alt="Logo">
+                </a>
+              </li>
+              <!-- Dashboards -->
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link" href="./index.html" title="Dashboard" data-placement="left">
+                  <i class="tio-home-vs-1-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Dashboard</span>
+                </a>
+              </li>
+              <!-- End Dashboards -->
+
+              <!-- Stores -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Stores</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-stores.html" title="Sales Report" data-placement="left">
+                  <i class="tio-shop-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Stores</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./add-store.html" data-placement="left">
+                  <i class="tio-add-square-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Add Store</span>
+                </a>
+              </li>
+              <!-- End Stores -->
+
+              <!-- Payments -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle">Payments</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./generate-bill.html" title="Layouts" data-placement="left">
+                  <i class="tio-credit-cards nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Generate Bill</span>
+                </a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link " href="./all-bills.html" title="Layouts" data-placement="left">
+                  <i class="tio-receipt-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Bills</span>
+                </a>
+              </li>
+              <!-- End Payments -->
+
+              <!-- Winners -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Winners</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item active">
+                <a class="js-nav-tooltip-link nav-link " href="./check-winners.html" title="Sales Report" data-placement="left">
+                  <i class="tio-search nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Check Winners</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-winners.html" data-placement="left">
+                  <i class="tio-smile nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Winners</span>
+                </a>
+              </li>
+              <!-- End Winners -->
+
+              <!-- Account -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link" data-placement="left" href="javascript:void(0);" onclick="logout()">
+                  <i class="tio-turn-off nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Logout</span>
+                </a>
+              </li>
+              <!-- End Account -->
+
+            </ul>
+          </div>
+          <!-- End Content -->
+        </div>
+      </div>
+    </aside>
+    <!-- SideBar Ends -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main" class="main">
+      <!-- Step Form -->
+      <form class="js-step-form py-md-5"
+            data-hs-step-form-options='{
+              "progressSelector": "#addUserStepFormProgress",
+              "stepsSelector": "#addUserStepFormContent",
+              "endSelector": "#addUserFinishBtn",
+              "isValidate": false
+            }'>
+        <div class="row justify-content-lg-center">
+          <div class="col-lg-8">
+            <!-- Step -->
+            <ul id="addUserStepFormProgress" class="js-step-progress step step-sm step-icon-sm step step-inline step-item-between mb-3 mb-md-5">
+              <li class="step-item">
+                <a class="step-content-wrapper" href="javascript:;"
+                    data-hs-step-form-next-options='{
+                    "targetSelector": "#addUserStepProfile"
+                  }'>
+                  <span class="step-icon step-icon-soft-dark">I</span>
+                  <div class="step-content">
+                    <span class="step-title">Submit Details</span>
+                  </div>
+                </a>
+              </li>
+
+              <li class="step-item">
+                <a class="step-content-wrapper" href="javascript:;"
+                    data-hs-step-form-next-options='{
+                    "targetSelector": "#addUserStepBillingAddress"
+                  }'>
+                  <span class="step-icon step-icon-soft-dark">II</span>
+                  <div class="step-content">
+                    <span class="step-title">Winner List</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <!-- End Step -->
+
+            <!-- Content Step Form -->
+            <div id="addUserStepFormContent">
+              <!-- Card -->
+              <div id="addUserStepProfile" class="card card-lg active border-primary shadow-lg">
+                <!-- Body -->
+                <div class="card-body">
+                    <br>
+                  <h2 align="center">Enter actual Winning Numbers!!<h2>
+                    <br>
+                  
+                  <!-- Form Group -->
+                
+                   <!--  <label for="dateLabel" class="col-sm-3 col-form-label input-label">Date</label> -->
+
+                    <div align="center">
+                     
+                      <select id='selected-date' class="js-select2-custom custom-select" size="1" style="opacity: 0;" name="shiftSelect"
+                                  data-hs-select2-options='{
+                                    "minimumResultsForSearch": "Infinity",
+                                    "dropdownAutoWidth": true,
+                                    "width": "15rem"
+                                  }' id="dateSelector">
+                              <option value="" disabled selected hidden>Select Date</option>
+                              <option id="date1"></option>
+                              <option id="date2"></option>
+                              <option id="date3"></option>
+                              <option id="date4"></option>
+                              <option id="date5"></option>
+                              <option id="date6"></option>
+                              <option id="date7"></option>
+                              
+                            </select>
+
+                    </div>
+                 <br>
+
+                 
+              
+                
+                  <!-- End Form Group -->
+
+                  	
+                   
+                  
+                  <!-- Form Group -->
+                  <div class="row">
+                    <label class="col-sm-3 col-form-label input-label">Morning Shift</label>
+
+                    <div class="col-sm-9">
+                      <div class="input-group input-group-sm-down-break">
+                        <!-- Custom Radio -->
+                        <!-- <div class="form-control"> -->
+                          <div class="custom-control">
+                             <input id="morning-3" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t1" placeholder="TEQMO3" maxlength="3">
+                           
+                        </div>
+                      
+                          <div class="custom-control">
+                            <input id="morning-4" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t4" placeholder="TEQMO4" maxlength="4">
+                           
+                          </div>
+                        </div>
+                  
+                      </div>
+            
+                  </div>
+                  <!-- End Form Group -->
+                  <br>
+                   <!-- Form Group -->
+                  <div class="row">
+                    <label class="col-sm-3 col-form-label input-label">Afternoon Shift</label>
+
+                    <div class="col-sm-9">
+                      <div class="input-group input-group-sm-down-break">
+                       
+                          <div class="custom-control">
+                             <input id="afternoon-3" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t2" placeholder="TEQMO3" maxlength="3" >
+                           
+                        </div>
+                       
+                          <div class="custom-control">
+                            <input id="afternoon-4" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t5" placeholder="TEQMO4" maxlength="4">
+                           
+                          </div>
+                        </div>
+                       
+                      </div>
+                  
+                  </div>
+                  <!-- End Form Group -->
+                  <br>
+                   <!-- Form Group -->
+                  <div class="row">
+                    <label class="col-sm-3 col-form-label input-label">Evening Shift</label>
+
+                    <div class="col-sm-9">
+                      <div class="input-group input-group-sm-down-break">
+                       
+                          <div class="custom-control">
+                             <input id="evening-3" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t3" placeholder="TEQMO3" maxlength="3" >
+                          
+                        </div>
+                       
+                          <div class="custom-control">
+                            <input id="evening-4" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t6" placeholder="TEQMO4" maxlength="4">
+                          
+                          </div>
+                        </div>
+                      
+                      </div>
+                  
+                  </div>
+                  <!-- End Form Group -->
+                  <br>
+                  
+                  
+                </div>
+                <!-- End Body -->
+
+                <!-- Footer -->
+                <div class="card-footer d-flex justify-content-center align-items-center">
+                  <button type="button" class="btn btn-primary"  
+                    onclick="checkWinners();"        
+                    data-hs-step-form-next-options='{
+                            "targetSelector": "#addUserStepBillingAddress"
+                          }'
+                          >
+                    Submit<!-- <i class="tio-chevron-right"></i> -->
+                  </button>
+                </div>
+                <!-- End Footer -->
+              </div>
+              <!-- End Card -->
+
+              <div id="addUserStepBillingAddress" class="card card-lg border-primary shadow-lg" style="display: none;">
+                <!-- Body -->
+                <div class="card-body">
+                  <!-- Header -->
+                  <div class="card-header">
+                    <div class="row justify-content-between align-items-center flex-grow-1">
+                      <div class="col-12 col-md">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <h5 class="card-header-title">Winners</h5>
+                        </div>
+                      </div>
+
+                      <div class="col-auto">
+                        <!-- Filter -->
+                        <div class="row align-items-sm-center">
+                          <div class="col-md">
+                            <form>
+                              <!-- Search -->
+                              <div class="input-group input-group-merge input-group-flush">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="tio-search"></i>
+                                  </div>
+                                </div>
+                                <input id="datatableSearch" type="search" class="form-control" placeholder="Search users" aria-label="Search users">
+                              </div>
+                              <!-- End Search -->
+                            </form>
+                          </div>
+                        </div>
+                        <!-- End Filter -->
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Header -->
+
+                  <!-- Table -->
+                  <div class="table-responsive datatable-custom">
+                    <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+                      data-hs-datatables-options='{
+                        "columnDefs": [{
+                          "targets": [0],
+                          "orderable": false
+                        }],
+                        "order": [],
+                        "info": {
+                          "totalQty": "#datatableWithPaginationInfoTotalQty"
+                        },
+                        "search": "#datatableSearch",
+                        "entries": "#datatableEntries",
+                        "pageLength": 15,
+                        "isResponsive": false,
+                        "isShowPaging": false,
+                        "pagination": "datatablePagination"
+                      }'>
+                      <thead class="thead-light">
+                        <tr>
+                          <th>Date</th>
+                          <th>Shift</th>
+                          <th>Game</th>
+                          <th>Store</th>
+                          <th>Actual Number</th>
+                          <th>Winning Numbers</th>
+                          <th>Count</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- End Table -->
+                </div>
+                <!-- End Footer -->
+              </div>
+            </div>
+            <!-- End Content Step Form -->
+          </div>
+        </div>
+        <!-- End Row -->
+      </form>
+      <!-- End Step Form -->
+
+      <!-- Footer -->
+        <div class="footer">
+          <div class="row justify-content-between align-items-center">
+            <div class="col">
+              <p class="font-size-sm mb-0">&copy; NumberPredictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
+            </div>
+            <div class="col-auto">
+              <div class="d-flex justify-content-end">
+                <!-- List Dot -->
+                <ul class="list-inline list-separator">
+                  <li class="list-inline-item">
+                    <a class="list-separator-link" href="#">FAQ</a>
+                  </li>
+
+                  <li class="list-inline-item">
+                    <a class="list-separator-link" href="#">License</a>
+                  </li>
+                </ul>
+                <!-- End List Dot -->
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- End Footer -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- JS Implementing Plugins -->
+    <script src="./assets/js/vendor.min.js"></script>
+    <script src="./assets/js/theme.js"></script>
+    <script src="./assets/vendor/sweetalert2@10.js"></script>
+    <!-- Firebase -->
+    <script src="./assets/firebase/common.js"></script>
+    <script src="./assets/firebase/check-winners.js"></script>
+
+    <!-- JS Plugins Init. -->
+    <script>
+        $(document).on('ready', function () {
+            // INITIALIZATION OF FLATPICKR
+            // =======================================================
+            $('.js-flatpickr').each(function () {
+                $.HSCore.components.HSFlatpickr.init($(this));
+            });
+
+            // INITIALIZATION OF SELECT2
+            // =======================================================
+            $('.js-select2-custom').each(function () {
+                var select2 = $.HSCore.components.HSSelect2.init($(this));
+            });
+
+            // INITIALIZATION OF STEP FORM
+            // =======================================================
+            $('.js-step-form').each(function () {
+            var stepForm = new HSStepForm($(this), {
+                finish: function() {
+                $("#addUserStepFormProgress").hide();
+                $("#addUserStepFormContent").hide();
+              }
+            }).init();
+            });
+        });
+    </script>
+  </body>
+</html>

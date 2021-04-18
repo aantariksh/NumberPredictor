@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Admin | Number Predictor by TeqmoMedia</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="./assets/css/vendor.min.css">
+    <link rel="stylesheet" href="./assets/vendor/icon-set/style.css">
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="./assets/css/theme.min.css">
+
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <!--Firebase Config-->
+    <Script src="./assets/firebase/auth.js"></Script>
+  </head>
+
+  <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
+
+    <!-- Header Starts -->
+    <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container" style="background-color: mediumvioletred;">
+      <div class="navbar-nav-wrap">
+
+        <div class="navbar-nav-wrap-content-left">
+          <!-- Navbar Vertical Toggle -->
+          <button type="button" class="js-navbar-vertical-aside-toggle-invoker close mr-3 d-lg-none">
+            <i class="tio-first-page navbar-vertical-aside-toggle-short-align" data-toggle="tooltip" data-placement="right" title="Collapse"></i>
+            <i class="tio-last-page navbar-vertical-aside-toggle-full-align" data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-toggle="tooltip" data-placement="right" title="Expand"></i>
+          </button>
+          <!-- End Navbar Vertical Toggle -->
+        </div>
+
+        <div class="mx-auto px-auto">
+          <h1>Hot Number Predictor</h1>
+        </div>
+
+        <!-- Secondary Content -->
+        <div class="navbar-nav-wrap-content-right">
+          <!-- Navbar -->
+          <ul class="navbar-nav align-items-center flex-row">
+
+            <li class="nav-item">
+              <!-- Account -->
+              <div class="hs-unfold">
+                <a class="js-hs-unfold-invoker navbar-dropdown-account-wrapper" href="javascript:;"
+                  data-hs-unfold-options='{
+                    "target": "#accountNavbarDropdown",
+                    "type": "css-animation"
+                  }'>
+                  <i class="tio-account-circle" id="profileImage" style="font-size: 40px;"></i>
+                </a>
+
+                <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
+                  <div class="dropdown-item-text">
+                    <div class="media align-items-center">
+                      <div class="media-body">
+                        <span class="card-title h5" id="profileName">Welcome</span>
+                        <span class="card-text" id="profileEmail">welcome@example.com</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <a class="dropdown-item" onclick="logout()" style="cursor: pointer;">
+                    <span class="text-truncate pr-2" title="Sign out">Sign out</span>
+                  </a>
+                </div>
+              </div>
+              <!-- End Account -->
+            </li>
+          </ul>
+          <!-- End Navbar -->
+        </div>
+        <!-- End Secondary Content -->
+      </div>
+    </header>
+    <!-- Header Ends -->
+
+    <!-- SideBar Starts -->
+    <aside class="js-navbar-vertical-aside navbar navbar-dark navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl">
+      <div class="navbar-vertical-container">
+        <div class="navbar-vertical-footer-offset">
+          <div class="navbar-brand-wrapper justify-content-between" style="background-color: mediumvioletred;">
+            <!-- Navbar Vertical Toggle -->
+            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-vertical-aside-toggle btn btn-icon btn-xs btn-ghost-dark">
+              <i class="tio-clear tio-lg"></i>
+            </button>
+            <!-- End Navbar Vertical Toggle -->
+          </div>
+
+          <!-- Content -->
+          <div class="navbar-vertical-content">
+            <ul class="navbar-nav navbar-nav-lg nav-tabs">
+              <!-- Logo -->
+              <li class="nav-item text-center" style="padding: 9px 0;">
+                <a class="navbar-brand" href="./index.html">
+                  <img class="navbar-brand-logo" src="./assets/img/logo-dark.png" style="width: 75%;margin: 0 auto;">
+                  <img class="navbar-brand-logo-mini" src="./assets/img/favicon.png" alt="Logo">
+                </a>
+              </li>
+              <!-- Dashboards -->
+              <li class="nav-item active">
+                <a class="js-nav-tooltip-link nav-link" href="./index.html" title="Dashboard" data-placement="left">
+                  <i class="tio-home-vs-1-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Dashboard</span>
+                </a>
+              </li>
+              <!-- End Dashboards -->
+
+              <!-- Stores -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Stores</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-stores.html" title="Sales Report" data-placement="left">
+                  <i class="tio-shop-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Stores</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./add-store.html" data-placement="left">
+                  <i class="tio-add-square-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Add Store</span>
+                </a>
+              </li>
+              <!-- End Stores -->
+
+              <!-- Payments -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle">Payments</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./generate-bill.html" title="Layouts" data-placement="left">
+                  <i class="tio-credit-cards nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Generate Bill</span>
+                </a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link " href="./all-bills.html" title="Layouts" data-placement="left">
+                  <i class="tio-receipt-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Bills</span>
+                </a>
+              </li>
+              <!-- End Payments -->
+
+              <!-- Winners -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Winners</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./check-winners.html" title="Sales Report" data-placement="left">
+                  <i class="tio-search nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Check Winners</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-winners.html" data-placement="left">
+                  <i class="tio-smile nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Winners</span>
+                </a>
+              </li>
+              <!-- End Winners -->
+
+              <!-- Account -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link" data-placement="left" href="javascript:void(0);" onclick="logout()">
+                  <i class="tio-turn-off nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Logout</span>
+                </a>
+              </li>
+              <!-- End Account -->
+
+            </ul>
+          </div>
+          <!-- End Content -->
+        </div>
+      </div>
+    </aside>
+    <!-- SideBar Ends -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+
+    <main id="content" role="main" class="main">
+      <!-- Page Header Content -->
+      <div class="bg-dark" style="border-left-style: solid;border-width: 1.8px;border-color: mediumvioletred;">
+        <div class="content container-fluid">
+          <div class="page-header page-header-light">
+            <h1 class="page-header-title" id="welcomeName">Welcome!</h1>
+          </div>
+        </div>
+      </div>
+      <!-- Page Header End -->
+
+      <!-- Content -->
+      <div class="content container-fluid">
+
+        <div class="row gx-lg-4">
+          <!-- Card 1 -->
+          <div class="col-sm-6 col-lg-3">
+            <div class="card card-body mb-3 mb-lg-5 border-primary shadow-lg">
+              <div class="media">
+                <div class="media-body">
+                  <h6 class="card-subtitle">Total Stores</h6>
+                  <span class="card-title h3" id="totalStores">0</span>
+                </div>
+                <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
+                  <i class="tio-shop"></i>
+                </span>
+              </div>
+              <div class="d-lg-none">
+                <hr>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-sm-6 col-lg-3">
+            <div class="card card-body mb-3 mb-lg-5 border-primary shadow-lg">
+              <div class="media">
+                <div class="media-body">
+                  <h6 class="card-subtitle">Total Plays</h6>
+                  <span class="card-title h3" id="totalPlays">0</span>
+                </div>
+                <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
+                  <i class="tio-website"></i>
+                </span>
+              </div>
+              <div class="d-lg-none">
+                <hr>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-sm-6 col-lg-3">
+            <div class="card card-body mb-3 mb-lg-5 border-primary shadow-lg">
+              <div class="media">
+                <div class="media-body">
+                  <h6 class="card-subtitle">Total Sales</h6>
+                  <span class="card-title h3" id="totalSales">$ 0</span>
+                </div>
+                <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
+                  <i class="tio-savings"></i>
+                </span>
+              </div>
+              <div class="d-sm-none">
+                <hr>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="col-sm-6 col-lg-3">
+            <div class="card card-body mb-3 mb-lg-5 border-primary shadow-lg">
+              <div class="media">
+                <div class="media-body">
+                  <h6 class="card-subtitle">Commission</h6>
+                  <span class="card-title h3" id="totalCommission">$ 0</span>
+                </div>
+
+                <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
+                  <i class="tio-dollar"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+      
+        <!-- Weekly Sales -->
+        <div class="card h-100 mb-3 mb-lg-5 border-primary shadow-lg" style="background-color: #00c2ba;">
+          <!-- Header -->
+          <div class="card-header">
+            <h5 class="card-header-title">Weekly Players</h5>
+          </div>
+          <!-- End Header -->
+
+          <!-- Body -->
+          <div class="card-body">
+            <div class="row mb-4">
+              <div class="col-sm mb-2 mb-sm-0">
+                <div class="d-flex align-items-center">
+                  <span class="h1 mb-0 text-success" id="countTrend">
+                    <i class="tio-trending-up"></i> 0%
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-sm-auto align-self-sm-end">
+                <!-- Legend Indicators -->
+                <div class="row font-size-sm">
+                  <div class="col-auto">
+                    <span class="legend-indicator bg-ghost-secondary"></span> Last Week
+                  </div>
+                  <div class="col-auto">
+                    <span class="legend-indicator bg-primary"></span> This Week
+                  </div>
+                </div>
+                <!-- End Legend Indicators -->
+              </div>
+            </div>
+            <!-- End Row -->
+
+            <!-- Bar Chart -->
+            <div class="chartjs-custom">
+              <canvas id="updatingData" style="height: 20rem;"
+              data-hs-chartjs-options='{
+                "type": "bar",
+                "data": {
+                  "labels": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                  "datasets": [{
+                    "data": [],
+                    "backgroundColor": "#e7eaf3",
+                    "borderColor": "#e7eaf3"
+                  },
+                  {
+                    "data": [],
+                    "backgroundColor": "#ff1493",
+                    "hoverBackgroundColor": "#ff1493",
+                    "borderColor": "#ff1493"
+                  }]
+                },
+                "options": {
+                  "scales": {
+                    "yAxes": [{
+                      "gridLines": {
+                        "color": "#e7eaf3",
+                        "drawBorder": false,
+                        "zeroLineColor": "#e7eaf3"
+                      },
+                      "ticks": {
+                        "beginAtZero": true,
+                        "fontSize": 12,
+                        "fontColor": "#000",
+                        "fontFamily": "Open Sans, sans-serif",
+                        "padding": 10,
+                        "postfix": ""
+                      }
+                    }],
+                    "xAxes": [{
+                      "gridLines": {
+                        "display": false,
+                        "drawBorder": false
+                      },
+                      "ticks": {
+                        "fontSize": 12,
+                        "fontColor": "#000",
+                        "fontFamily": "Open Sans, sans-serif",
+                        "padding": 5
+                      },
+                      "categoryPercentage": 0.5,
+                      "maxBarThickness": "35"
+                    }]
+                  },
+                  "cornerRadius": 2,
+                  "tooltips": {
+                    "prefix": "",
+                    "hasIndicator": true,
+                    "mode": "index",
+                    "intersect": false
+                  },
+                  "hover": {
+                    "mode": "nearest",
+                    "intersect": true
+                  }
+                }
+              }'></canvas>
+            </div>
+            <!-- End Bar Chart -->
+          </div>
+          <!-- End Body -->
+        </div>
+        <!-- End Weekly Sales -->
+        
+      
+      <!-- Map -->
+        <div id="cardFullScreenEg" class="card overflow-hidden mb-3 mb-lg-5 border-primary shadow-lg">
+          <!-- Header -->
+          <div class="card-header">
+            <div class="row align-items-sm-center flex-grow-1">
+              <div class="col-sm mb-2 mb-sm-0">
+                <h4 class="card-header-title">Your Stores <i class="tio-help-outlined text-primary" data-toggle="tooltip" data-placement="top" title="This map is manually updated, may not reflect live data."></i></h4>
+              </div>
+              <div class="col-sm-auto">
+                <a class="btn btn-sm btn-ghost-secondary" href="all-stores.html">View Stores</a>
+              </div>
+            </div>
+            <!-- End Row -->
+          </div>
+          <!-- End Header -->
+
+          <!-- Body -->
+          <div class="card-body">
+            <iframe src="https://www.google.com/maps/d/embed?mid=1OItT-z5oiHOuJAD7wIRvfGucNFVpWGK9" width="100%" height="480" style="border:0;"></iframe>
+          </div>
+          <!-- End Body -->
+        </div>
+        <!-- End Map -->
+      </div>
+      <!-- End Content -->
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="row justify-content-between align-items-center">
+          <div class="col">
+            <p class="font-size-sm mb-0">&copy; NumberPredictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
+          </div>
+          <div class="col-auto">
+            <div class="d-flex justify-content-end">
+              <!-- List Dot -->
+              <ul class="list-inline list-separator">
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">FAQ</a>
+                </li>
+
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">License</a>
+                </li>
+              </ul>
+              <!-- End List Dot -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Footer -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- JS Implementing Plugins -->
+    <script src="./assets/js/vendor.min.js"></script>
+    <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="./assets/js/theme.js"></script>
+    
+    <!-- Custom JS -->
+    <Script src="./assets/firebase/common.js"></Script>
+    <Script src="./assets/firebase/dashboard.js"></Script>
+  </body>
+</html>

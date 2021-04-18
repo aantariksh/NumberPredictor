@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Number Predictor by TeqmoMedia</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="./assets/css/dialPad.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <!-- Firebase Config -->
+    <script src="./assets/firebase/auth.js"></script>
+    <style>
+      .myVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -100;
+      }
+      .bg {
+        color: white;
+        /* The image used */
+        background-image: url('./assets/img/background.jpg');
+        /* Full height */
+        height: 100%; 
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100vw 100vh;
+      }
+      .card{
+        width: 100%;
+        border: 30px solid transparent;
+        padding: 15px;
+        border-image: url('./assets/img/border.png') 30 round;
+        background-color: rgba(0, 0, 0, 0);
+      }
+
+      .glow {
+        font-size: 35px;
+        font-weight: 500;
+        color: #fff;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+        }
+        
+        to {
+          text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        }
+      }
+      .extraDigit{color: yellow}
+    </style>
+  </head>
+  <body class="bg">
+    <!-- Previous Winning Number -->
+    <div class="container text-center center" id="input">
+        <div class="card shadow" style="width: 50%; margin: 0 auto;">
+            <div class="card-body text-center">
+                <h2 class="card-title" style="color: var(--myYlw)">Lottery Number Predictor</h2>
+                <p class="card-text">Get ahead in game with better predictions!</p>
+                <form id="mainForm">
+                  <div class="dialPadcontainer container text-center">
+                    <div id="displayNumbers" style="border-style: solid;border-width: 2px;border-color:  #17a2b8;">
+                      <input type="number" id="numberInput" hidden value="">
+                      <input type="number" id="digits" hidden value="3">
+                    </div>
+                    <div class="row2">
+                      <div class="digit" id="one">1</div>
+                      <div class="digit" id="two">2</div>
+                      <div class="digit" id="three">3</div>
+                    </div>
+                    <div class="row2">
+                      <div class="digit" id="four">4</div>
+                      <div class="digit" id="five">5</div>
+                      <div class="digit" id="six">6</div>
+                    </div>
+                    <div class="row2">
+                      <div class="digit" id="seven">7</div>
+                      <div class="digit" id="eight">8</div>
+                      <div class="digit" id="nine">9</div>
+                    </div>
+                    <div class="row2">
+                      <div class="digit" id="none" style="color: #fff;">0</div>
+                      <div class="digit" id="zero">0</div>
+                      <i class="fa fa-long-arrow-left dig" aria-hidden="true"></i>
+                    </div>
+                    <br>
+                    <div class="row2">
+                      <a class="btn btn-block btn-info" onclick="checkCount()">Submit</a>
+                    </div>
+                  </div>
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Video -->
+    <video autoplay muted id="loader" class="myVideo" style="display: none">
+      <source src="./assets/videos/loader.mp4" type="video/mp4"/>
+    </video>
+
+    <!-- Results Video -->
+    <video autoplay muted loop id="results" class="myVideo" style="display: none">
+      <source src="./assets/videos/results.mp4" type="video/mp4"/>
+    </video>
+
+    <!-- Results -->
+    <div class="container-fluid row text-center center" id='output' style="display: none">
+
+      <div class="col-lg-1"></div>
+
+      <div class="col-lg-2 mb-4">
+        <h2 class="glow">Lucky You <br> 🤞</h2>
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 id="card1" class="glow">1234 <br>1234 <br>1234 <br>1234 <br>1234 <br></h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 mb-4">
+        <h2 class="glow">TEQMO IQ <br> 💯</h2>
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 id="card2" class="glow">1234 <br>1234 <br>1234 <br>1234 <br>1234 <br></h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 mb-4">
+        <h2 class="glow">Predictor <br> 🔥</h2>
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 id="card3" class="glow">1234 <br>1234 <br>1234 <br>1234 <br>1234 <br></h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 mb-4">
+        <h2 class="glow">God Gift <br> 💝</h2>
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 id="card4" class="glow">1234 <br>1234 <br>1234 <br>1234 <br>1234 <br></h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 mb-4">
+        <h2 class="glow">Prediction <br> 💥</h2>
+        <div class="card shadow">
+          <div class="card-body">
+            <h6 id="card5" class="glow">1234 <br>1234 <br>1234 <br>1234 <br>1234 <br></h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-1"></div>
+
+      <div class="col-12 text-center mt-4">
+        <h2 style="color:white">Time remaining: <span id="timer">10</span> secs</h2>
+      </div>
+    </div>
+
+    <script src="./assets/vendor/jquery-3.5.1.slim.min.js"></script>
+    <script src="./assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="./assets/vendor/sweetalert2@10.js"></script>
+    <script src="./assets/firebase/game.js"></script>
+    <script>
+      var url = new URL(location.href)
+      var digits = url.searchParams.get('digit')
+      document.getElementById('digits').value = digits
+
+      var count = 0
+      $(".digit").on('click', function() {
+        if(this.id == "none") return
+        var num = ($(this).clone().children().remove().end().text());
+        if (count < digits) {
+          $("#displayNumbers").append('<span>' + num.trim() + '</span>');
+            count++;
+            document.getElementById("numberInput").value += num.trim();
+        }
+      });
+      $('.fa-long-arrow-left').on('click', function() {
+        $('#displayNumbers span:last-child').remove();
+        var str = document.getElementById("numberInput").value;
+        str.substring(0, str.length - 1);
+        document.getElementById("numberInput").value = str
+        count--;
+      });
+
+      function checkCount(){
+        if (count == digits) {
+          $("#mainForm").submit()
+        } else{
+          Swal.fire({
+              title: 'Oops...',
+              text: `Please enter ${digits} digits to continue!`,
+              allowOutsideClick: false
+          })
+        }
+      }
+    </script>
+  </body>
+</html>
