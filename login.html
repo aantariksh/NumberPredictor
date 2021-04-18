@@ -10,20 +10,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
-    <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyBFwJkHQHb4IuU0Xuloba3d9FSZayB1eqw",
-        authDomain: "numberpredictor-prd.firebaseapp.com",
-        databaseURL: "https://numberpredictor-prd-default-rtdb.firebaseio.com",
-        projectId: "numberpredictor-prd",
-        storageBucket: "numberpredictor-prd.appspot.com",
-        messagingSenderId: "333354525993",
-        appId: "1:333354525993:web:b8b713f2e609d9c545c338"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-    </script>
+    <!-- Firebase Config -->
+    <script src="./assets/firebase/auth.js"></script>
   </head>
   <body>
 
@@ -44,9 +32,6 @@
                   <input type="password" class="form-control" id="password" placeholder="Password">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="screenType" hidden>
-                </div>
-                <div class="form-group">
                   <a class="btn" style="background-color: var(--myYlw)" href="index.html">Change Screen</a>
                   <a class="btn btn-primary" onclick="login()">Login</a>
                 </div>
@@ -58,11 +43,5 @@
 
     <script src="./assets/vendor/jquery-3.5.1.slim.min.js"></script>
     <script src="./assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="./assets/firebase/firebase.js"></script>
-    <script>
-      var url = new URL(location.href)
-      var screenType = url.searchParams.get('screen')
-      document.getElementById('screenType').value = screenType
-    </script>
   </body>
 </html>

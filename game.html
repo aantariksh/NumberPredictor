@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="./assets/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/common.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <!-- Firebase Config -->
+    <script src="./assets/firebase/auth.js"></script>
+
     <style>
       .numberCircle {
         border-radius: 50%;
@@ -109,6 +117,10 @@
       </div>
 
       <div class="col-lg-2"></div>
+
+      <div class="col-12 text-center mt-4">
+        <h2>Time remaining: <span id="timer">10</span> secs</h2>
+      </div>
     </div>
 
     <script src="./assets/vendor/jquery-3.5.1.slim.min.js"></script>

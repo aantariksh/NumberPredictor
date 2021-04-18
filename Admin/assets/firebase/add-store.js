@@ -19,18 +19,17 @@ function confirmpage() {
 //Signup using secondary authentication. 
 //Signup using email and password.
 function signUp() {
-    var email =  document.getElementById('emailLabel').value;
-    var password =  document.getElementById('passwordLabel').value;
+    var email = document.getElementById('emailLabel').value;
+    var password = document.getElementById('passwordLabel').value;
 
     secondaryApp.auth().createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
-        $('#successMessageContent').show();
         var user = userCredential.user;
-
+        var UID = user.uid;
+        console.log(UID)
         //check whether store owner or agent account is created
         if ($("input[type='radio'][name='userAccountTypeRadio']:checked").val() === 'StoreOwner') {
             //Adding branch details of new store in database
-            var newPostKey = firebase.database().ref().child('Teqmo/' + 'Stores/').push().key;
             var updates = {
                 details: {
                     ownerName: document.getElementById('firstNameLabel').value + " " + document.getElementById('lastNameLabel').value,
@@ -52,10 +51,11 @@ function signUp() {
             };
 
             for (let i=0; i<document.getElementById('screenLabel').value; i++) {
-                updates.screens[i] = {lockStatus: 0, loggedinStatus: 0}
+                updates.screens[i] = {lockStatus: 1, loggedinStatus: 0}
             }
-            // console.log(updates)
+            console.log(updates)
             firebase.database().ref(`Teqmo/Stores/${UID}`).set(updates);
+            $('#successMessageContent').show();
         } else {
             // TODO: Update for Agents
             // var newPostKey = firebase.database().ref().child('Teqmo/' + 'Agents/').push().key;

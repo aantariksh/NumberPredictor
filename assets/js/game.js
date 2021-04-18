@@ -1,6 +1,7 @@
 $("#mainForm").submit(function(e) {
     e.preventDefault();
     generate()
+    timer()
 });
 
 function checkLength(ele){
@@ -57,4 +58,28 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function timer(requiredSeconds=15) {
+    let i = requiredSeconds; //Seconds, keep it to 30 later
+    let countDown = setInterval(async function() {
+        let seconds=i;
+        i--;  
+        document.getElementById("timer").innerHTML = seconds;
+
+        if(seconds <= 1){
+            clearInterval(countDown);
+            // document.getElementById("timer").innerHTML = "<h1>GAME OVER<h1>";
+            setTimeout(()=>{
+                document.getElementById("timer").innerHTML = "0";
+                window.location.href="video-loop.html"; //Going back once time gets over
+            },1000);
+
+            var id = localStorage.getItem('screenID');
+            var UID = sessionStorage.getItem('storeUID');
+            await firebase.database().ref(`Teqmo/Stores/${UID}/screens/${id}`).update({
+                'lockStatus': 1
+            });
+        }
+    }, 1000);
 }

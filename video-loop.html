@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
     <title>Number Predictor by TeqmoMedia</title>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <!-- Firebase Config -->
+    <script src="./assets/firebase/auth.js"></script>
     
     <style>
       * {
@@ -21,7 +28,7 @@
       }
     </style>
   </head>
-  <body onclick="myFunction()">
+  <body onclick="checkLockStatus()">
     <div style="text-align: center">
       <video autoplay muted loop id="myVideo">
         <source src="./assets/videos/video.mp4" type="video/mp4" />
@@ -29,10 +36,7 @@
       </video>
     </div>
 
-    <script>
-      function myFunction() {
-        window.location.href = "terms.html";
-      }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="./assets/firebase/video-loop.js"></script>
   </body>
 </html>

@@ -86,7 +86,7 @@ function screens(){
                     // console.log(screenID, settings)
                     if (!settings.loggedinStatus) {
                         var activityStatus = screenDisabled
-                    } else if(settings.lockUnlock){
+                    } else if(settings.lockStatus){
                         var activityStatus = screenAvailable
                     } else {
                         var activityStatus = screenBusy

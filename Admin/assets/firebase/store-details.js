@@ -74,7 +74,8 @@ async function storeBillDetails(weeks){
 
     if(weeks){
         jQuery.each(weeks, function(weekNum, details) {
-            if (details) {
+            console.log(weekNum, details)
+            if (details && typeof(weekNum) == 'number') {
                 let startDate = getDateFromWeek(weekNum, 0); //From Common function's File
                 let endDate = getDateFromWeek(weekNum, 1);
                 let billStatus = billStatusArray[details.billStatus];
