@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
+    <title>Number Predictor by TeqmoMedia</title>
+    
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial;
+        font-size: 17px;
+        background-color: salmon;
+      }
+      #myVideo {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body onclick="myFunction()">
+    <div style="text-align: center">
+      <video autoplay muted loop id="myVideo">
+        <source src="./assets/videos/video.mp4" type="video/mp4" />
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+
+    <script>
+      function myFunction() {
+        window.location.href = "terms.html";
+      }
+    </script>
+  </body>
+</html>

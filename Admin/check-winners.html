@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Admin | Number Predictor by TeqmoMedia</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="./assets/css/vendor.min.css">
+    <link rel="stylesheet" href="./assets/vendor/icon-set/style.css">
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="./assets/css/theme.min.css">
+
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <!--Firebase Config-->
+    <Script src="./assets/firebase/auth.js"></Script>
+  </head>
+
+  <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
+
+    <!-- Header Starts -->
+    <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container navbar-bordered">
+      <div class="navbar-nav-wrap">
+
+        <div class="navbar-nav-wrap-content-left">
+          <!-- Navbar Vertical Toggle -->
+          <button type="button" class="js-navbar-vertical-aside-toggle-invoker close mr-3">
+            <i class="tio-first-page navbar-vertical-aside-toggle-short-align" data-toggle="tooltip" data-placement="right" title="Collapse"></i>
+            <i class="tio-last-page navbar-vertical-aside-toggle-full-align" data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-toggle="tooltip" data-placement="right" title="Expand"></i>
+          </button>
+          <!-- End Navbar Vertical Toggle -->
+        </div>
+
+        <!-- Secondary Content -->
+        <div class="navbar-nav-wrap-content-right">
+          <!-- Navbar -->
+          <ul class="navbar-nav align-items-center flex-row">
+
+            <li class="nav-item">
+              <!-- Account -->
+              <div class="hs-unfold">
+                <a class="js-hs-unfold-invoker navbar-dropdown-account-wrapper" href="javascript:;"
+                  data-hs-unfold-options='{
+                    "target": "#accountNavbarDropdown",
+                    "type": "css-animation"
+                  }'>
+                  <div class="avatar avatar-sm avatar-circle">
+                    <img class="avatar-img" src="./assets/img/160x160/img1.jpg" id="profileImage">
+                    <span class="avatar-status avatar-sm-status avatar-status-success"></span>
+                  </div>
+                </a>
+
+                <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
+                  <div class="dropdown-item-text">
+                    <div class="media align-items-center">
+                      <div class="avatar avatar-sm avatar-circle mr-2">
+                        <img class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
+                      </div>
+                      <div class="media-body">
+                        <span class="card-title h5" id="profileName">Welcome</span>
+                        <span class="card-text" id="profileEmail">welcome@example.com</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item" href="profile.html">
+                    <span class="text-truncate pr-2">Profile details</span>
+                  </a>
+
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item" href="#">
+                    <span class="text-truncate pr-2" title="Sign out" onclick="logout()">Sign out</span>
+                  </a>
+                </div>
+              </div>
+              <!-- End Account -->
+            </li>
+          </ul>
+          <!-- End Navbar -->
+        </div>
+        <!-- End Secondary Content -->
+      </div>
+    </header>
+    <!-- Header Ends -->
+
+    <!-- SideBar Starts -->
+    <aside class="js-navbar-vertical-aside navbar navbar-dark navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered  ">
+      <div class="navbar-vertical-container">
+        <div class="navbar-vertical-footer-offset">
+          <div class="navbar-brand-wrapper justify-content-between">
+            <!-- Logo -->
+              <a class="navbar-brand" href="./index.html">
+                <img class="navbar-brand-logo" src="./assets/img/logo.png" alt="Logo">
+                <img class="navbar-brand-logo-mini" src="./assets/img/favicon.png" alt="Logo">
+              </a>
+            <!-- End Logo -->
+
+            <!-- Navbar Vertical Toggle -->
+            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-vertical-aside-toggle btn btn-icon btn-xs btn-ghost-dark">
+              <i class="tio-clear tio-lg"></i>
+            </button>
+            <!-- End Navbar Vertical Toggle -->
+          </div>
+
+          <!-- Content -->
+          <div class="navbar-vertical-content">
+            <ul class="navbar-nav navbar-nav-lg nav-tabs">
+              <!-- Dashboards -->
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link" href="./index.html" title="Dashboard" data-placement="left">
+                  <i class="tio-home-vs-1-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Dashboard</span>
+                </a>
+              </li>
+              <!-- End Dashboards -->
+
+              <!-- Stores -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Stores</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-stores.html" title="Sales Report" data-placement="left">
+                  <i class="tio-shop-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Stores</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./add-store.html" data-placement="left">
+                  <i class="tio-add-square-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Add Store</span>
+                </a>
+              </li>
+              <!-- End Stores -->
+
+              <!-- Payments -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle">Payments</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./generate-bill.html" title="Layouts" data-placement="left">
+                  <i class="tio-credit-cards nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Generate Bill</span>
+                </a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link " href="./all-bills.html" title="Layouts" data-placement="left">
+                  <i class="tio-receipt-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Bills</span>
+                </a>
+              </li>
+              <!-- End Payments -->
+
+              <!-- Winners -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Winners</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item active">
+                <a class="js-nav-tooltip-link nav-link " href="./check-winners.html" title="Sales Report" data-placement="left">
+                  <i class="tio-search nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Check Winners</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-winners.html" data-placement="left">
+                  <i class="tio-smile nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Winners</span>
+                </a>
+              </li>
+              <!-- End Winners -->
+
+              <!-- Account -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle">My Account</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link" href="./profile.html"data-placement="left">
+                  <i class="tio-account-circle nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Profile Details</span>
+                </a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link" data-placement="left" href="javascript:void(0);" onclick="logout()">
+                  <i class="tio-turn-off nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Logout</span>
+                </a>
+              </li>
+              <!-- End Account -->
+
+            </ul>
+          </div>
+          <!-- End Content -->
+        </div>
+      </div>
+    </aside>
+    <!-- SideBar Ends -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+
+    <main id="content" role="main" class="main">
+      <!-- Step Form -->
+      <form class="js-step-form py-md-5"
+            data-hs-step-form-options='{
+              "progressSelector": "#addUserStepFormProgress",
+              "stepsSelector": "#addUserStepFormContent",
+              "endSelector": "#addUserFinishBtn",
+              "isValidate": false
+            }'>
+        <div class="row justify-content-lg-center">
+          <div class="col-lg-8">
+            <!-- Step -->
+            <ul id="addUserStepFormProgress" class="js-step-progress step step-sm step-icon-sm step step-inline step-item-between mb-3 mb-md-5">
+              <li class="step-item">
+                <a class="step-content-wrapper" href="javascript:;"
+                    data-hs-step-form-next-options='{
+                    "targetSelector": "#addUserStepProfile"
+                  }'>
+                  <span class="step-icon step-icon-soft-dark">I</span>
+                  <div class="step-content">
+                    <span class="step-title">Submit Details</span>
+                  </div>
+                </a>
+              </li>
+
+              <li class="step-item">
+                <a class="step-content-wrapper" href="javascript:;"
+                    data-hs-step-form-next-options='{
+                    "targetSelector": "#addUserStepConfirmation"
+                  }'>
+                  <span class="step-icon step-icon-soft-dark">II</span>
+                  <div class="step-content">
+                    <span class="step-title">Winner List</span>
+                  </div>
+                </a>
+              </li>
+
+              <!-- <li class="step-item">
+                <a class="step-content-wrapper" href="javascript:;"
+                    data-hs-step-form-next-options='{
+                    "targetSelector": "#addUserStepConfirmation"
+                  }'>
+                  <span class="step-icon step-icon-soft-dark">3</span>
+                  <div class="step-content">
+                    <span class="step-title">Confirmation</span>
+                  </div>
+                </a>
+              </li> -->
+            </ul>
+            <!-- End Step -->
+
+            <!-- Content Step Form -->
+            <div id="addUserStepFormContent">
+              <!-- Card -->
+              <div id="addUserStepProfile" class="card card-lg active">
+                <!-- Body -->
+                <div class="card-body">
+                    <br>
+                  <h2 align="center">Enter actual Winning Numbers!!<h2>
+                    <br>
+                  
+                  <!-- Form Group -->
+                
+                   <!--  <label for="dateLabel" class="col-sm-3 col-form-label input-label">Date</label> -->
+
+                    <div align="center">
+                     
+                      <select id='selected-date' class="js-select2-custom custom-select" size="1" style="opacity: 0;" name="shiftSelect"
+                                  data-hs-select2-options='{
+                                    "minimumResultsForSearch": "Infinity",
+                                    "dropdownAutoWidth": true,
+                                    "width": "15rem"
+                                  }' id="dateSelector">
+                              <option value="" disabled selected hidden>Select Date</option>
+                              <option id="date1"></option>
+                              <option id="date2"></option>
+                              <option id="date3"></option>
+                              <option id="date4"></option>
+                              <option id="date5"></option>
+                              <option id="date6"></option>
+                              <option id="date7"></option>
+                              
+                            </select>
+
+                    </div>
+                 <br>
+
+                 
+              
+                
+                  <!-- End Form Group -->
+
+                  	
+                   
+                  
+                  <!-- Form Group -->
+                  <div class="row">
+                    <label class="col-sm-3 col-form-label input-label">Morning Shift</label>
+
+                    <div class="col-sm-9">
+                      <div class="input-group input-group-sm-down-break">
+                        <!-- Custom Radio -->
+                        <!-- <div class="form-control"> -->
+                          <div class="custom-control">
+                             <input id="morning-3" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t1" placeholder="TEQMO3" maxlength="3">
+                           
+                        </div>
+                      
+                          <div class="custom-control">
+                            <input id="morning-4" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t4" placeholder="TEQMO4" maxlength="4">
+                           
+                          </div>
+                        </div>
+                  
+                      </div>
+            
+                  </div>
+                  <!-- End Form Group -->
+                  <br>
+                   <!-- Form Group -->
+                  <div class="row">
+                    <label class="col-sm-3 col-form-label input-label">Afternoon Shift</label>
+
+                    <div class="col-sm-9">
+                      <div class="input-group input-group-sm-down-break">
+                       
+                          <div class="custom-control">
+                             <input id="afternoon-3" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t2" placeholder="TEQMO3" maxlength="3" >
+                           
+                        </div>
+                       
+                          <div class="custom-control">
+                            <input id="afternoon-4" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t5" placeholder="TEQMO4" maxlength="4">
+                           
+                          </div>
+                        </div>
+                       
+                      </div>
+                  
+                  </div>
+                  <!-- End Form Group -->
+                  <br>
+                   <!-- Form Group -->
+                  <div class="row">
+                    <label class="col-sm-3 col-form-label input-label">Evening Shift</label>
+
+                    <div class="col-sm-9">
+                      <div class="input-group input-group-sm-down-break">
+                       
+                          <div class="custom-control">
+                             <input id="evening-3" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t3" placeholder="TEQMO3" maxlength="3" >
+                          
+                        </div>
+                       
+                          <div class="custom-control">
+                            <input id="evening-4" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" name="winner" id="t6" placeholder="TEQMO4" maxlength="4">
+                          
+                          </div>
+                        </div>
+                      
+                      </div>
+                  
+                  </div>
+                  <!-- End Form Group -->
+                  <br>
+                  
+                  
+                </div>
+                <!-- End Body -->
+
+                <!-- Footer -->
+                <div class="card-footer d-flex justify-content-center align-items-center">
+                  <button type="button" class="btn btn-primary"  
+                    onclick="checkWinners();"        
+                    data-hs-step-form-next-options='{
+                            "targetSelector": "#addUserStepBillingAddress"
+                          }'
+                          >
+                    Submit<!-- <i class="tio-chevron-right"></i> -->
+                  </button>
+                </div>
+                <!-- End Footer -->
+              </div>
+              <!-- End Card -->
+
+              <div id="addUserStepBillingAddress" class="card card-lg" style="display: none;">
+                <!-- Body -->
+                <div class="card-body">
+
+                  <div class="card-header">
+            <div class="row justify-content-between align-items-center flex-grow-1">
+              <div class="col-12 col-md">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-header-title">Winners</h5>
+
+                  <!-- Datatable Info -->
+                  
+                  <!-- End Datatable Info -->
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <!-- Filter -->
+                <div class="row align-items-sm-center">
+                  <div class="col-md">
+                    <form>
+                      <!-- Search -->
+                      <div class="input-group input-group-merge input-group-flush">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="tio-search"></i>
+                          </div>
+                        </div>
+                        <input id="datatableSearch" type="search" class="form-control" placeholder="Search users" aria-label="Search users">
+                      </div>
+                      <!-- End Search -->
+                    </form>
+                  </div>
+                </div>
+                <!-- End Filter -->
+              </div>
+            </div>
+          </div>
+          <!-- End Header -->
+
+          <!-- Table -->
+          <div class="table-responsive datatable-custom">
+            <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+            data-hs-datatables-options='{
+              "columnDefs": [{
+                 "targets": [0],
+                 "orderable": false
+               }],
+              "order": [],
+              "info": {
+                "totalQty": "#datatableWithPaginationInfoTotalQty"
+              },
+              "search": "#datatableSearch",
+              "entries": "#datatableEntries",
+              "pageLength": 15,
+              "isResponsive": false,
+              "isShowPaging": false,
+              "pagination": "datatablePagination"
+            }'>
+       <thead class="thead-light">
+         <tr>
+           <th>Date</th>
+           <th>Shift</th>
+           <th>Game</th>
+           <th>Store</th>
+           <th>Actual Number</th>
+           <th>Winning Numbers</th>
+           <th>Count</th>
+         </tr>
+       </thead>
+
+       <tbody>
+
+            <!--SAMPLE ROW
+           <td class="table-column-pr-0">
+             <div class="custom-control custom-checkbox">
+               <input type="checkbox" class="custom-control-input" id="usersDataCheck1">
+               <label class="custom-control-label" for="usersDataCheck1"></label>
+             </div>
+           </td>
+           <td class="table-column-pl-0">
+             <a class="d-flex align-items-center" href="./ecommerce-customer-details.html">
+               <div class="avatar avatar-circle">
+                 <img class="avatar-img" src="./assets/img/160x160/img10.jpg" alt="Image Description">
+               </div>
+               <div class="ml-3">
+                 <span class="h5 text-hover-primary">Amanda Harvey <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
+               </div>
+             </a>
+           </td>
+           <td>amanda@example.com</td>
+           <td>+1-202-555-0140</td>
+           <td>United Kingdom <span class="text-hide">Code: GB</span></td>
+           <td>
+             <span class="legend-indicator bg-success"></span>Active
+           </td>
+           <td>3</td>
+           <td>$3,511.01</td>
+           <td>Aug 17, 2020, 5:48 (ET)</td>
+         </tr>
+         -->
+       </tbody>
+     </table>
+          </div>
+                  <!-- Form Group -->
+                  <!-- <div class="row form-group" style="display: none;" id="screens">
+                    <label for="screenLabel" class="col-sm-3 col-form-label input-label">Number of Screens</label>
+                    <div class="col-sm-9">
+                      <input type="number" class="form-control" name="screens" id="screenLabel" placeholder="Enter number of screens" aria-label="Human resources">
+                    </div>
+                  </div> -->
+                  <!-- End Form Group -->
+                  <!-- Form Group -->
+                  <!-- <div class="row form-group">
+                    <label for="locationLabel" class="col-sm-3 col-form-label input-label">Location</label>
+                    <div class="col-sm-9"> -->
+                      <!-- Select -->
+                      <!-- <div class="mb-3">
+                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;" id="locationLabel"
+                                data-hs-select2-options='{
+                                  "placeholder": "Select country",
+                                  "searchInputPlaceholder": "Search a country"
+                                }'>
+                          <option label="empty"></option>
+                          
+                          <option value="US" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle mr-2" src="./assets/vendor/flag-icon-css/flags/1x1/us.svg" alt="United States of America Flag" /><span class="text-truncate">United States of America</span></span>'>United States of America</option>
+                          
+                        </select>
+                      </div> -->
+                      <!-- End Select -->
+
+                     <!--  <div class="mb-3">
+                        <input type="text" class="form-control" name="city" id="cityLabel" placeholder="City" aria-label="City">
+                      </div>
+                      <input type="text" class="form-control" name="state" id="stateLabel" placeholder="State" aria-label="State">
+                    </div>
+                  </div> -->
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                 <!--  <div class="row form-group">
+                    <label for="addressLine1Label" class="col-sm-3 col-form-label input-label">Address line 1</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="addressLine1" id="addressLine1Label" placeholder="Your address" aria-label="Your address">
+                    </div>
+                  </div> -->
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <!-- <div class="js-add-field row form-group"
+                        data-hs-add-field-options='{
+                          "template": "#addAddressFieldTemplate",
+                          "container": "#addAddressFieldContainer",
+                          "defaultCreated": 0
+                        }'>
+                    <label for="addressLine2Label" class="col-sm-3 col-form-label input-label">Address line 2 <span class="input-label-secondary">(Optional)</span></label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="addressLine2" id="addressLine2Label" placeholder="Your address" aria-label="Your address">
+ -->
+                      <!-- Container For Input Field -->
+                      <!-- <div id="addAddressFieldContainer"></div>
+                      <a href="javascript:;" class="js-create-field form-link btn btn-sm btn-no-focus btn-ghost-primary">
+                        <i class="tio-add"></i> Add address
+                      </a>
+                    </div>
+                  </div> -->
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                 <!--  <div class="row">
+                    <label for="zipCodeLabel" class="col-sm-3 col-form-label input-label">Zip code <i class="tio-help-outlined text-body ml-1" data-toggle="tooltip" data-placement="top" title="You can find your code in a postal address."></i></label>
+                    <div class="col-sm-9">
+                      <input type="text" class="js-masked-input form-control" name="zipCode" id="zipCodeLabel" placeholder="Your zip code" aria-label="Your zip code"
+                              data-hs-mask-options='{
+                                "template": "AA0 0AA"
+                              }'>
+                    </div>
+                  </div> -->
+                  <!-- End Form Group -->
+                </div>
+                <!-- End Body -->
+
+                <!-- Footer -->
+                <div class="card-footer d-flex align-items-center">
+                  <button type="button" class="btn btn-ghost-secondary" onclick="location.reload();"> 
+                    <i class="tio-chevron-left"></i> Previous step
+                  </button>
+
+                 <!--  <div class="ml-auto">
+                    <button type="button" class="btn btn-primary" onclick="confirmpage(),checkpass(),storeNameInput()" 
+                            data-hs-step-form-next-options='{
+                              "targetSelector": "#addUserStepConfirmation"
+                            }'>
+                      Next <i class="tio-chevron-right"></i>
+                    </button>
+                  </div> -->
+                </div>
+                <!-- End Footer -->
+              </div>
+
+              <div id="addUserStepConfirmation" class="card card-lg" style="display: none;">
+                <!-- Profile Cover -->
+                <div class="profile-cover">
+                  <div class="profile-cover-img-wrapper">
+                    <img class="profile-cover-img" src="./assets/img/1920x400/img1.jpg" alt="Image Description">
+                  </div>
+                </div>
+                <!-- End Profile Cover -->
+
+                <!-- Avatar -->
+                <div class="avatar avatar-xxl avatar-circle avatar-border-lg profile-cover-avatar">
+                  <img class="avatar-img" id="myImg" 
+                  src="./assets/img/160x160/img1.jpg" 
+                  alt="Image Description">
+                </div>
+                <!-- End Avatar -->
+
+                <!-- Body -->
+                <!-- <div class="card-body">
+                  <dl class="row">
+                    <dt class="col-sm-6 text-sm-right">Full name:</dt>
+                    <dd class="col-sm-6" id="fn"></dd>
+                    <dt class="col-sm-6 text-sm-right">Email:</dt>
+                    <dd class="col-sm-6" id="email"></dd>
+                    <dt class="col-sm-6 text-sm-right">Phone:</dt>
+                    <dd class="col-sm-6" id="phone"></dd>
+                    <dt class="col-sm-6 text-sm-right" style="display: none;" id="sndt">Store Name:</dt>
+                    <dd class="col-sm-6" id="sn" style="display: none;"></dd>
+                    <dt class="col-sm-6 text-sm-right">Company Name:</dt>
+                    <dd class="col-sm-6" id="cn"></dd>
+                    <dt class="col-sm-6 text-sm-right">Account type:</dt>
+                    <dd class="col-sm-6" id="at"></dd>
+                    <dt class="col-sm-6 text-sm-right" style="display: none;" id="nsdt">Number of Screens:</dt>
+                    <dd class="col-sm-6" id="ns" style="display: none;"></dd>
+                    <dt class="col-sm-6 text-sm-right">Country:</dt>
+                    <dd class="col-sm-6"><img class="avatar avatar-xss avatar-circle mr-1" src="./assets/vendor/flag-icon-css/flags/1x1/gb.svg" alt="United States of America Flag"> United States of America</dd>
+                    <dt class="col-sm-6 text-sm-right">City:</dt>
+                    <dd class="col-sm-6" id="city"></dd>
+                    <dt class="col-sm-6 text-sm-right">State:</dt>
+                    <dd class="col-sm-6" id="state"></dd>
+                    <dt class="col-sm-6 text-sm-right">Address line 1:</dt>
+                    <dd class="col-sm-6" id="addr1"></dd>
+                    <dt class="col-sm-6 text-sm-right">Address line 2:</dt>
+                    <dd class="col-sm-6" id="addr2"></dd>
+                    <dt class="col-sm-6 text-sm-right">Zip code:</dt>
+                    <dd class="col-sm-6" id="zc"></dd>
+                  </dl> -->
+                  <!-- End Row -->
+                <!-- </div> -->
+                <!-- End Body -->
+
+                <!-- Footer -->
+                <div class="card-footer d-sm-flex align-items-sm-center">
+                  <button type="button" class="btn btn-ghost-secondary mb-2 mb-sm-0"
+                      data-hs-step-form-prev-options='{
+                        "targetSelector": "#addUserStepBillingAddress"
+                      }'>
+                    <i class="tio-chevron-left"></i> Previous step
+                  </button>
+
+                  <div class="ml-auto">
+                    <!-- <button type="button" class="btn btn-white mr-2">Save in drafts</button> -->
+                    <button id="addUserFinishBtn" type="button" onclick="signUp()" class="btn btn-primary">Add user</button>
+                  </div>
+                </div>
+                <!-- End Footer -->
+              </div>
+            </div>
+            <!-- End Content Step Form -->
+          </div>
+        </div>
+        <!-- End Row -->
+      </form>
+      <!-- End Step Form -->
+
+      <!-- Footer -->
+        <div class="footer">
+          <div class="row justify-content-between align-items-center">
+            <div class="col">
+              <p class="font-size-sm mb-0">&copy; NumberPredictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
+            </div>
+            <div class="col-auto">
+              <div class="d-flex justify-content-end">
+                <!-- List Dot -->
+                <ul class="list-inline list-separator">
+                  <li class="list-inline-item">
+                    <a class="list-separator-link" href="#">FAQ</a>
+                  </li>
+
+                  <li class="list-inline-item">
+                    <a class="list-separator-link" href="#">License</a>
+                  </li>
+                </ul>
+                <!-- End List Dot -->
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- End Footer -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- JS Implementing Plugins -->
+    <script src="./assets/js/vendor.min.js"></script>
+    <script src="./assets/js/theme.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Firebase -->
+    <script src="./assets/firebase/common.js"></script>
+    <script src="./assets/firebase/check-winners.js"></script>
+
+    <!-- JS Plugins Init. -->
+    <script>
+        $(document).on('ready', function () {
+            // INITIALIZATION OF FLATPICKR
+            // =======================================================
+            $('.js-flatpickr').each(function () {
+                $.HSCore.components.HSFlatpickr.init($(this));
+            });
+
+            // INITIALIZATION OF SELECT2
+            // =======================================================
+            $('.js-select2-custom').each(function () {
+                var select2 = $.HSCore.components.HSSelect2.init($(this));
+            });
+
+            // INITIALIZATION OF STEP FORM
+            // =======================================================
+            $('.js-step-form').each(function () {
+            var stepForm = new HSStepForm($(this), {
+                finish: function() {
+                $("#addUserStepFormProgress").hide();
+                $("#addUserStepFormContent").hide();
+                // $("#successMessageContent").show();
+                }
+            }).init();
+            });
+        });
+    </script>
+  </body>
+</html>

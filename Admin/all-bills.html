@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Admin | Number Predictor by TeqmoMedia</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="./assets/css/vendor.min.css">
+    <link rel="stylesheet" href="./assets/vendor/icon-set/style.css">
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="./assets/css/theme.min.css">
+
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <!--Firebase Config-->
+    <Script src="./assets/firebase/auth.js"></Script>
+  </head>
+
+  <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
+
+    <!-- Header Starts -->
+    <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container navbar-bordered">
+      <div class="navbar-nav-wrap">
+
+        <div class="navbar-nav-wrap-content-left">
+          <!-- Navbar Vertical Toggle -->
+          <button type="button" class="js-navbar-vertical-aside-toggle-invoker close mr-3">
+            <i class="tio-first-page navbar-vertical-aside-toggle-short-align" data-toggle="tooltip" data-placement="right" title="Collapse"></i>
+            <i class="tio-last-page navbar-vertical-aside-toggle-full-align" data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-toggle="tooltip" data-placement="right" title="Expand"></i>
+          </button>
+          <!-- End Navbar Vertical Toggle -->
+        </div>
+
+        <!-- Secondary Content -->
+        <div class="navbar-nav-wrap-content-right">
+          <!-- Navbar -->
+          <ul class="navbar-nav align-items-center flex-row">
+
+            <li class="nav-item">
+              <!-- Account -->
+              <div class="hs-unfold">
+                <a class="js-hs-unfold-invoker navbar-dropdown-account-wrapper" href="javascript:;"
+                  data-hs-unfold-options='{
+                    "target": "#accountNavbarDropdown",
+                    "type": "css-animation"
+                  }'>
+                  <div class="avatar avatar-sm avatar-circle">
+                    <img class="avatar-img" src="./assets/img/160x160/img1.jpg" id="profileImage">
+                    <span class="avatar-status avatar-sm-status avatar-status-success"></span>
+                  </div>
+                </a>
+
+                <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
+                  <div class="dropdown-item-text">
+                    <div class="media align-items-center">
+                      <div class="avatar avatar-sm avatar-circle mr-2">
+                        <img class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
+                      </div>
+                      <div class="media-body">
+                        <span class="card-title h5" id="profileName">Welcome</span>
+                        <span class="card-text" id="profileEmail">welcome@example.com</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item" href="profile.html">
+                    <span class="text-truncate pr-2">Profile details</span>
+                  </a>
+
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item" href="#">
+                    <span class="text-truncate pr-2" title="Sign out" onclick="logout()">Sign out</span>
+                  </a>
+                </div>
+              </div>
+              <!-- End Account -->
+            </li>
+          </ul>
+          <!-- End Navbar -->
+        </div>
+        <!-- End Secondary Content -->
+      </div>
+    </header>
+    <!-- Header Ends -->
+
+    <!-- SideBar Starts -->
+    <aside class="js-navbar-vertical-aside navbar navbar-dark navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered  ">
+      <div class="navbar-vertical-container">
+        <div class="navbar-vertical-footer-offset">
+          <div class="navbar-brand-wrapper justify-content-between">
+            <!-- Logo -->
+              <a class="navbar-brand" href="./index.html">
+                <img class="navbar-brand-logo" src="./assets/img/logo.png" alt="Logo">
+                <img class="navbar-brand-logo-mini" src="./assets/img/favicon.png" alt="Logo">
+              </a>
+            <!-- End Logo -->
+
+            <!-- Navbar Vertical Toggle -->
+            <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-vertical-aside-toggle btn btn-icon btn-xs btn-ghost-dark">
+              <i class="tio-clear tio-lg"></i>
+            </button>
+            <!-- End Navbar Vertical Toggle -->
+          </div>
+
+          <!-- Content -->
+          <div class="navbar-vertical-content">
+            <ul class="navbar-nav navbar-nav-lg nav-tabs">
+              <!-- Dashboards -->
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link" href="./index.html" title="Dashboard" data-placement="left">
+                  <i class="tio-home-vs-1-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Dashboard</span>
+                </a>
+              </li>
+              <!-- End Dashboards -->
+
+              <!-- Stores -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Stores</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-stores.html" title="Sales Report" data-placement="left">
+                  <i class="tio-shop-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Stores</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./add-store.html" data-placement="left">
+                  <i class="tio-add-square-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Add Store</span>
+                </a>
+              </li>
+              <!-- End Stores -->
+
+              <!-- Payments -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle">Payments</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./generate-bill.html" title="Layouts" data-placement="left">
+                  <i class="tio-credit-cards nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Generate Bill</span>
+                </a>
+              </li>
+
+              <li class="nav-item active">
+                <a class="js-nav-tooltip-link nav-link " href="./all-bills.html" title="Layouts" data-placement="left">
+                  <i class="tio-receipt-outlined nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Bills</span>
+                </a>
+              </li>
+              <!-- End Payments -->
+
+              <!-- Winners -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle" title="Reports">Winners</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./check-winners.html" title="Sales Report" data-placement="left">
+                  <i class="tio-search nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Check Winners</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="js-nav-tooltip-link nav-link " href="./all-winners.html" data-placement="left">
+                  <i class="tio-smile nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Winners</span>
+                </a>
+              </li>
+              <!-- End Winners -->
+
+              <!-- Account -->
+              <li class="nav-item"><div class="nav-divider"></div></li>
+
+              <li class="nav-item">
+                <small class="nav-subtitle">My Account</small>
+                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link" href="./profile.html"data-placement="left">
+                  <i class="tio-account-circle nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Profile Details</span>
+                </a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="js-nav-tooltip-link nav-link" data-placement="left" href="javascript:void(0);" onclick="logout()">
+                  <i class="tio-turn-off nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Logout</span>
+                </a>
+              </li>
+              <!-- End Account -->
+
+            </ul>
+          </div>
+          <!-- End Content -->
+        </div>
+      </div>
+    </aside>
+    <!-- SideBar Ends -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main" class="main">
+      <!-- Page Header Content -->
+      <div class="bg-dark">
+        <div class="content container-fluid">
+          <div class="page-header page-header-light">
+            <div class="row align-items-center">
+              <div class="col">
+                <h1 class="page-header-title">All Stores Weekly Bills</h1>
+              </div>
+            </div>
+            <!-- End Row -->
+          </div>
+        </div>
+      </div>
+      <!-- Page Header End -->
+
+      <!-- Content -->
+      <div class="content container-fluid">
+          <!-- Card -->
+          <div class="card mb-3 mb-lg-5">
+            <!-- Header -->
+            <div class="card-header">
+              <div class="row justify-content-between align-items-center flex-grow-1">
+                <div class="col-sm mb-3 mb-sm-0">
+                  <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="card-header-title">All Stores Bills</h4>
+                </div>
+              </div>
+              <!-- End Row -->
+              </div>
+          </div>
+            <!-- End Header -->
+
+            <!-- Body -->
+            <div class="card-body">
+              <!-- Input Group -->
+              <div class="input-group input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="tio-search"></i>
+                  </span>
+                </div>
+                
+                <input id="datatableSearch" type="search" class="form-control" placeholder="Search orders" aria-label="Search orders">
+              </div>
+              <!-- End Input Group -->
+            </div>
+            <!-- End Body -->
+
+            <!-- Table -->
+            <div class="table-responsive datatable-custom text-center">
+              <table id="datatable" class="table table-hover table table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+                     data-hs-datatables-options='{
+                       "columnDefs": [{
+                          "targets": [0,3],
+                          "orderable": false
+                        }],
+                       "order": [],
+                       "info": {
+                         "totalQty": "#datatableWithPaginationInfoTotalQty"
+                       },
+                       "search": "#datatableSearch",
+                       "entries": "#datatableEntries",
+                       "pageLength": 8,
+                       "isResponsive": true,
+                       "isShowPaging": false,
+                       "pagination": "datatablePagination"
+                     }'>
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Store Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Payment Status</th>
+                    <th>Total</th>
+                    <th>Invoice</th>
+                  </tr>
+                </thead>
+
+                <tbody id="tableBody">
+                  <tr>
+                    <td></td>
+                    <td>Please</td>
+                    <td>Wait</td>
+                    <td>Loading</td>
+                    <td>Data</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- End Table -->
+
+            <!-- Footer -->
+            <div class="card-footer">
+              <!-- Pagination -->
+              <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+                <div class="col-sm mb-2 mb-sm-0">
+                  <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+                    <span class="mr-2">Show per page:</span>
+
+                    <!-- Select -->
+                    <select id="datatableEntries" class="js-select2-custom"
+                            data-hs-select2-options='{
+                              "minimumResultsForSearch": "Infinity",
+                              "customClass": "custom-select custom-select-sm custom-select-borderless",
+                              "dropdownAutoWidth": true,
+                              "width": true
+                            }'>
+                      <option value="8" selected>8</option>
+                      <option value="12">12</option>
+                      <option value="16">16</option>
+                      <option value="20">20</option>
+                    </select>
+                    <!-- End Select -->
+
+                    <span class="text-secondary mr-2">Total:</span>
+
+                    <!-- Pagination Quantity -->
+                    <span id="datatableWithPaginationInfoTotalQty"></span>
+                  </div>
+                </div>
+
+                <div class="col-sm-auto">
+                  <div class="d-flex justify-content-center justify-content-sm-end">
+                    <!-- Pagination -->
+                    <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+                  </div>
+                </div>
+              </div>
+              <!-- End Pagination -->
+            </div>
+            <!-- End Footer -->
+          </div>
+          <!-- End Card -->
+      </div>
+
+     <!-- Footer -->
+        <div class="footer">
+          <div class="row justify-content-between align-items-center">
+            <div class="col">
+              <p class="font-size-sm mb-0">&copy; NumberPredictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
+            </div>
+            <div class="col-auto">
+              <div class="d-flex justify-content-end">
+                <!-- List Dot -->
+                <ul class="list-inline list-separator">
+                  <li class="list-inline-item">
+                    <a class="list-separator-link" href="#">FAQ</a>
+                  </li>
+
+                  <li class="list-inline-item">
+                    <a class="list-separator-link" href="#">License</a>
+                  </li>
+                </ul>
+                <!-- End List Dot -->
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- End Footer -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- JS Implementing Plugins -->
+    <script src="./assets/js/vendor.min.js"></script>
+    <script src="./assets/js/theme.js"></script>
+    <!-- Firebase -->
+    <script src="./assets/firebase/common.js"></script>
+    <script src="./assets/firebase/all-bills.js"></script>
+  </body>
+</html>

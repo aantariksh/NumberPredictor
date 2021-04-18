@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Number Predictor by TeqmoMedia</title>
+    <link rel="stylesheet" href="./assets/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+      .numberCircle {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        padding: 8px;
+
+        background: #fff;
+        border: 2px solid #666;
+        color: #666;
+        text-align: center;
+
+        font: 32px Arial, sans-serif;
+      }
+      :root {
+        --animate-duration: 1.2s;
+        --animate-delay: 0.5s;
+      }
+      h2{font-size: 35px; font-weight: 500;}
+    </style>
+  </head>
+  <body>
+
+    <!-- Previous Winning Number -->
+    <div class="container text-center center" id="input">
+        <div class="card shadow" style="width: 50%; margin: 0 auto;">
+            <div class="card-body text-center">
+                <h2 class="card-title">Lottery Number Predictor</h2>
+                <p class="card-text">Get ahead in game with better predictions!</p>
+                <form id="mainForm">
+                  <input type="number" id="numberInput" placeholder="Last winning number" onInput="checkLength(this)">
+                  <input type="number" id="digits" hidden value="3">
+                  <br><br>
+                  <button class="btn btn-primary" type="submit" style="border-radius: 20px;">Generate Numbers</button>
+                </form>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Video -->]
+    <video autoplay muted loop id="loader" class="center" style="display: none">
+      <source src="./assets/videos/loader.mp4" type="video/mp4" style="height: 100%; width:auto;"/>
+    </video>
+
+    <!-- Results -->
+    <div class="container row text-center center" id='output' style="display: none">
+
+      <div class="col-lg-4 mb-4">
+        <div class="card shadow animate__animated animate__bounceInLeft" style="width: 100%;background: #e07768;">
+          <div class="card-body">
+            <h2>You're lucky 🤞</h2>
+            <h3 id="card1">
+              1234 <br>
+              1234 <br>
+              1234 <br>
+              1234 <br>
+              1234 <br>
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-4">
+        <div class="card shadow animate__animated animate__flash animate__repeat-2" style="width: 100%;background: #6eadd4;">
+          <div class="card-body">
+            <h2>TEQMO IQ 💯</h2>
+            <h3 id="card2">1234 <br>1234 <br>1234 <br>1234 <br>1234 <br></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-4">
+        <div class="card shadow animate__animated animate__bounceInRight" style="width: 100%;background: #4aada9;">
+          <div class="card-body">
+            <h2>Hot Predictor 🔥</h2>
+            <h3 id="card3">1234 <br>1234 <br>1234 <br>1234 <br>1234 <br></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2"></div>
+
+      <div class="col-lg-4 mb-4">
+        <div class="card shadow animate__animated animate__jello animate__repeat-3" style="width: 100%;background: var(--myYlw);">
+          <div class="card-body">
+            <h2>God Gift 💝</h2>
+            <h3 id="card4">1234 <br>1234 <br>1234 <br>1234 <br>1234 <br></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 mb-4">
+        <div class="card shadow animate__animated animate__jello animate__repeat-3" style="width: 100%;">
+          <div class="card-body">
+            <h2>Prediction 💥</h2>
+            <h3 id="card5">1234 <br>1234 <br>1234 <br>1234 <br>1234 <br></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2"></div>
+    </div>
+
+    <script src="./assets/vendor/jquery-3.5.1.slim.min.js"></script>
+    <script src="./assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/game.js"></script>
+    <script>
+      var url = new URL(location.href)
+      var digits = url.searchParams.get('digit')
+      document.getElementById('digits').value = digits
+    </script>
+  </body>
+</html>

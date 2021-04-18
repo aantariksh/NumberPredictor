@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin | Number Predictor by TeqmoMedia</title>
+    <link rel="shortcut icon" href="../assets/img/favicon.png">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/vendor/icon-set/style.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/theme.min.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <!--Firebase Config-->
+    <script src="../assets/firebase/auth.js"></script>
+  </head>
+
+  <body>
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main" class="main">
+      <div class="position-fixed top-0 right-0 left-0 bg-img-hero" style="height: 32rem; background-image: url(../assets/img/bg.svg);">
+        <!-- SVG Bottom Shape -->
+        <figure class="position-absolute right-0 bottom-0 left-0">
+          <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1921 273">
+            <polygon fill="#fff" points="0,273 1921,273 1921,0 "/>
+          </svg>
+        </figure>
+        <!-- End SVG Bottom Shape -->
+      </div>
+
+      <!-- Content -->
+      <div class="container py-5 py-sm-7">
+        <a class="d-flex justify-content-center my-7" href="index.html">
+          <img class="z-index-2" src="../assets/img/logo-dark.png" style="width: 12rem;">
+        </a>
+
+        <div class="row justify-content-center">
+          <div class="col-md-7 col-lg-5">
+            <!-- Card -->
+            <div class="card card-lg mb-5">
+              <div class="card-body">
+                <!-- Form -->
+                <form onsubmit="event.preventDefault();">
+                  <div class="text-center">
+                    <div class="mb-5">
+                      <h1 class="display-4">ADMIN Sign in</h1>
+                      <p>Don't have an account yet? <a href="https://teqmomedia.com" target="_blank">Contact us now!</a></p>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="email@address.com" required autofocus>
+                  </div>
+                  <div class="mb-4">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password">
+                  </div>
+                  <button type="submit" class="btn btn-block btn-primary" id="loginButton" onclick="login()">Submit</button>
+                  <!-- <div class="form-text text-center"><a href="./forgot-password.html">Forgot Password?</a></div> -->
+
+                  <div class="text-center mt-2">
+                    <a class="btn btn-link" href="forgot-password.html">
+                      Forgot Password?
+                    </a>
+                  </div>
+                </form>
+                <!-- End Form -->
+              </div>
+            </div>
+            <!-- End Card -->
+          </div>
+        </div>
+      </div>
+      <!-- End Content -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  </body>
+</html>
