@@ -1,65 +1,47 @@
 firebase.auth().onAuthStateChanged((user) => {
     if(user) {
+        const UID = localStorage.getItem('storeUID');
+        if (!UID) {
+            localStorage.setItem('storeUID', user.uid);
+        }
         loadScreens()
     }
 }); 
 
+// Load and display the status of Store Owner's screen
+// Allow selecting only those screens which aren't already in use!
 function loadScreens(){
-    const sID = localStorage.getItem('screenID')
-    if (sID) {
+    // Check if screen ID already set
+    const screenID = localStorage.getItem('screenID')
+    if (screenID) {
         window.location.href="./video-loop.html"
     }
+    const UID = localStorage.getItem('storeUID');
 
-    const UID = firebase.auth().currentUser.uid;
     firebase.database().ref(`Teqmo/Stores/${UID}/screens`).on('value', (snapshot) => {
-        if(snapshot.exists()){
+        if (snapshot.exists()) {
             document.getElementById('mainCard').innerHTML = ''
+
             const data = snapshot.val()
             jQuery.each(data, function(screenID, settings) {
                 if (settings) {
                     console.log(screenID, settings)
                     var isDisabled = settings.loggedinStatus ? 'disabled' : ''
-                    var div = `<div class="btn btn-primary btn-lg btn-block mb-3 ${isDisabled}" id="${screenID}" onclick="setScreenID(this.id)">
+                    var newButton = `<div class="btn btn-primary btn-lg btn-block mb-3 ${isDisabled}" id="${screenID}" onclick="setScreenID(this.id)">
                         Screen ${screenID}</div>`
-                    document.getElementById('mainCard').innerHTML += div
+                    document.getElementById('mainCard').innerHTML += newButton
                 }
             });
         }
     });
 }
 
-function setScreenID(id){
-    const UID = firebase.auth().currentUser.uid;
+// Set screen ID on LOCAL STORAGE
+function setScreenID(id) {
+    const UID = localStorage.getItem('storeUID');
     localStorage.setItem('screenID', id)
     firebase.database().ref(`Teqmo/Stores/${UID}/screens/${id}`).update({
         'loggedinStatus': 1
     });
     window.location.href="./video-loop.html"
-}
-
-function play(){
-    var id = localStorage.getItem('screenID');
-    const UID = firebase.auth().currentUser.uid;
-
-    if(id){
-        firebase.database().ref(`Teqmo/Stores/${UID}/screens/${id}/lockStatus`).once('value',(snapshot)=>{
-            var status = snapshot.val()
-            if(status){
-                document.getElementById('status').innerHTML = 'Please pay to play!'
-            } else{
-                console.log('ok')
-                document.getElementById('stop').style.display = "block"
-                document.getElementById('status').innerHTML = 'You can play!'
-            }
-        })
-    }
-}
-
-function stop(){
-    const UID = firebase.auth().currentUser.uid;
-    firebase.database().ref(`Teqmo/Stores/${UID}/screens/${id}`).update({
-        'lockStatus': 1
-    });
-    document.getElementById('stop').style.display = "none"
-    document.getElementById('status').innerHTML = 'Please pay to play!'
 }

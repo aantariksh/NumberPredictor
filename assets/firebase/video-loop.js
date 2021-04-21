@@ -1,7 +1,7 @@
 function checkLockStatus() {
-    const UID =  sessionStorage.getItem('storeUID');
+    const UID =  localStorage.getItem('storeUID');
     const screenID = localStorage.getItem('screenID')
-    // console.log(UID, screenID)
+    console.log(UID, screenID)
     if (!UID || !screenID) { 
         showFailError() 
         return
@@ -18,6 +18,11 @@ function checkLockStatus() {
 }
 
 function showFailError(msg) {
-    let err = msg ? msg : 'Please try again later!'
-    alert(err)
+    let err = msg ? msg : 'Please try again later! If the problem persist contact Store Owner.'
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `${err}`,
+        allowOutsideClick: false
+    })
 }

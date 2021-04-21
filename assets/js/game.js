@@ -76,7 +76,7 @@ function timer(requiredSeconds=15) {
             },1000);
 
             var id = localStorage.getItem('screenID');
-            var UID = sessionStorage.getItem('storeUID');
+            var UID = localStorage.getItem('storeUID');
             await firebase.database().ref(`Teqmo/Stores/${UID}/screens/${id}`).update({
                 'lockStatus': 1
             });
