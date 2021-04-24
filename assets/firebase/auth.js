@@ -18,10 +18,22 @@ firebase.auth().onAuthStateChanged((user) => {
         // Storing UID in local storage
         const UID = firebase.auth().currentUser.uid;
         localStorage.setItem('storeUID', UID);
-        // window.location.href = './select-screen.html'
+        window.location.href = './select-screen.html'
     }
     else if (!user && !window.location.href.includes('login.html')) {
         window.location.href = './login.html'
+    }
+
+    // Logout Screen if logged out from Admin Screen
+    if (user) {
+        const screnId = localStorage.getItem('screenID');
+        const UID = localStorage.getItem('storeUID');
+        firebase.database().ref(`Teqmo/Stores/${UID}/screens/${screnId}/loggedinStatus`).on('value', snapshot => {
+            let loggedinStatus = snapshot.val()
+            if (!loggedinStatus) {
+                logoutScreen()
+            }
+        })
     }
 });  
 
@@ -40,23 +52,29 @@ function login() {
             text: `${errorMessage}`
         })
     });
+
+    // Update the button description after click
+    const button = document.getElementById('loginButton')
+    button.disabled = true
+    button.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
 }
 
 // Remove screen Id from local storage and signout user
 async function logoutScreen() {
-    var id = localStorage.getItem('screenID');
-    const UID = localStorage.getItem('storeUID');;
-    if(!UID || !id) {return}
-    firebase.database().ref(`Teqmo/Stores/${UID}/Screens/${id}`).update({
+    const screnId = localStorage.getItem('screenID');
+    const UID = localStorage.getItem('storeUID');
+    if(!UID || !screnId) {return}
+    await firebase.database().ref(`Teqmo/Stores/${UID}/screens/${screnId}`).update({
+        'lockStatus': 1,
         'loggedinStatus': 0
     });
     localStorage.removeItem('screenID')
     localStorage.removeItem('storeUID');
-    signout();
+    logout();
 }
 
-// Signout Function
-function signout() {
+// Logout Function
+function logout() {
     firebase.auth().signOut().then(() => {
         window.location.href="index.html";
     }).catch((error) => {

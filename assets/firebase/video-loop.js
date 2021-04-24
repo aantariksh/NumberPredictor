@@ -1,7 +1,7 @@
 function checkLockStatus() {
     const UID =  localStorage.getItem('storeUID');
     const screenID = localStorage.getItem('screenID')
-    console.log(UID, screenID)
+    // console.log(UID, screenID)
     if (!UID || !screenID) { 
         showFailError() 
         return

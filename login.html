@@ -26,7 +26,7 @@
             <h2 class="card-title">Login to Game</h2>
             <br>
             <div class="card my-auto px-5 py-3" id="inner-card">
-              <form>
+              <form onsubmit="event.preventDefault();">
                 <br>
                 <div class="form-group">
                   <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Registered Email">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                   <a class="btn" style="background-color: var(--myYlw)" href="index.html">Change Screen</a>
-                  <a class="btn btn-primary" onclick="login()">Login</a>
+                  <button type="submit" class="btn btn-primary" id="loginButton" onclick="login()">Login</button>
                 </div>
               </form>
             </div>

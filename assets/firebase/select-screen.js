@@ -37,10 +37,10 @@ function loadScreens(){
 }
 
 // Set screen ID on LOCAL STORAGE
-function setScreenID(id) {
+async function setScreenID(id) {
     const UID = localStorage.getItem('storeUID');
     localStorage.setItem('screenID', id)
-    firebase.database().ref(`Teqmo/Stores/${UID}/screens/${id}`).update({
+    await firebase.database().ref(`Teqmo/Stores/${UID}/screens/${id}`).update({
         'loggedinStatus': 1
     });
     window.location.href="./video-loop.html"
