@@ -1,9 +1,13 @@
 // Call data retrieval functions only after firebase is loaded
-firebase.auth().onAuthStateChanged((user) => {
+firebase.auth().onAuthStateChanged(async (user) => {
     if(user){
-        showSalesReport()
-        updateCounts()
-        updateBasicInfo()
+      const UID = user.uid;
+      const snapshot = await firebase.database().ref(`Teqmo/Stores/${UID}/payment`).once('value')
+      const data = snapshot.val()
+
+      showSalesReport(data.weeks)
+      updateCounts(data.weeks, data.totalCommission, data.totalSales)
+      updateBasicInfo()
     }
 })
 
@@ -11,26 +15,24 @@ firebase.auth().onAuthStateChanged((user) => {
  * Fetches all the sales related data for All the weeks present in Database
  * Passes the array to the update function which loads the data on table and initialises it
  */
-async function showSalesReport(){
-    const UID = firebase.auth().currentUser.uid;
-    // const UID = 'OHatm0qKa2Rf3DFnAj1Vq64Fcn62'
-
-    const snapshot = await firebase.database().ref(`Teqmo/Stores/${UID}/payment`).once('value')
-    const data = snapshot.val()
+async function showSalesReport(weeks){
     var dataSet = []
-    jQuery.each(data.weeks, function(weekNum, details) {
+    jQuery.each(weeks, function(weekNum, details) {
         // console.log(weekNum, details)
-        if(details){
-            let startDate = getDateFromWeek(weekNum,0);
-            let endDate = getDateFromWeek(weekNum,1);
+        if (details && weekNum!="start") {
+            let startDate = getDateFromWeek(weekNum, 0);
+            let endDate = getDateFromWeek(weekNum, 1);
             let count = details.counter.reduce((a, b) => a + b, 0)
-            let sales = details.sales;
-            let commission = details.commission;
-            let rate = "50 %";
-            let profit = sales-commission;
+            let sales = details.sales ? details.sales : 'N/A';
+            let commission = details.commission ? details.commission : 'N/A';
+            let rate = 'N/A', profit = 'N/A'
+            if (details.sales &&  details.commission) {
+              rate = (commission*100/sales).toFixed(0).toString() + '%'
+              profit = (sales - commission).toFixed(2);
+            }
 
             let row = [startDate, endDate, count, sales, commission, rate, profit]
-            dataSet.push(row)
+            dataSet.unshift(row)
         }
     })
     updateDataTable(dataSet)
@@ -84,28 +86,18 @@ function updateDataTable(dataSet){
 /**
  * Updates the count cards on page load 
  */
-function updateCounts(){
-  const UID = firebase.auth().currentUser.uid
-  const link = `Teqmo/Stores/${UID}/payment`
-
-  firebase.database().ref(link).once('value', (snapshot)=>{
-    const data = snapshot.val()
-    if(data){
-      const totalCommission = data.totalCommission
-      const totalSales = data.totalSales
-      const profit = totalSales - totalCommission
-      var totalCount = 0
-      jQuery.each(data.weeks, (weekNum, details) => {
-        if(details){
-          var weekCount = details.counter.reduce((a, b) => a + b, 0)
-          totalCount += weekCount
-        }
-      })
-
-      document.getElementById('totalCount').innerHTML = totalCount
-      document.getElementById('totalCommission').innerHTML = '$ '+ totalCommission
-      document.getElementById('totalSales').innerHTML = '$ '+ totalSales
-      document.getElementById('profit').innerHTML = '$ '+ profit
+function updateCounts(weeks, totalCommission, totalSales){
+  const profit = (totalSales - totalCommission).toFixed(2)
+  var totalCount = 0
+  jQuery.each(weeks, (weekNum, details) => {
+    if(details && weekNum!="start"){
+      var weekCount = details.counter.reduce((a, b) => a + b, 0)
+      totalCount += weekCount
     }
   })
+
+  document.getElementById('totalCount').innerHTML = totalCount
+  document.getElementById('totalCommission').innerHTML = '$ '+ totalCommission
+  document.getElementById('totalSales').innerHTML = '$ '+ totalSales
+  document.getElementById('profit').innerHTML = '$ '+ profit
 }

@@ -4,6 +4,7 @@ firebase.auth().onAuthStateChanged((user) => {
         updateChart()
         screens()
         updateBasicInfo()
+        // setTimeout(showPage, 2000)
     }
 })
 
@@ -101,21 +102,25 @@ function screens(){
                     var card = `
                     <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
                         <div class="card card-hover-shadow h-100">
-                        <div class="card-body">
-                            <h6 class="card-subtitle">Screen ID</h6>
-                            <div class="row align-items-center gx-2 mb-1">
-                                <div class="col-6">
-                                    <span class="card-title h2"> TEQMO${screenID}</span>
+                            <div class="card-body">
+                                <h6 class="card-subtitle">Screen ID</h6>
+                                <div class="row align-items-center gx-2 mb-1">
+                                    <div class="col-6">
+                                        <span class="card-title h2"> Screen ${screenID}</span>
+                                    </div>
+                                    <div class="col-6 text-center">
+                                        <button type="button" id="${screenID}" ${activityStatus}
+                                    </div>
                                 </div>
-                                <div class="col-6 text-center">
-                                    <button type="button" id="${screenID}" ${activityStatus}
-                                </div>
+                                <h4>
+                                    <span class="text-body mr-1">Status</span>
+                                    ${logInStatus}
+                                </h4>
                             </div>
-                            <h4>
-                                <span class="text-body mr-1">Status</span>
-                                ${logInStatus}
-                            </h4>
-                        </div>
+                            <hr>
+                            <div class="text-center mb-1">
+                              <button class="btn btn-secondary btn-xs" id="${screenID}" onclick="logoutScreen(this.id)">Log Out Screen</button>
+                            </div>
                         </div>
                     </div>`
 
@@ -131,8 +136,7 @@ function screens(){
  * Increments the count value
  * @param {Number} screenID 
  */
-function unlockScreen(screenID){
-    console.log(screenID);
+function unlockScreen(screenID) {
     const UID = firebase.auth().currentUser.uid;
     firebase.database().ref(`Teqmo/Stores/${UID}/screens/${screenID}`).update({
         'lockStatus': SCREEN_UNLOCK
@@ -151,5 +155,18 @@ function unlockScreen(screenID){
         } else if (typeof value === 'number') {
             return value + 1;
         } 
+    });
+}
+
+/**
+ * Logs out the screen with the screen ID
+ * Logout function on the screen side
+ * @param {Number} screenID 
+ */
+function logoutScreen(screenID) {
+    const UID = firebase.auth().currentUser.uid;
+    firebase.database().ref(`Teqmo/Stores/${UID}/screens/${screenID}`).update({
+        'lockStatus': SCREEN_LOCK,
+        'loggedinStatus': 0
     });
 }

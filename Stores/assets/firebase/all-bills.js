@@ -19,34 +19,30 @@ async function showAllPastBills(){
     var dataSet = []
 
     jQuery.each(data.weeks, function(weekNum, details) {
-        if(details){
+        if (details && weekNum!="start") {
             let startDate = getDateFromWeek(weekNum,0);
             let endDate = getDateFromWeek(weekNum,1);
-            let billStatus = details.billStatus;
-            let total = details.sales;
-            var statusLine
-            if(billStatus==0){
-                statusLine = `<span class="badge badge-soft-secondary">
-                                <span class="legend-indicator bg-secondary"></span>Not Generated
-                              </span>`
+            let total = details.sales ? details.sales : 'N/A';
+            let statusLine;
+            if (details.billStatus == 2) {
+              statusLine = `<span class="badge badge-soft-success">
+                              <span class="legend-indicator bg-success"></span>Paid
+                            </span>`
             }
-            else if (billStatus==1){
-                statusLine = `<span class="badge badge-soft-warning">
-                                <span class="legend-indicator bg-warning"></span>Pending
-                              </span>`
+            else if (details.billStatus == 1) {
+              statusLine = `<span class="badge badge-soft-warning">
+                              <span class="legend-indicator bg-warning"></span>Pending
+                            </span>`
             }
             else {
-                statusLine = `<span class="badge badge-soft-success">
-                                <span class="legend-indicator bg-success"></span>Paid
-                              </span>`
+              statusLine = `<span class="badge badge-soft-secondary">
+                              <span class="legend-indicator bg-secondary"></span>Not Generated
+                            </span>`
             }
-            var invoice = `<a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#invoiceReceiptModal">
-            <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`
-
-            var temp =[startDate,endDate,statusLine,total,invoice]
-
+            var invoice = `<a class="btn btn-sm btn-white" href="invoice.html?weekID=${weekNum}">
+                                <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`
+            var temp = [startDate,endDate,statusLine,total,invoice]
             dataSet.unshift(temp)
-
         }
       })
       updateDataTable(dataSet)

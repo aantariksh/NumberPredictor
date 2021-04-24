@@ -22,6 +22,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
     <!-- Configuration -->
     <script src="./assets/firebase/auth.js"></script>
+
+    <style>
+      .card-body{padding-bottom: 5px;}
+      hr{padding: 0px; margin: 10px;}
+    </style>
   </head>
 
   <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
@@ -60,9 +65,6 @@
                 <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
                   <div class="dropdown-item-text">
                     <div class="media align-items-center">
-                      <div class="avatar avatar-sm avatar-circle mr-2">
-                        <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
-                      </div>
                       <div class="media-body">
                         <span class="card-title h5" id="profileName">Welcome</span>
                         <span class="card-text" id="profileEmail">welcome@example.com</span>
@@ -195,14 +197,14 @@
 
     <!-- ========== MAIN CONTENT ========== -->
 
-    <main id="content" role="main" class="main">
+    <main id="content" role="main" class="main" >
       <!-- Page Header Content -->
       <div class="bg-dark">
         <div class="content container-fluid">
           <div class="page-header page-header-light">
             <div class="row align-items-center">
               <div class="col">
-                <h1 class="page-header-title" id="welcomeName">Welcome, Markus!</h1>
+                <h1 class="page-header-title" id="welcomeName">Welcome!</h1>
               </div>
 
               <div class="col-auto" style="color:white" id="todaysDate">
@@ -215,14 +217,18 @@
           <!-- Screens -->
           <div id="screenContainer" class="row gx-2 gx-lg-3">
             <!-- Card -->
-            <div class="col-sm-6 col-md-4 mb-3 mb-lg-5">
+            <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
               <div class="card card-hover-shadow h-100">
                 <div class="card-body">
                   <h6 class="card-subtitle">Screen ID</h6>
 
                   <div class="row align-items-center gx-2 mb-1">
                     <div class="col-6">
-                      <span class="card-title h2">MRK1</span>
+                      <span class="card-title h2 mb-1">MRK1</span>
+                      <h4>
+                        <span class="text-body mr-1">Status</span>
+                        <span class="badge badge-soft-success">Active</span>
+                      </h4>
                     </div>
                     <div class="col-6 text-center">
                       <!-- <button type="button" class="btn btn-soft-danger btn-pill mx-auto">Screen in Use</button> -->
@@ -233,10 +239,10 @@
                     </div>
                   </div>
                   <!-- End Row -->
-                  <h4>
-                    <span class="text-body mr-1">Status</span>
-                    <span class="badge badge-soft-success">Active</span>
-                  </h4>
+                  <hr>
+                  <div class="text-center mb-1">
+                    <button class="btn btn-secondary btn-xs">Log Out Screen</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -250,7 +256,7 @@
       <!-- Content -->
       <div class="content container-fluid mt-5">
         <!-- Weekly Sales -->
-        <div class="card h-100 mb-3 mb-lg-5">
+        <div class="card h-100 mb-3 mb-lg-5 border-secondary shadow-lg">
           <!-- Header -->
           <div class="card-header">
             <h5 class="card-header-title">Weekly Players</h5>

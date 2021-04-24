@@ -60,9 +60,6 @@
                 <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
                   <div class="dropdown-item-text">
                     <div class="media align-items-center">
-                      <div class="avatar avatar-sm avatar-circle mr-2">
-                        <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
-                      </div>
                       <div class="media-body">
                         <span class="card-title h5" id="profileName">Welcome</span>
                         <span class="card-text" id="profileEmail">welcome@example.com</span>
@@ -207,20 +204,6 @@
             <div class="profile-cover">
               <div class="profile-cover-img-wrapper">
                 <img id="profileCoverImg" class="profile-cover-img" src="./assets/img/1920x400/img1.jpg" alt="Image Description">
-
-                <!-- Custom File Cover -->
-                <div class="profile-cover-content profile-cover-btn">
-                  <div class="custom-file-btn">
-                    <input type="file" class="js-file-attach custom-file-btn-input" id="profileCoverUplaoder"
-                           data-hs-file-attach-options='{
-                              "textTarget": "#profileCoverImg",
-                              "mode": "image",
-                              "targetAttr": "src",
-                              "allowTypes": [".png", ".jpeg", ".jpg"]
-                           }'>
-                  </div>
-                </div>
-                <!-- End Custom File Cover -->
               </div>
             </div>
             <!-- End Profile Cover -->
@@ -254,137 +237,190 @@
               <ul class="list-inline list-inline-m-1">
                 <li class="list-inline-item">
                   <i class="tio-shop mr-1"></i>
-                  <span id="storeHeader"></span>
+                  <span id="headerStoreName">Store Name</span>
                 </li>
 
                 <li class="list-inline-item">
                   <i class="tio-poi-outlined mr-1"></i>
-                  <a href="#" id="stateHeader"></a>
-                  <a href="#">,United States</a>
+                  <span id="headerCity">City, </span>
+                  <span id="headerState">State</span>
                 </li>
 
                 <li class="list-inline-item">
                   <i class="tio-date-range mr-1"></i>
-                  <span>Joined April 2021</span>
+                  <span id="joinDate">Joined April 2021</span>
                 </li>
               </ul>
               <!-- End List -->
             </div>
             <!-- End Profile Header -->
 
-            <!-- Nav -->
-            <div class="js-nav-scroller hs-nav-scroller-horizontal mb-5"
-                 data-hs-nav-scroller-options='{
-                   "type": "horizontal",
-                   "delay": 20
-                 }'>
+            <!-- Profile Details -->
+            <div class="card mb-3 mb-lg-5">
+              <div class="card-header">
+                <h2 class="card-title h4">Basic information</h2>
+              </div>
 
-              <span class="hs-nav-scroller-arrow-backward" style="display: none;">
-                <a class="hs-nav-scroller-arrow-link" href="javascript:;">
-                  <i class="tio-chevron-left"></i>
-                </a>
-              </span>
+              <!-- Body -->
+              <div class="card-body">
+                <!-- Form -->
+                <form>
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="name" class="col-sm-3 col-form-label input-label">Full name</label>
 
-              <span class="hs-nav-scroller-arrow-forward" style="display: none;">
-                <a class="hs-nav-scroller-arrow-link" href="javascript:;">
-                  <i class="tio-chevron-right"></i>
-                </a>
-              </span>
-
-              <ul class="nav nav-tabs align-items-center">
-                <li class="nav-item">
-                  <a class="nav-link active disabled" href="#">Profile</a>
-                </li>
-             
-
-                <li class="nav-item ml-auto">
-                 
-
-                  <!-- Unfold -->
-                  <div class="hs-unfold hs-nav-scroller-unfold">
-                    <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white" href="javascript:;"
-                       data-hs-unfold-options='{
-                         "target": "#profileDropdown",
-                         "type": "css-animation"
-                       }'>
-                      <i class="tio-more-vertical"></i>
-                    </a>
-
-                    <div id="profileDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                      <span class="dropdown-header">Settings</span>
-
-                      <a class="dropdown-item" href="#">
-                        <i class="tio-share dropdown-item-icon"></i> Share profile
-                      </a>
-                    
-                      <a class="dropdown-item" href="#">
-                        <i class="tio-info-outined dropdown-item-icon"></i> Suggest edits
-                      </a>
-
-                      <div class="dropdown-divider"></div>
-
-                      <span class="dropdown-header">Feedback</span>
-
-                      <a class="dropdown-item" href="#">
-                        <i class="tio-report-outlined dropdown-item-icon"></i> Report
-                      </a>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="email" id="name">
                     </div>
                   </div>
-                  <!-- End Unfold -->
-                </li>
-              </ul>
-            </div>
-            <!-- End Nav -->
+                  <!-- End Form Group -->
 
-            <div class="row">
-              <div class="col lg-4">
-              
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="email" class="col-sm-3 col-form-label input-label">Email</label>
+                    <div class="col-sm-9">
+                      <input type="email" class="form-control" name="email" id="email">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
 
-                <!-- Card -->
-                 <div class="panel">
-        
-          <div class="panel-body bio-graph-info">
-        
-              <div class="row">
-                  <div class="col-lg-6 col-md-12 col-sm-12">
-                      <p id="name"><span style="width: 120px;display: inline-block;font-weight: bold;">Owner </span>: </p>
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="phone" class="col-sm-3 col-form-label input-label">Phone <span class="input-label-secondary">(Optional)</span></label>
+                    <div class="col-sm-9">
+                      <input type="text" class="js-masked-input form-control" name="phone" id="phone">
+                    </div>
                   </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12">
-                      <p id="company"><span style="width: 120px;display: inline-block;font-weight: bold;">Company</span>: </p>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="storeName" class="col-sm-3 col-form-label input-label">Store Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="storeName">
+                    </div>
                   </div>
-               </div>
-               <div class="row">
-                  <div class="col-lg-6 col-md-12 col-sm-12">
-                     <p id="store"><span style="width: 120px;display: inline-block;font-weight: bold;">Store Name</span>: </p>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="companyName" class="col-sm-3 col-form-label input-label">Company Name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="companyName">
+                    </div>
                   </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12">
-                     <p id="address"><span style="width: 120px;display: inline-block;font-weight: bold;">Address</span>: </p>
+                  <!-- End Form Group -->
+
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="locationLabel" class="col-sm-3 col-form-label input-label">Address</label>
+
+                    <div class="col-sm-9">
+                      <div class="mb-3">
+                        <input type="text" class="form-control" id="address">
+                      </div>
+                      <div class="mb-3">
+                        <input type="text" class="form-control" id="cityState">
+                      </div>
+                    </div>
                   </div>
-               </div>
-               <div class="row">
-                  <div class="col-lg-6 col-md-12 col-sm-12">
-                      <p id="cityState"><span style="width: 120px;display: inline-block;font-weight: bold;">City, State</span>: </p>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="zipCodeLabel" class="col-sm-3 col-form-label input-label">Zip code</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="js-masked-input form-control" id="zipCode">
+                    </div>
                   </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12">
-                     <p id="zipcode"><span style="width: 120px;display: inline-block;font-weight: bold;">ZipCode</span>: </p>
+                  <!-- End Form Group -->
+
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                   </div>
-               </div>
-               <div class="row">
-                  <div class="col-lg-6 col-md-12 col-sm-12">
-                     <p id="email"><span style="width: 120px;display: inline-block;font-weight: bold;">Email </span>: </p>
-                  </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12">
-                     <p id="contact"><span style="width: 120px;display: inline-block;font-weight: bold;">Phone </span>: </p>
-                  </div>
-               </div>
-              
-                 
+                </form>
+                <!-- End Form -->
               </div>
-          </div>
-      </div>
-               
-              </div>
+              <!-- End Body -->
             </div>
+            <!-- Profile Details End -->
+
+            <!-- Change Password -->
+            <div id="passwordSection" class="card mb-3 mb-lg-5">
+              <div class="card-header">
+                <h4 class="card-title">Change your password</h4>
+              </div>
+
+              <!-- Body -->
+              <div class="card-body">
+                <!-- Form -->
+                <form id="changePasswordForm">
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="currentPasswordLabel" class="col-sm-3 col-form-label input-label">Current password</label>
+
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" name="currentPassword" id="currentPasswordLabel" placeholder="Enter current password" aria-label="Enter current password">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="newPassword" class="col-sm-3 col-form-label input-label">New password</label>
+
+                    <div class="col-sm-9">
+                      <input type="password" class="js-pwstrength form-control" name="newPassword" id="newPassword" placeholder="Enter new password" aria-label="Enter new password" data-hs-pwstrength-options="{
+                               &quot;ui&quot;: {
+                                 &quot;container&quot;: &quot;#changePasswordForm&quot;,
+                                 &quot;viewports&quot;: {
+                                   &quot;progress&quot;: &quot;#passwordStrengthProgress&quot;,
+                                   &quot;verdict&quot;: &quot;#passwordStrengthVerdict&quot;
+                                 }
+                               }
+                             }">
+
+                      <p id="passwordStrengthVerdict" class="form-text mb-2"><span class="password-verdict"></span></p>
+
+                      <div id="passwordStrengthProgress"><div class="progress false"><div class="progress-bar bg-danger" style="min-width: 1px; width: 1%;"></div></div></div>
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="confirmNewPasswordLabel" class="col-sm-3 col-form-label input-label">Confirm new password</label>
+
+                    <div class="col-sm-9">
+                      <div class="mb-3">
+                        <input type="password" class="form-control" name="confirmNewPassword" id="confirmNewPasswordLabel" placeholder="Confirm your new password" aria-label="Confirm your new password">
+                      </div>
+
+                      <h5>Password requirements:</h5>
+
+                      <p class="font-size-sm mb-2">Ensure that these requirements are met:</p>
+
+                      <ul class="font-size-sm">
+                        <li>Minimum 8 characters long - the more, the better</li>
+                        <li>At least one lowercase character</li>
+                        <li>At least one uppercase character</li>
+                        <li>At least one number, symbol, or whitespace character</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
+                <!-- End Form -->
+              </div>
+              <!-- End Body -->
+            </div>
+            <!-- Change Password End -->
           </div>
         </div>
         <!-- End Row -->
@@ -392,46 +428,46 @@
       <!-- End Content -->
 
       <!-- Footer -->
-        <div class="footer">
-          <div class="row justify-content-between align-items-center">
-            <div class="col">
-              <p class="font-size-sm mb-0">&copy; Number Predictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
-            </div>
-            <div class="col-auto">
-              <div class="d-flex justify-content-end">
-                <!-- List Dot -->
-                <ul class="list-inline list-separator">
-                  <li class="list-inline-item">
-                    <a class="list-separator-link" href="#">FAQ</a>
-                  </li>
+      <div class="footer">
+        <div class="row justify-content-between align-items-center">
+          <div class="col">
+            <p class="font-size-sm mb-0">&copy; Number Predictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
+          </div>
+          <div class="col-auto">
+            <div class="d-flex justify-content-end">
+              <!-- List Dot -->
+              <ul class="list-inline list-separator">
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">FAQ</a>
+                </li>
 
-                  <li class="list-inline-item">
-                    <a class="list-separator-link" href="#">License</a>
-                  </li>
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">License</a>
+                </li>
 
-                  <li class="list-inline-item">
-                    <!-- Keyboard Shortcuts Toggle -->
-                    <div class="hs-unfold">
-                      <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;"
-                         data-hs-unfold-options='{
-                              "target": "#keyboardShortcutsSidebar",
-                              "type": "css-animation",
-                              "animationIn": "fadeInRight",
-                              "animationOut": "fadeOutRight",
-                              "hasOverlay": true,
-                              "smartPositionOff": true
-                             }'>
-                        <i class="tio-command-key"></i>
-                      </a>
-                    </div>
-                    <!-- End Keyboard Shortcuts Toggle -->
-                  </li>
-                </ul>
-                <!-- End List Dot -->
-              </div>
+                <li class="list-inline-item">
+                  <!-- Keyboard Shortcuts Toggle -->
+                  <div class="hs-unfold">
+                    <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;"
+                        data-hs-unfold-options='{
+                            "target": "#keyboardShortcutsSidebar",
+                            "type": "css-animation",
+                            "animationIn": "fadeInRight",
+                            "animationOut": "fadeOutRight",
+                            "hasOverlay": true,
+                            "smartPositionOff": true
+                            }'>
+                      <i class="tio-command-key"></i>
+                    </a>
+                  </div>
+                  <!-- End Keyboard Shortcuts Toggle -->
+                </li>
+              </ul>
+              <!-- End List Dot -->
             </div>
           </div>
         </div>
+      </div>
       <!-- End Footer -->
     </main>
     <!-- ========== END MAIN CONTENT ========== -->
@@ -439,6 +475,16 @@
     <!-- JS Implementing Plugins -->
     <script src="./assets/js/vendor.min.js"></script>
     <script src="./assets/js/theme.js"></script>
+
+    <script>
+      $(document).on('ready', function () {
+        // INITIALIZATION OF PASSWORD STRENGTH MODULE
+        // =======================================================
+        $('.js-pwstrength').each(function () {
+          var pwstrength = $.HSCore.components.HSPWStrength.init($(this));
+        });
+      });
+    </script>
     <!-- Firebase -->
     <script src="./assets/firebase/common.js"></script>
     <script src="./assets/firebase/profile.js"></script>

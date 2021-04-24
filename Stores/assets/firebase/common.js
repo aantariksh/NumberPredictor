@@ -1,5 +1,6 @@
 const START_DATE = new Date('4/4/2021')
 const SCREEN_UNLOCK = 0
+const SCREEN_LOCK = 1
 
 /**
  * For formatting any date in MM/DD/YYYY
@@ -67,11 +68,13 @@ function getShiftName(shiftNumber){
  * Updates the basic user info whatever is available on the page
  * Eg. Top left profile icon details
  */
-function updateBasicInfo(){
-    // const UID = firebase.auth().currentUser.uid;
-    // TODO: Fetch and update user details
-    const userName = 'Mark Zuck'
-    const userEmail = 'mark@fb.com'
+async function updateBasicInfo(){
+    const UID = firebase.auth().currentUser.uid;
+    var snapshot = await firebase.database().ref(`Teqmo/Stores/${UID}/details`).once('value')
+    var details = snapshot.val()
+
+    const userName = details.ownerName ? details.ownerName : 'No Owner Name'
+    const userEmail = details.email ? details.email : 'No Valid Email'
 
     var profileName = document.getElementById('profileName')
     if(profileName){
@@ -83,20 +86,21 @@ function updateBasicInfo(){
         profileEmail.innerHTML = userEmail
     }
 
-    var image = document.getElementById('profileImage')
-    if(image){
-        image.src = './assets/img/160x160/img6.jpg'
-    }
-
     var todaysDate = document.getElementById('todaysDate')
-    if(todaysDate){
+    if (todaysDate) {
         var date = new Date()
         date = date.toString().substring(0,15)
         todaysDate.innerHTML = `<i class="tio-date-range"></i> ${date}`
     }
 
     var welcomeName = document.getElementById('welcomeName')
-    if(welcomeName){
+    if (welcomeName && details.ownerName) {
         welcomeName.innerHTML = `Welcome, ${userName}!`
     }
+}
+
+// TODO: Display page content after the data is populated
+function showPage(){
+    document.getElementById('pageLoader').style["display"] = 'none';
+    document.getElementById('content').style["display"] = '';
 }
