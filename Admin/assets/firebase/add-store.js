@@ -1,3 +1,9 @@
+firebase.auth().onAuthStateChanged((user) => {
+    if(user){
+        updateBasicInfo()
+    }
+})
+
 var secondaryApp = firebase.initializeApp(firebaseConfig, "Secondary");
 
 //updates confirmation page based on user inputs.

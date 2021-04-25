@@ -1,3 +1,9 @@
+firebase.auth().onAuthStateChanged((user) => {
+    if(user){
+        updateBasicInfo()
+    }
+})
+
 var dates = [];
 for (let i = 1; i <= 7; i++) {
     dates.push(new Date(new Date().getTime() - ((7 >= 0 ? i : (i - i - i)) * 24 * 60 * 60 * 1000)).toLocaleString());
