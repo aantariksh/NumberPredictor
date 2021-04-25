@@ -230,31 +230,61 @@
             <!-- Header -->
             <div class="card-header">
               <div class="row justify-content-between align-items-center flex-grow-1">
-                <div class="col-sm mb-3 mb-sm-0">
-                  <div class="d-flex justify-content-between align-items-center">
-                  <h4 class="card-header-title">All Stores Bills</h4>
+                <div class="col-sm-6 col-md-4 mb-3 mb-sm-0">
+                  <form>
+                    <!-- Search -->
+                    <div class="input-group input-group-merge input-group-flush">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="tio-search"></i>
+                        </div>
+                      </div>
+                      <input id="datatableSearch" type="search" class="form-control" placeholder="Search users" aria-label="Search users">
+                    </div>
+                    <!-- End Search -->
+                  </form>
+                </div>
+  
+                <div class="col-sm-6">
+                  <div class="d-sm-flex justify-content-sm-end align-items-sm-center">
+                    <!-- Unfold -->
+                    <div class="hs-unfold mr-2">
+                      <a class="js-hs-unfold-invoker btn btn-sm btn-white dropdown-toggle" href="javascript:;" data-hs-unfold-options="{
+                           &quot;target&quot;: &quot;#usersExportDropdown&quot;,
+                           &quot;type&quot;: &quot;css-animation&quot;
+                         }" data-hs-unfold-target="#usersExportDropdown" data-hs-unfold-invoker="">
+                        <i class="tio-download-to mr-1"></i> Export
+                      </a>
+  
+                      <div id="usersExportDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right hs-unfold-content-initialized hs-unfold-css-animation animated hs-unfold-hidden" data-hs-target-height="275" data-hs-unfold-content="" data-hs-unfold-content-animation-in="slideInUp" data-hs-unfold-content-animation-out="fadeOut" style="animation-duration: 300ms;">
+                        <span class="dropdown-header">Options</span>
+                        <a id="export-print" class="dropdown-item" href="javascript:;">
+                          <img class="avatar avatar-xss avatar-4by3 mr-2" src="./assets/svg/illustrations/print.svg" alt="Image Description">
+                          Print
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <span class="dropdown-header">Download options</span>
+                        <a id="export-excel" class="dropdown-item" href="javascript:;">
+                          <img class="avatar avatar-xss avatar-4by3 mr-2" src="./assets/svg/brands/excel.svg" alt="Image Description">
+                          Excel
+                        </a>
+                        <a id="export-csv" class="dropdown-item" href="javascript:;">
+                          <img class="avatar avatar-xss avatar-4by3 mr-2" src="./assets/svg/illustrations/placeholder-csv-format.svg" alt="Image Description">
+                          .CSV
+                        </a>
+                        <a id="export-pdf" class="dropdown-item" href="javascript:;">
+                          <img class="avatar avatar-xss avatar-4by3 mr-2" src="./assets/svg/brands/pdf.svg" alt="Image Description">
+                          PDF
+                        </a>
+                      </div>
+                    </div>
+                    <!-- End Unfold -->
+                  </div>
                 </div>
               </div>
               <!-- End Row -->
-              </div>
             </div>
             <!-- End Header -->
-
-            <!-- Body -->
-            <div class="card-body">
-              <!-- Input Group -->
-              <div class="input-group input-group-merge">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="tio-search"></i>
-                  </span>
-                </div>
-                
-                <input id="datatableSearch" type="search" class="form-control" placeholder="Search orders" aria-label="Search orders">
-              </div>
-              <!-- End Input Group -->
-            </div>
-            <!-- End Body -->
 
             <!-- Table -->
             <div class="table-responsive datatable-custom text-center">

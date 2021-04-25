@@ -86,11 +86,6 @@ function updateBasicInfo(){
         profileEmail.innerHTML = userEmail
     }
 
-    var image = document.getElementById('profileImage')
-    if(image){
-        image.src = './assets/img/160x160/img6.jpg'
-    }
-
     var todaysDate = document.getElementById('todaysDate')
     if(todaysDate){
         var date = new Date()

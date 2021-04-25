@@ -48,7 +48,9 @@ function login(){
           icon: 'error',
           title: 'Oops...',
           text: `${errorCode} ${errorMessage}`,
-        })
+        }).then(
+          () => { location.reload() }
+        )
     });
 
     // Update the button description after click

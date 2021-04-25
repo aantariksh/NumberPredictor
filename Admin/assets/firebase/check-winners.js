@@ -3,19 +3,6 @@ for (let i = 1; i <= 7; i++) {
     dates.push(new Date(new Date().getTime() - ((7 >= 0 ? i : (i - i - i)) * 24 * 60 * 60 * 1000)).toLocaleString());
     document.getElementById("date"+i).innerHTML=dates[i-1].substring(0,dates[i-1].indexOf(','));
 }
-//console.log(dates)
-
-//  function collectDetails(){
-//      console.log('Hii');
-// 	var x = document.getElementById("dateSelector").value;
-// 	console.log(x)
-// 	for(let i=1; i<=6; i++){
-// 	document.getElementById("xyz"+i).innerHTML = x;}
-// 	for(let i=1; i<=6; i++){
-// 	document.getElementById("actual"+i).innerHTML = document.getElementById("t"+i).value;}
-// }
-
-//------------------------------------------------------------------------------
 
 let tableData=[];
 
@@ -35,9 +22,6 @@ async function checkWinners(){
             icon: 'error',
             text: 'Please, Enter all the values'
         })
-        .then(() => {
-            location.reload();
-        })
     }
     else{
         //date,shift,digit,winningNum
@@ -49,10 +33,58 @@ async function checkWinners(){
         await getResult(selectedDate,2,3,evening3);
         await getResult(selectedDate,2,4,evening4);
         console.log(tableData)
-        updateWinnersTable(tableData);
+        setTimeout(()=>{updateWinnersTable(tableData)}, 3000);
     }
     
 }
+
+async function getResult(date,shift,digit,winningNumber){
+    if((digit==3 && winningNumber.length==3) || (digit==4 && winningNumber.length==4)){
+        date=date.split('/');
+        if(date[0].length==1) date[0]='0'+date[0];
+        if(date[1].length==1) date[1]='0'+date[1];
+        [date[0],date[1]]=[date[1],date[0]]
+        date=date.reverse().join('/');
+        Operation(date,shift,digit,winningNumber);
+    }
+    else{
+        Swal.fire({
+            icon: 'error',text: 'Please, Enter Valid numbers!'
+        })
+        .then(() => {
+            location.reload();
+        })
+    }
+}
+
+async function Operation(date,shift,digit,winningNumber){
+    let allPermutations=getPermutations(winningNumber);
+    let snapshot=await firebase.database().ref(`Teqmo/Numbers/${digit}/${date}/${shift}`).once('value');
+    
+    if (snapshot.exists()){
+        let AllStoreData=snapshot;
+        AllStoreData.forEach(StoreUID => {
+            let storeResult=new Set();
+            StoreUID.forEach(array=>{
+                let numberArray=array.val();
+                storeResult=isPresent(numberArray,allPermutations,storeResult);
+            })
+            if(storeResult.size>0){
+                storeResult=Array.from(new Set(storeResult));
+                addTableRow(digit,date,shift,winningNumber,StoreUID.key,storeResult);
+                insertWinningNumbers(digit,date,shift,winningNumber,StoreUID.key,storeResult);
+            }
+            else{
+                //console.log('Not exists for that store')
+            };
+        });             
+    }
+    else {
+        //console.log('Winning numbers do not exist, for particular shift of particular date')
+    }
+     
+}
+
 
 function isPresent(arr,allPermutations,storeResult){
     arr=arr.split(','); //arr is in string format
@@ -99,35 +131,6 @@ function getPermutations(winningNumber){
 	return Permutations;
 }
 
-async function Operation(date,shift,digit,winningNumber){
-    let allPermutations=getPermutations(winningNumber);
-    let snapshot=await firebase.database().ref(`Teqmo/Numbers/${digit}/${date}/${shift}`).once('value');
-    
-    if (snapshot.exists()){
-        let AllStoreData=snapshot;
-        AllStoreData.forEach(StoreUID => {
-            let storeResult=new Set();
-            StoreUID.forEach(array=>{
-                let numberArray=array.val();
-                storeResult=isPresent(numberArray,allPermutations,storeResult);
-            })
-            if(storeResult.size>0){
-                storeResult=Array.from(new Set(storeResult));
-                addTableRow(digit,date,shift,winningNumber,StoreUID.key,storeResult);
-                insertWinningNumbers(digit,date,shift,winningNumber,StoreUID.key,storeResult);
-            }
-            else{
-                //console.log('Not exists for that store')
-            };
-        });             
-    }
-    else {
-        //console.log('Winning numbers do not exist, for particular shift of particular date')
-    }
-     
-}
-
-
 async function addTableRow(digit,date,shift,winningNumber,StoreUID,storeResult){
     let shiftName=['Morning','Afternoon','Evening'];
     let gameName='TEQMO'+digit;
@@ -143,7 +146,6 @@ async function getStoreName(storeUID){
     let name=snashot.val();
     return name;
 }
-
  
 async function insertWinningNumbers(digit,date,shift,winningNumber,storeUid,winningArray){
     date=date.replace('/','-').replace('/','-');
@@ -152,39 +154,16 @@ async function insertWinningNumbers(digit,date,shift,winningNumber,storeUid,winn
         'predictions':winningArray.toString()
     });
 }
-
-async function getResult(date,shift,digit,winningNumber){
-    if((digit==3 && winningNumber.length==3) || (digit==4 && winningNumber.length==4)){
-        date=date.split('/');
-        if(date[0].length==1) date[0]='0'+date[0];
-        if(date[1].length==1) date[1]='0'+date[1];
-        [date[0],date[1]]=[date[1],date[0]]
-        date=date.reverse().join('/');
-        Operation(date,shift,digit,winningNumber);
-    }
-    else{
-        Swal.fire({
-            icon: 'error',text: 'Please, Enter Valid numbers!'
-        })
-        .then(() => {
-            location.reload();
-        })
-    }
-}
  
+// updateWinnersTable()
 function updateWinnersTable(dataSet){
-    console.log(dataSet);
-    // Sample Data to be received (Number of items in each row should match the columns)
-    // let dataSet = [
-    //      ["Name with HTML tags,attributes", "s1@gmail.com", "9847473823", "$ 200"],
-    //      ["Name with HTML tags,attributes", "s3@gmail.com", "2334453556", "$ 300"]
-    //  ]
-    //dataSet=[["5/41/2255","Mor","Te3","Stire","125","123,453","7"]];
+    // dataSet = [[1,2,3,4,5,6,7], [1,2,3,4,5,6,7]]
+    console.log("Updating Tables", dataSet);
   
     let datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {
       data: dataSet,
       columns: [
-          { title: "Date" },
+          { title: "Date2" },
           { title: "Shift" },
           { title: "Game" },
           { title: "Store" },
