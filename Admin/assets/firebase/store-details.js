@@ -74,14 +74,18 @@ async function storeBillDetails(weeks){
 
     if(weeks){
         jQuery.each(weeks, function(weekNum, details) {
-            console.log(weekNum, details)
-            if (details && typeof(weekNum) == 'number') {
+            if (details && weekNum!='start') {
+                // console.log(weekNum, details)
                 let startDate = getDateFromWeek(weekNum, 0); //From Common function's File
                 let endDate = getDateFromWeek(weekNum, 1);
-                let billStatus = billStatusArray[details.billStatus];
-                let billIconClass = billStatusClasses[details.billStatus];
-                let sales = details.sales;
-                let commission = details.commission;
+                let billStatus = billStatusArray[0], billIconClass = billStatusClasses[0]
+                let sales = 'N/A', commission = 'N/A'
+                if (details.billStatus) {
+                    billStatus = billStatusArray[details.billStatus];
+                    billIconClass = billStatusClasses[details.billStatus];
+                    sales = details.sales ? details.sales : 'N/A';
+                    commission = details.commission ? details.commission : 'N/A';
+                }
 
                 let billStatusHTML = `<span class="badge badge-soft-${billIconClass}">
                                     <span class="legend-indicator bg-${billIconClass}"></span>${billStatus}

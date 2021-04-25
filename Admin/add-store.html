@@ -71,14 +71,6 @@
                     </div>
                   </div>
 
-                  <div class="dropdown-divider"></div>
-
-                  <a class="dropdown-item" href="profile.html">
-                    <span class="text-truncate pr-2">Profile details</span>
-                  </a>
-
-                  <div class="dropdown-divider"></div>
-
                   <a class="dropdown-item" href="#">
                     <span class="text-truncate pr-2" title="Sign out" onclick="logout()">Sign out</span>
                   </a>
@@ -197,17 +189,6 @@
               <!-- Account -->
               <li class="nav-item"><div class="nav-divider"></div></li>
 
-              <li class="nav-item">
-                <small class="nav-subtitle">My Account</small>
-                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
-              </li>
-
-              <li class="nav-item ">
-                <a class="js-nav-tooltip-link nav-link" href="./profile.html"data-placement="left">
-                  <i class="tio-account-circle nav-icon"></i>
-                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Profile Details</span>
-                </a>
-              </li>
 
               <li class="nav-item ">
                 <a class="js-nav-tooltip-link nav-link" data-placement="left" href="javascript:void(0);" onclick="logout()">
@@ -264,7 +245,7 @@
                 </a>
               </li>
 
-              <li class="step-item" onclick="confirmpage(),checkpass(),storeNameInput()">
+              <li class="step-item" onclick="confirmpage(),checkpass()">
                 <a class="step-content-wrapper" href="javascript:;"
                     data-hs-step-form-next-options='{
                     "targetSelector": "#addUserStepConfirmation"
@@ -281,69 +262,46 @@
             <!-- Content Step Form -->
             <div id="addUserStepFormContent">
               <!-- Card -->
-              <div id="addUserStepProfile" class="card card-lg active">
+              <div id="addUserStepProfile" class="card card-lg active border-secondary shadow-lg">
                 <!-- Body -->
                 <div class="card-body">
-                  <!-- Form Group -->
                   <div class="row form-group">
-                    <label for="firstNameLabel" class="col-sm-3 col-form-label input-label">Full name <i class="tio-help-outlined text-body ml-1" data-toggle="tooltip" data-placement="top" title="Displayed on public forums, such as Front."></i></label>
+                    <label class="col-sm-3 col-form-label input-label">Full name</label>
 
                     <div class="col-sm-9">
-                      <div class="input-group input-group-sm-down-break">
-                        <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="First Name" aria-label="Clarice">
-                        <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Last Name" aria-label="Boone">
-                      </div>
+                      <input type="text" class="form-control" id="fullName" placeholder="Full Name">
                     </div>
                   </div>
-                  <!-- End Form Group -->
 
-                  <!-- Form Group -->
                   <div class="row form-group">
-                    <label for="emailLabel" class="col-sm-3 col-form-label input-label">Email</label>
+                    <label for="email" class="col-sm-3 col-form-label input-label">Email</label>
 
                     <div class="col-sm-9">
-                      <input type="email" class="form-control" name="email" id="emailLabel" placeholder="abc@example.com" aria-label="clarice@example.com">
+                      <input type="email" class="form-control" id="email" placeholder="abc@example.com" aria-label="clarice@example.com">
                     </div>
                   </div>
 
                   <div class="row form-group">
                     <label for="passwordLabel" class="col-sm-3 col-form-label input-label">Password <span class="input-label-secondary">(Minimum length 8)</span></label>
-
                     <div class="col-sm-9">
-                      <input type="password" class="form-control" name="password" id="passwordLabel" placeholder="Enter password" aria-label="Enter password">
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" aria-label="Enter password">
                     </div>
-
                   </div>
 
                   <div class="row form-group">
-                    <label for="passwordLabel" class="col-sm-3 col-form-label input-label">Confirm Password</label>
-
+                    <label class="col-sm-3 col-form-label input-label">Confirm Password</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="confirmPassword" placeholder="Re-enter password">
                     </div>
-
                   </div>
                 
-                  <!-- End Form Group -->
-
-                  <!-- Form Group -->
-                  <div class="js-add-field row form-group"
-                        data-hs-add-field-options='{
-                          "template": "#addPhoneFieldTemplate",
-                          "container": "#addPhoneFieldContainer",
-                          "defaultCreated": 0
-                        }'>
-                    <label for="phoneLabel" class="col-sm-3 col-form-label input-label">Phone <span class="input-label-secondary">(Optional)</span></label>
+                  <div class="row form-group">
+                    <label class="col-sm-3 col-form-label input-label">Phone <span class="input-label-secondary">(Optional)</span></label>
 
                     <div class="col-sm-9">
                       <div class="input-group input-group-sm-down-break align-items-center">
-                        <input type="text" class="js-masked-input form-control" name="phone" id="phoneLabel" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx"
-                                data-hs-mask-options='{
-                                  "template": "+0(000)000-00-00"
-                                }'>
-
+                        <input type="text" class="js-masked-input form-control" name="phone" id="phone" placeholder="+x(xxx)xxx-xx-xx">
                         <div class="input-group-append">
-                          <!-- Select -->
                           <div class="select2-custom">
                             <select class="js-select2-custom custom-select" size="1" style="opacity: 0;" name="phoneSelect"
                                   data-hs-select2-options='{
@@ -357,117 +315,26 @@
                               <option value="Fax">Fax</option>
                               <option value="Direct">Direct</option>
                             </select>
-                            <!-- End Select -->
                           </div>
                         </div>
                       </div>
-
-                      <!-- Container For Input Field -->
-                     <!--  <div id="addPhoneFieldContainer"></div> -->
-
-                      <!-- <a class="js-create-field form-link btn btn-sm btn-no-focus btn-ghost-primary" href="javascript:;">
-                        <i class="tio-add"></i> Add phone
-                      </a> -->
                     </div>
                   </div>
-                  <!-- End Form Group -->
 
-                  <!-- Add Phone Input Field -->
-                  <div id="addAddressFieldTemplate" style="display: none;">
-                    <div class="input-group-add-field">
-                      <input type="text" class="form-control" data-name="addressLine" placeholder="Your address" aria-label="Your address">
-
-                      <a class="js-delete-field input-group-add-field-delete" href="javascript:;">
-                        <i class="tio-clear"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <!-- End Add Phone Input Field -->
-
-                  <!-- Add Phone Input Field -->
-                  <div id="addPhoneFieldTemplate" class="input-group-add-field" style="display: none;">
-                    <div class="input-group input-group-sm-down-break align-items-center">
-                      <input type="text" class="js-masked-input form-control" data-name="additionlPhone" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx"
-                              data-hs-mask-options='{
-                                "template": "+0(000)000-00-00"
-                              }'>
-
-                      <div class="input-group-append">
-                        <!-- Select -->
-                        <div class="select2-custom">
-                          <select class="js-select2-custom-dynamic custom-select" size="1" style="opacity: 0;" data-name="additionlPhoneSelect"
-                                  data-hs-select2-options='{
-                                  "minimumResultsForSearch": "Infinity",
-                                  "dropdownAutoWidth": true,
-                                  "width": "6rem"
-                                }'>
-                            <option value="Mobile" selected>Mobile</option>
-                            <option value="Home">Home</option>
-                            <option value="Work">Work</option>
-                            <option value="Fax">Fax</option>
-                            <option value="Direct">Direct</option>
-                          </select>
-                        </div>
-                        <!-- End Select -->
-                      </div>
-                    </div>
-
-                    <a class="js-delete-field input-group-add-field-delete" href="javascript:;">
-                      <i class="tio-clear"></i>
-                    </a>
-                  </div>
-                  <!-- End Add Phone Input Field -->
-
-                  <!-- Form Group -->
-                  <div class="row">
-                    <label class="col-sm-3 col-form-label input-label">Account type</label>
-
+                  <div class="row form-group">
+                    <label for="storeName" class="col-sm-3 col-form-label input-label">Store Name</label>
                     <div class="col-sm-9">
-                      <div class="input-group input-group-sm-down-break">
-                        <!-- Custom Radio -->
-                        <div class="form-control">
-                          <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="userAccountTypeRadio" id="userAccountTypeRadio1" value="StoreOwner" onclick="storeNameInput(),screenDiv()">
-                            <label class="custom-control-label" for="userAccountTypeRadio1">StoreOwner</label>
-                          </div>
-                        </div>
-                        <!-- End Custom Radio -->
-
-                        <!-- Custom Radio -->
-                        <div class="form-control">
-                          <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" name="userAccountTypeRadio" id="userAccountTypeRadio2" value="Agent" onclick="storeNameInput(),screenDiv()">
-                            <label class="custom-control-label" for="userAccountTypeRadio2">Agent</label>
-                          </div>
-                        </div>
-                        <!-- End Custom Radio -->
-                      </div>
+                      <input type="text" class="form-control" name="store" id="storeName" placeholder="Enter the Store name">
                     </div>
                   </div>
-                  <!-- End Form Group -->
-                  <br>
-                  <!-- Form Group -->
-                  <div class="row form-group" style="display: none;" id="strName">
-                    <label for="storeLabel" class="col-sm-3 col-form-label input-label">Store Name</label>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" name="store" id="storeLabel" placeholder="Enter the store name" aria-label="Htmlstream">
-                    </div>
-                  </div>
-                  <!-- End Form Group -->
-
-                  <!-- Form Group -->
                   <div class="row form-group">
                     <label for="companyLabel" class="col-sm-3 col-form-label input-label">Company Name</label>
-
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="company" id="companyLabel" placeholder="Enter the company name" aria-label="Human resources">
+                      <input type="text" class="form-control" name="company" id="companyName" placeholder="Enter the Company name">
                     </div>
                   </div>
-                  <!-- End Form Group -->
 
-                  
-                  
                 </div>
                 <!-- End Body -->
 
@@ -484,89 +351,48 @@
               </div>
               <!-- End Card -->
 
-              <div id="addUserStepBillingAddress" class="card card-lg" style="display: none;">
+              <div id="addUserStepBillingAddress" class="card card-lg border-secondary shadow-lg" style="display: none;">
                 <!-- Body -->
                 <div class="card-body">
                   <!-- Form Group -->
-                  <div class="row form-group" style="display: none;" id="screens">
+                  <div class="row form-group">
                     <label for="screenLabel" class="col-sm-3 col-form-label input-label">Number of Screens</label>
 
                     <div class="col-sm-9">
                       <input type="number" class="form-control" name="screens" id="screenLabel" placeholder="Enter number of screens" aria-label="Human resources">
                     </div>
                   </div>
-                  <!-- End Form Group -->
-                  <!-- Form Group -->
-                  <div class="row form-group">
-                    <label for="locationLabel" class="col-sm-3 col-form-label input-label">Location</label>
 
-                    <div class="col-sm-9">
-                      <!-- Select -->
-                      <div class="mb-3">
-                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;" id="locationLabel"
-                                data-hs-select2-options='{
-                                  "placeholder": "Select country",
-                                  "searchInputPlaceholder": "Search a country"
-                                }'>
-                          <option label="empty"></option>
-                          <option value="US" data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle mr-2" src="./assets/vendor/flag-icon-css/flags/1x1/us.svg" alt="United States of America Flag" /><span class="text-truncate">United States of America</span></span>'>United States of America</option>
-                        </select>
-                      </div>
-                      <!-- End Select -->
-
-                      <div class="mb-3">
-                        <input type="text" class="form-control" name="city" id="cityLabel" placeholder="City" aria-label="City">
-                      </div>
-
-                      <input type="text" class="form-control" name="state" id="stateLabel" placeholder="State" aria-label="State">
-                    </div>
-                  </div>
-                  <!-- End Form Group -->
-
-                  <!-- Form Group -->
                   <div class="row form-group">
                     <label for="addressLine1Label" class="col-sm-3 col-form-label input-label">Address line 1</label>
-
                     <div class="col-sm-9">
                       <input type="text" class="form-control" name="addressLine1" id="addressLine1Label" placeholder="Your address" aria-label="Your address">
                     </div>
                   </div>
-                  <!-- End Form Group -->
 
-                  <!-- Form Group -->
-                  <div class="js-add-field row form-group"
-                        data-hs-add-field-options='{
-                          "template": "#addAddressFieldTemplate",
-                          "container": "#addAddressFieldContainer",
-                          "defaultCreated": 0
-                        }'>
+                  <div class="row form-group">
                     <label for="addressLine2Label" class="col-sm-3 col-form-label input-label">Address line 2 <span class="input-label-secondary">(Optional)</span></label>
-
                     <div class="col-sm-9">
                       <input type="text" class="form-control" name="addressLine2" id="addressLine2Label" placeholder="Your address" aria-label="Your address">
-
-                      <!-- Container For Input Field -->
-                      <div id="addAddressFieldContainer"></div>
-
-                      <a href="javascript:;" class="js-create-field form-link btn btn-sm btn-no-focus btn-ghost-primary">
-                        <i class="tio-add"></i> Add address
-                      </a>
                     </div>
                   </div>
-                  <!-- End Form Group -->
 
-                  <!-- Form Group -->
-                  <div class="row">
-                    <label for="zipCodeLabel" class="col-sm-3 col-form-label input-label">Zip code <i class="tio-help-outlined text-body ml-1" data-toggle="tooltip" data-placement="top" title="You can find your code in a postal address."></i></label>
+                  <div class="row form-group">
+                    <label for="locationLabel" class="col-sm-3 col-form-label input-label">Location</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="js-masked-input form-control" name="zipCode" id="zipCodeLabel" placeholder="Your zip code" aria-label="Your zip code"
-                              data-hs-mask-options='{
-                                "template": "AA0 0AA"
-                              }'>
+                      <input type="text" class="form-control mb-3" name="city" id="cityLabel" placeholder="City" aria-label="City">
+                      <input type="text" class="form-control" name="state" id="stateLabel" placeholder="State" aria-label="State">
                     </div>
                   </div>
-                  <!-- End Form Group -->
+
+                  <div class="row">
+                    <label for="zipCodeLabel" class="col-sm-3 col-form-label input-label">Zip Code</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="js-masked-input form-control" name="zipCode" id="zipCodeLabel" placeholder="Your zip code">
+                    </div>
+                  </div>
+
                 </div>
                 <!-- End Body -->
 
@@ -580,7 +406,7 @@
                   </button>
 
                   <div class="ml-auto">
-                    <button type="button" class="btn btn-primary" onclick="confirmpage(),checkpass(),storeNameInput()" 
+                    <button type="button" class="btn btn-primary" onclick="confirmpage(),checkpass()" 
                             data-hs-step-form-next-options='{
                               "targetSelector": "#addUserStepConfirmation"
                             }'>
@@ -591,7 +417,7 @@
                 <!-- End Footer -->
               </div>
 
-              <div id="addUserStepConfirmation" class="card card-lg" style="display: none;">
+              <div id="addUserStepConfirmation" class="card card-lg border-secondary shadow-lg" style="display: none;">
                 <!-- Profile Cover -->
                 <div class="profile-cover">
                   <div class="profile-cover-img-wrapper">
@@ -612,34 +438,28 @@
                 <div class="card-body">
                   <dl class="row">
                     <dt class="col-sm-6 text-sm-right">Full name:</dt>
-                    <dd class="col-sm-6" id="fn"></dd>
+                    <dd class="col-sm-6" id="fullName2"></dd>
 
                     <dt class="col-sm-6 text-sm-right">Email:</dt>
-                    <dd class="col-sm-6" id="email"></dd>
+                    <dd class="col-sm-6" id="email2"></dd>
 
                     <dt class="col-sm-6 text-sm-right">Phone:</dt>
-                    <dd class="col-sm-6" id="phone"></dd>
+                    <dd class="col-sm-6" id="phone2"></dd>
 
-                    <dt class="col-sm-6 text-sm-right" style="display: none;" id="sndt">Store Name:</dt>
-                    <dd class="col-sm-6" id="sn" style="display: none;"></dd>
+                    <dt class="col-sm-6 text-sm-right">Store Name:</dt>
+                    <dd class="col-sm-6" id="sn"></dd>
 
                     <dt class="col-sm-6 text-sm-right">Company Name:</dt>
                     <dd class="col-sm-6" id="cn"></dd>
 
-                    <dt class="col-sm-6 text-sm-right">Account type:</dt>
-                    <dd class="col-sm-6" id="at"></dd>
-
-                    <dt class="col-sm-6 text-sm-right" style="display: none;" id="nsdt">Number of Screens:</dt>
-                    <dd class="col-sm-6" id="ns" style="display: none;"></dd>
-
-                    <dt class="col-sm-6 text-sm-right">Country:</dt>
-                    <dd class="col-sm-6"><img class="avatar avatar-xss avatar-circle mr-1" src="./assets/vendor/flag-icon-css/flags/1x1/gb.svg" alt="United States of America Flag"> United States of America</dd>
+                    <dt class="col-sm-6 text-sm-right" id="nsdt">Number of Screens:</dt>
+                    <dd class="col-sm-6" id="ns"></dd>
 
                     <dt class="col-sm-6 text-sm-right">City:</dt>
-                    <dd class="col-sm-6" id="city"></dd>
+                    <dd class="col-sm-6" id="city2"></dd>
 
                     <dt class="col-sm-6 text-sm-right">State:</dt>
-                    <dd class="col-sm-6" id="state"></dd>
+                    <dd class="col-sm-6" id="state2"></dd>
 
                     <dt class="col-sm-6 text-sm-right">Address line 1:</dt>
                     <dd class="col-sm-6" id="addr1"></dd>

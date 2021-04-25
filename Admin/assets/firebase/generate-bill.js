@@ -20,14 +20,14 @@ async function listUnbilledWeeks() {
             }
         })
     }
-    let currentWeek = getWeekNumber(new Date(getFormattedDate(new Date()))); //Current Week Number
-    
-    for (let i=1; i<currentWeek; i++) {
+    let currentWeek = getWeekNumber(new Date()); //Current Week Number
+
+    for (let i=1; i < currentWeek; i++) {
         if (!weeksDone.has(i)) {
-            let startDate = getDateFromWeek(i,0);
-            let endDate = getDateFromWeek(i,1);
+            let startDate = getDateFromWeek(i, 0);
+            let endDate = getDateFromWeek(i, 1);
             let row = `<option value="${startDate}">${startDate} - ${endDate}</option>`
-            document.getElementById('select-week').innerHTML += row;         
+            document.getElementById('select-week').innerHTML += row;
         }
     }
 }
@@ -36,78 +36,112 @@ async function listUnbilledWeeks() {
  * Generates Bills for all the stores for selected week 
  * Commission Rate will be same for all the stores for that week
  */
-function generateBillForAllStores(){
+function generateBillForAllStores() {
+
+    // Update the button description after click
+    const button = document.getElementById('generateButton')
+    button.disabled = true
+    button.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Generating...`
+
     let weekNum = getWeekNumber(new Date(document.getElementById('select-week').value));
-    let commissionRate = parseInt(document.getElementById('commissionRate').value);
-    
-    if(!weekNum){Swal.fire({icon: 'error',text: 'Please, select a week',})}
-    else if(!commissionRate){Swal.fire({icon: 'error',text: 'Please, Enter commission rate',})}
+    let commissionRate = document.getElementById('commission-rate').value;
+    let ticketValue = document.getElementById('ticket-value').value;
+    if (!weekNum) {
+        showFailError('Please select a week!')
+    } else if (!commissionRate) {
+        showFailError('Please enter Commission rate!')
+    } else if (!ticketValue) {
+        showFailError('Please enter Ticket value!')
+    }
+    else if(commissionRate.includes('.') || parseInt(commissionRate)<0 || parseInt(commissionRate)>100){
+        showFailError('Please, Enter Commission Rate between 0 to 100 without decimal point')
+    }
 
-    saveCommissionRate(weekNum,commissionRate);
+    commissionRate = parseInt(commissionRate);
+    ticketValue = parseFloat(ticketValue);
 
-    let fees=1; //Money required to play game one time
+    savecommissionRate(weekNum.toString(), commissionRate);
 
-    firebase.database().ref(`Teqmo/Stores`).get().then(function(snapshot){
+    firebase.database().ref(`Teqmo/Stores`).get().then(function (snapshot) {
         const data = snapshot.val()
-        jQuery.each(data, function(UID,uidDetails) {
+
+        jQuery.each(data, function (UID, uidDetails) {
             if (uidDetails) {
-                let check = uidDetails.Payment.Weeks
-                jQuery.each(check, function(weekNumber, weekDetails) {
-                    if(weekNumber==weekNum){
-                        if (weekDetails) {
-                            //let billStatus = weekDetails.billStatus;
-                            let countSum=(weekDetails.counter)?weekDetails.counter.reduce((a, b) => a + b, 0):0;
-                            let Sales=countSum*fees;
-                            let Commission=((Sales*commissionRate)/100).toFixed(2);//Upto two decimal places
-                            updateBillValues(UID,Sales,Commission,weekNum);
+                let check = uidDetails.payment.weeks
+                jQuery.each(check, function (weekNumber, weekDetails) {
+                    if (weekNumber == weekNum) {
+                        try{
+                            if (weekDetails) {
+                                //let billStatus = weekDetails.billStatus;
+                                let countSum = (weekDetails.counter) ? weekDetails.counter.reduce((a, b) => a + b, 0) : 0;
+                                let sales = countSum * ticketValue;
+                                let commission = ((sales * commissionRate) / 100).toFixed(2); //Upto two decimal places
+                                updateBillValues(UID, sales, commission, weekNum);
+                            }
                         }
+                        catch{}
                     }
                 })
             }
         })
     });
+    showSuccessMsg()
 }
 
 /**
  * Saves Commission rate for selected week 
  * This can be useful to check, if bill is already generated or not for that week
- * @param {Number} weekNum week number of selected week 
+ * @param {String} weekNum week number of selected week 
  * @param {Number} commissionRate commission rate in %
  */
-
-function saveCommissionRate(weekNum,commissionRate){
-    firebase.database().ref(`Teqmo/Details/commissionRate/${commissionRate}`).get().then(function(snapshot){
-        let data=(snapshot.exists())?`${snapshot.val()},${weekNum.toString()}`:weekNum.toString();
+function savecommissionRate(weekNum, commissionRate) {
+    firebase.database().ref(`Teqmo/Details/commissionRate/${commissionRate}`).get().then(function (snapshot) {
+        let data = (snapshot.exists()) ? `${snapshot.val()},${weekNum}` : weekNum;
         firebase.database().ref(`Teqmo/Details/commissionRate`).child(commissionRate).set(data);
     });
 }
 
 /**
- * Updates Sales,Commission values for that store for selected week
+ * Updates sales,commission values for that store for selected week
  * Same values are used to increment total values
  * @param {Number} storeUID UID of a store 
- * @param {Number} Sales Sales for selected week
- * @param {Number} Commission Commission for selected week
+ * @param {Number} sales Sales for selected week
+ * @param {Number} commission Commission for selected week
  * @param {Number} weekNum Week number of selected week
  */
-async function updateBillValues(storeUID,Sales,Commission,weekNum){
+async function updateBillValues(storeUID, sales, commission, weekNum) {
     firebase.database().ref(`Teqmo/Stores/${storeUID}/payment/weeks/${weekNum}`).update({
-        'billStatus':1,     //1 : Generated & Unpaid
-        'commission':Commission,
-        'sales':Sales
+        'billStatus': 1, //1 : Generated & Unpaid
+        'commission': commission,
+        'sales': sales
     });
 
     //Updating total 
-    let totalCommission=await firebase.database().ref(`Teqmo/Stores/${storeUID}/payment/totalCommission`).once('value');
-    let totalSales=await firebase.database().ref(`Teqmo/Stores/${storeUID}/payment/totalSales`).once('value');
-    totalCommission=totalCommission.val()+Commission;
-    totalSales=totalSales.val()+Sales;
-    
-    firebase.database().ref(`Teqmo/Stores/${storeUID}/payment`).update({
-        'totalCommission':totalCommission,
-        'totalSales':totalSales
-    });
+    let totalCommission = await firebase.database().ref(`Teqmo/Stores/${storeUID}/payment/totalCommission`).once('value');
+    let totalSales = await firebase.database().ref(`Teqmo/Stores/${storeUID}/payment/totalSales`).once('value');
+    totalCommission = totalCommission.val() + commission;
+    totalSales = totalSales.val() + sales;
 
+    firebase.database().ref(`Teqmo/Stores/${storeUID}/payment`).update({
+        'totalCommission': totalCommission,
+        'totalSales': totalSales
+    });
+}
+
+// Function to display fail messages
+function showFailError(msg) {
+    let err = msg ? msg : 'Please try again later! If the problem persist contact the Developer.'
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `${err}`,
+        allowOutsideClick: false
+    }).then(() => {
+        location.reload()
+    })
+}
+
+function showSuccessMsg(msg){
     Swal.fire({
         icon: 'success',
         text: 'Bills generated Successfully!'
@@ -115,4 +149,3 @@ async function updateBillValues(storeUID,Sales,Commission,weekNum){
         location.reload();
     })
 }
- 
