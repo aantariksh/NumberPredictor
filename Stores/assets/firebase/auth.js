@@ -46,6 +46,8 @@ function login(){
           icon: 'error',
           title: 'Oops...',
           text: `${errorCode} ${errorMessage}`,
+        }).then(function(){
+          location.reload();
         })
     });
 
