@@ -16,6 +16,9 @@
     <!-- CSS Front Template -->
     <link rel="stylesheet" href="./assets/css/theme.min.css">
 
+    <!--Sweet alert library-->
+    <script src="./assets/vendor/sweetalert2@10.js"></script>
+
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
@@ -264,7 +267,7 @@
               <!-- Body -->
               <div class="card-body">
                 <!-- Form -->
-                <form>
+                <div>
                   <!-- Form Group -->
                   <div class="row form-group">
                     <label for="name" class="col-sm-3 col-form-label input-label">Full name</label>
@@ -279,14 +282,14 @@
                   <div class="row form-group">
                     <label for="email" class="col-sm-3 col-form-label input-label">Email</label>
                     <div class="col-sm-9">
-                      <input type="email" class="form-control" name="email" id="email">
+                      <input type="email" disabled style="color:grey;" class="form-control" name="email" id="email">
                     </div>
                   </div>
                   <!-- End Form Group -->
 
                   <!-- Form Group -->
                   <div class="row form-group">
-                    <label for="phone" class="col-sm-3 col-form-label input-label">Phone <span class="input-label-secondary">(Optional)</span></label>
+                    <label for="phone" class="col-sm-3 col-form-label input-label">Phone <span class="input-label-secondary"></span></label>
                     <div class="col-sm-9">
                       <input type="text" class="js-masked-input form-control" name="phone" id="phone">
                     </div>
@@ -314,15 +317,30 @@
 
                   <!-- Form Group -->
                   <div class="row form-group">
-                    <label for="locationLabel" class="col-sm-3 col-form-label input-label">Address</label>
+                    <label for="addressLabel" class="col-sm-3 col-form-label input-label">Address</label>
 
                     <div class="col-sm-9">
-                      <div class="mb-3">
                         <input type="text" class="form-control" id="address">
-                      </div>
-                      <div class="mb-3">
-                        <input type="text" class="form-control" id="cityState">
-                      </div>
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="cityLabel" class="col-sm-3 col-form-label input-label">City</label>
+                    
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="city">
+                    </div>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="row form-group">
+                    <label for="stateLabel" class="col-sm-3 col-form-label input-label">State</label>
+                    
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="state">
                     </div>
                   </div>
                   <!-- End Form Group -->
@@ -338,9 +356,9 @@
                   <!-- End Form Group -->
 
                   <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" disabled id="save-changes-btn" onclick="updateProfileDetails()" class="btn btn-primary">Save changes</button>
                   </div>
-                </form>
+                </div> 
                 <!-- End Form -->
               </div>
               <!-- End Body -->
@@ -356,13 +374,13 @@
               <!-- Body -->
               <div class="card-body">
                 <!-- Form -->
-                <form id="changePasswordForm">
+                <div id="changePasswordForm">
                   <!-- Form Group -->
                   <div class="row form-group">
-                    <label for="currentPasswordLabel" class="col-sm-3 col-form-label input-label">Current password</label>
+                    <label for="currentPassword" class="col-sm-3 col-form-label input-label">Current password</label>
 
                     <div class="col-sm-9">
-                      <input type="password" class="form-control" name="currentPassword" id="currentPasswordLabel" placeholder="Enter current password" aria-label="Enter current password">
+                      <input type="password" class="form-control" name="currentPassword" id="currentPassword" placeholder="Enter current password" aria-label="Enter current password">
                     </div>
                   </div>
                   <!-- End Form Group -->
@@ -391,11 +409,11 @@
 
                   <!-- Form Group -->
                   <div class="row form-group">
-                    <label for="confirmNewPasswordLabel" class="col-sm-3 col-form-label input-label">Confirm new password</label>
+                    <label for="confirmNewPassword" class="col-sm-3 col-form-label input-label">Confirm new password</label>
 
                     <div class="col-sm-9">
                       <div class="mb-3">
-                        <input type="password" class="form-control" name="confirmNewPassword" id="confirmNewPasswordLabel" placeholder="Confirm your new password" aria-label="Confirm your new password">
+                        <input type="password" class="form-control" name="confirmNewPassword" id="confirmNewPassword" placeholder="Confirm your new password" aria-label="Confirm your new password">
                       </div>
 
                       <h5>Password requirements:</h5>
@@ -406,16 +424,16 @@
                         <li>Minimum 8 characters long - the more, the better</li>
                         <li>At least one lowercase character</li>
                         <li>At least one uppercase character</li>
-                        <li>At least one number, symbol, or whitespace character</li>
+                        <li>At least one number, symbol</li>
                       </ul>
                     </div>
                   </div>
                   <!-- End Form Group -->
 
                   <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" onclick="updatePassword()" class="btn btn-primary">Update Password</button>
                   </div>
-                </form>
+                </div>
                 <!-- End Form -->
               </div>
               <!-- End Body -->
