@@ -61,7 +61,52 @@ function updateDataTable(dataSet){
           '<img class="mb-3" src="./assets/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">' +
           '<p class="mb-0">No data to show</p>' +
           '</div>'
-    }
+    },
+    // Table Export
+    dom: 'Bfrtip',
+    buttons: [
+      {
+        extend: 'copy',
+        className: 'd-none'
+      },
+      {
+        extend: 'excel',
+        className: 'd-none'
+      },
+      {
+        extend: 'csv',
+        className: 'd-none'
+      },
+      {
+        extend: 'pdf',
+        className: 'd-none'
+      },
+      {
+        extend: 'print',
+        className: 'd-none'
+      },
+    ]
+  });
+
+  // Table Export Buttons
+  $('#export-copy').click(() => {
+    datatable.button('.buttons-copy').trigger()
+  });
+
+  $('#export-excel').click(() => {
+    datatable.button('.buttons-excel').trigger()
+  });
+
+  $('#export-csv').click(() => {
+    datatable.button('.buttons-csv').trigger()
+  });
+
+  $('#export-pdf').click(() => {
+    datatable.button('.buttons-pdf').trigger()
+  });
+
+  $('#export-print').click(() => {
+    datatable.button('.buttons-print').trigger()
   });
 
   // Initialise search on table
@@ -81,3 +126,11 @@ function updateDataTable(dataSet){
     }, 1);
   });
 }
+
+$(document).on('ready', function () {
+  // INITIALIZATION OF SELECT2
+  // =======================================================
+  $('.js-select2-custom').each(function () {
+    var select2 = $.HSCore.components.HSSelect2.init($(this));
+  });
+});
