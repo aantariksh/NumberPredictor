@@ -71,14 +71,6 @@
                     </div>
                   </div>
 
-                  <div class="dropdown-divider"></div>
-
-                  <a class="dropdown-item" href="profile.html">
-                    <span class="text-truncate pr-2">Profile details</span>
-                  </a>
-
-                  <div class="dropdown-divider"></div>
-
                   <a class="dropdown-item" href="#">
                     <span class="text-truncate pr-2" title="Sign out" onclick="logout()">Sign out</span>
                   </a>
@@ -197,17 +189,6 @@
               <!-- Account -->
               <li class="nav-item"><div class="nav-divider"></div></li>
 
-              <li class="nav-item">
-                <small class="nav-subtitle">My Account</small>
-                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
-              </li>
-
-              <li class="nav-item ">
-                <a class="js-nav-tooltip-link nav-link" href="./profile.html"data-placement="left">
-                  <i class="tio-account-circle nav-icon"></i>
-                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Profile Details</span>
-                </a>
-              </li>
 
               <li class="nav-item ">
                 <a class="js-nav-tooltip-link nav-link" data-placement="left" href="javascript:void(0);" onclick="logout()">
@@ -241,7 +222,7 @@
       <!-- Content Step Form -->
       <div class="container mt-5">
         <!-- Card -->
-        <div class="card">
+        <div class="card border-secondary shadow-lg">
           <!-- Body -->
           <div class="card-body">
             <!-- Form Group -->
@@ -257,7 +238,7 @@
                             data-hs-select2-options='{
                               "minimumResultsForSearch": "Infinity",
                               "dropdownAutoWidth": true,
-                              "width": "25rem"
+                              "width": "30rem"
                             }'>
                         <option value="select">Select</option>
                       </select>
@@ -271,10 +252,19 @@
 
             <!-- Form Group -->
             <div class="row form-group">
-              <label for="commissionRate" class="col-sm-3 col-form-label input-label">Commission Rate</label>
+              <label  class="col-sm-3 col-form-label input-label">Ticket Value<span class="input-label-secondary">($)</span></label>
+              <div class="col-sm-2">
+                <input type="number" value="1" id="ticketValue" class="form-control text-right">
+              </div>              
+            </div>
+            <!-- End Form Group -->
+
+            <!-- Form Group -->
+            <div class="row form-group">
+              <label  class="col-sm-3 col-form-label input-label">Commission Rate<span class="input-label-secondary">(%)</span></label>
               <div class="col-sm-2">
                 <input type="number" value="20" id="commissionRate" class="form-control text-right">
-              </div>
+              </div>              
             </div>
             <!-- End Form Group -->
           </div>
@@ -282,11 +272,8 @@
 
           <!-- Footer -->
           <div class="card-footer d-flex justify-content-end align-items-center">
-            <button onclick="generateBillForAllStores()" type="button" class="btn btn-primary"
-                    data-hs-step-form-next-options='{
-                      "targetSelector": "#addUserStepBillingAddress"
-                    }'>
-              Generate Bill<i class="tio-chevron-right"></i>
+            <button onclick="generateBillForAllStores()" type="button" class="btn btn-primary" id="generateButton">
+              Generate Bill
             </button>
           </div>
           <!-- End Footer -->
@@ -325,7 +312,7 @@
     <!-- JS Implementing Plugins -->
     <script src="./assets/js/vendor.min.js"></script>
     <script src="./assets/js/theme.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Firebase -->
     <script src="./assets/firebase/common.js"></script>

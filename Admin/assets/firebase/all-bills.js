@@ -18,15 +18,15 @@ async function showAllStoresAllBills() {
 
     var dataSet = []
     
-    jQuery.each(data, function(storesNum,details) {
+    jQuery.each(data, function(storesNum, details) {
     if (details) {
         jQuery.each(details.payment.weeks, function(weekNum, weekDetails) {
-            if (weekDetails){
-                let storeName = details.details.storeName;
+            if (weekDetails && weekNum!="start") {
+                let storeName = details.details.storeName ? details.details.storeName : 'No Store Name';
                 let startDate = getDateFromWeek(weekNum, 0);
                 let endDate = getDateFromWeek(weekNum, 1);
                 let billStatus = weekDetails.billStatus;
-                let total = weekDetails.sales;
+                let total = weekDetails.sales ? weekDetails.sales : 'N/A';
                 var statusLine
                 if(billStatus==0){
                     statusLine = `<span class="badge badge-soft-secondary">
@@ -45,11 +45,8 @@ async function showAllStoresAllBills() {
                 }
                 var invoice = `<a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#invoiceReceiptModal">
                 <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`
-
-                var temp =[storeName,startDate,endDate,statusLine,total,invoice]
-
+                var temp = [storeName,startDate,endDate,statusLine,total,invoice]
                 dataSet.unshift(temp)
-
                 }
             })
         }

@@ -6,7 +6,6 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 })
 
-
 /**
  * Fetches all the Winners from All the Stores present in Database
  * Table Format - [winDate, shiftName, game+gameType, storeName, actualNumber, predictions, count]
@@ -15,9 +14,7 @@ async function showAllStoresAllWinner() {
     const snapshot = await firebase.database().ref(`Teqmo/Winners`).once('value')
     const data = snapshot.val()
     var dataSet = []
-
-    var game = "TEQMO"
-    var gameType // GameType --> TEQMO3 / TEQMO4
+    const game = "TEQMO"
 
     const stores = await firebase.database().ref(`Teqmo/Stores`).once('value')
     var storeDetails = {}
@@ -40,11 +37,11 @@ async function showAllStoresAllWinner() {
                             // to `Wed Apr 07 2021`
                             let winDate = new Date(date)
                             winDate = winDate.toString().substring(0,15).replace(' ', ', ')
-                            let shiftName = getShiftName(shift);
+                            let shiftName = getShiftName(shift)
                             let storeName = storeDetails[UID] ? storeDetails[UID] : 'Not available'
 
-                            let actualNumber = winners.winNum;
-                            let predictions = winners.predictions.replace(/,/g, ', ');
+                            let actualNumber = winners.winNum
+                            let predictions = winners.predictions.replace(/,/g, ', ')
                             let count = predictions.split(',').length
                             
                             let row = [winDate, shiftName, game+gameType, storeName, actualNumber, predictions, count]
@@ -58,15 +55,6 @@ async function showAllStoresAllWinner() {
     console.log(dataSet)
     updateDataTable(dataSet)
 }
-
-async function showNamePerUID(UID) {
-    const storeData = await firebase.database().ref(`Teqmo/Stores/${UID}/details/StoreName`).once('value')
-    // console.log(storeData)
-    var storeDetails = storeData.val()
-    // console.log(storeDetails)
-    return storeDetails
-}
-
         
 function updateDataTable(dataSet) {
     var datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {

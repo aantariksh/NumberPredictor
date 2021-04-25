@@ -15,7 +15,7 @@ async function showAllStores() {
   if (data) {
     jQuery.each(data, function(storeUID, storeInfo) {
       if (storeInfo) {
-        console.log(storeUID, storeInfo)
+        // console.log(storeUID, storeInfo)
         storeName = storeInfo.details.storeName ? storeInfo.details.storeName : 'No Name';
         email = storeInfo.details.email ? storeInfo.details.email : 'No Email';
         phoneNo = storeInfo.details.phone ? storeInfo.details.phone : 'No Phone';
@@ -44,7 +44,8 @@ async function showAllStores() {
 
 // INITIALIZATION OF DATATABLES
 function updateDataTable(dataSet){
-  console.log(dataSet);
+  // console.log(dataSet);
+  document.getElementById('all-stores-count').innerHTML = dataSet.length
   let datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {
     data: dataSet,
     columns: [

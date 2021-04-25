@@ -71,14 +71,6 @@
                     </div>
                   </div>
 
-                  <div class="dropdown-divider"></div>
-
-                  <a class="dropdown-item" href="profile.html">
-                    <span class="text-truncate pr-2">Profile details</span>
-                  </a>
-
-                  <div class="dropdown-divider"></div>
-
                   <a class="dropdown-item" href="#">
                     <span class="text-truncate pr-2" title="Sign out" onclick="logout()">Sign out</span>
                   </a>
@@ -197,17 +189,6 @@
               <!-- Account -->
               <li class="nav-item"><div class="nav-divider"></div></li>
 
-              <li class="nav-item">
-                <small class="nav-subtitle">My Account</small>
-                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
-              </li>
-
-              <li class="nav-item ">
-                <a class="js-nav-tooltip-link nav-link" href="./profile.html"data-placement="left">
-                  <i class="tio-account-circle nav-icon"></i>
-                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Profile Details</span>
-                </a>
-              </li>
 
               <li class="nav-item ">
                 <a class="js-nav-tooltip-link nav-link" data-placement="left" href="javascript:void(0);" onclick="logout()">
@@ -281,7 +262,7 @@
             <!-- Content Step Form -->
             <div id="addUserStepFormContent">
               <!-- Card -->
-              <div id="addUserStepProfile" class="card card-lg active">
+              <div id="addUserStepProfile" class="card card-lg active border-secondary shadow-lg">
                 <!-- Body -->
                 <div class="card-body">
                     <br>
@@ -417,39 +398,39 @@
                 <div class="card-body">
 
                   <div class="card-header">
-            <div class="row justify-content-between align-items-center flex-grow-1">
-              <div class="col-12 col-md">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="card-header-title">Winners</h5>
+                    <div class="row justify-content-between align-items-center flex-grow-1">
+                      <div class="col-12 col-md">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <h5 class="card-header-title">Winners</h5>
 
-                  <!-- Datatable Info -->
-                  
-                  <!-- End Datatable Info -->
-                </div>
-              </div>
+                          <!-- Datatable Info -->
+                          
+                          <!-- End Datatable Info -->
+                        </div>
+                      </div>
 
-              <div class="col-auto">
-                <!-- Filter -->
-                <div class="row align-items-sm-center">
-                  <div class="col-md">
-                    <form>
-                      <!-- Search -->
-                      <div class="input-group input-group-merge input-group-flush">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="tio-search"></i>
+                      <div class="col-auto">
+                        <!-- Filter -->
+                        <div class="row align-items-sm-center">
+                          <div class="col-md">
+                            <form>
+                              <!-- Search -->
+                              <div class="input-group input-group-merge input-group-flush">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                                    <i class="tio-search"></i>
+                                  </div>
+                                </div>
+                                <input id="datatableSearch" type="search" class="form-control" placeholder="Search users" aria-label="Search users">
+                              </div>
+                              <!-- End Search -->
+                            </form>
                           </div>
                         </div>
-                        <input id="datatableSearch" type="search" class="form-control" placeholder="Search users" aria-label="Search users">
+                        <!-- End Filter -->
                       </div>
-                      <!-- End Search -->
-                    </form>
+                    </div>
                   </div>
-                </div>
-                <!-- End Filter -->
-              </div>
-            </div>
-          </div>
           <!-- End Header -->
 
           <!-- Table -->
