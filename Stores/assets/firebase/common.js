@@ -37,7 +37,7 @@ function getPassedDays(date){
 function getWeekNumber(date){
     const diffTime = Math.abs(date - START_DATE);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    const weekNum = Math.floor(diffDays/7)+1;
+    const weekNum = Math.ceil(diffDays/7);
     return weekNum
 }
 
