@@ -67,6 +67,34 @@ function getShiftName(shiftNumber){
 }
 
 /**
+ * Gives current time  
+ * @returns {string} time ,current time in HHMMSS & 24 hours format e.g. 180254
+ */
+ function getCurrentTime() {
+    let d = new Date(); // Current 
+    let hourString = ((d.getHours() <= 9) ? '0' : '') + d.getHours().toString();
+    let minuteString = ((d.getMinutes() <= 9) ? '0' : '') + d.getMinutes().toString();
+    let secondString = ((d.getSeconds() <= 9) ? '0' : '') + d.getSeconds().toString();
+    let time = hourString + minuteString + secondString;
+    return time;
+}
+
+/**
+ * Calculates shift name according to given time
+ * @param {string} time in HHMMSS & 24 hours format e.g. 180510  
+ * @returns {string} Morning, Afternoon, Evening
+ */
+ function getGreeting(time) {
+    let hours = time.substring(0, 2);
+    let minutes = time.substring(2, 4);
+    let seconds = time.substring(4, 6);
+    time = parseInt(hours + minutes + seconds);
+    if (time <= 120000) return "Morning";
+    else if (time <= 160000) return "Afternoon";
+    else return "Evening";
+}
+
+/**
  * Updates the basic user info whatever is available on the page
  * Eg. Top left profile icon details
  */
@@ -95,8 +123,11 @@ async function updateBasicInfo(){
         todaysDate.innerHTML = `<i class="tio-date-range"></i> ${date}`
     }
 
+    var greeting = "Good" + getGreeting(getCurrentTime());
+    console.log(greeting);
+    
     var welcomeName = document.getElementById('welcomeName')
     if(welcomeName){
-        welcomeName.innerHTML = `Welcome, ${userName}!`
+        welcomeName.innerHTML = `${greeting}, ${userName}!`
     }
 }
