@@ -89,9 +89,9 @@ function getShiftName(shiftNumber){
     let minutes = time.substring(2, 4);
     let seconds = time.substring(4, 6);
     time = parseInt(hours + minutes + seconds);
-    if (time <= 120000) return "Morning";
-    else if (time <= 160000) return "Afternoon";
-    else return "Evening";
+    if (time <= 120000) return "morning";
+    else if (time <= 160000) return "afternoon";
+    else return "evening";
 }
 
 /**
@@ -123,8 +123,7 @@ async function updateBasicInfo(){
         todaysDate.innerHTML = `<i class="tio-date-range"></i> ${date}`
     }
 
-    var greeting = "Good" + getGreeting(getCurrentTime());
-    console.log(greeting);
+    var greeting = "Good " + getGreeting(getCurrentTime());
     
     var welcomeName = document.getElementById('welcomeName')
     if(welcomeName){
