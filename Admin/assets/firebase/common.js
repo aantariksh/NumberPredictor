@@ -130,3 +130,4 @@ async function updateBasicInfo(){
         welcomeName.innerHTML = `${greeting}, ${userName}!`
     }
 }
+
