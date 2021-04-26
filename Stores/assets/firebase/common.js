@@ -65,31 +65,14 @@ function getShiftName(shiftNumber){
 }
 
 /**
- * Gives current time  
- * @returns {string} time ,current time in HHMMSS & 24 hours format e.g. 180254
- */
- function getCurrentTime() {
-    let d = new Date(); // Current 
-    let hourString = ((d.getHours() <= 9) ? '0' : '') + d.getHours().toString();
-    let minuteString = ((d.getMinutes() <= 9) ? '0' : '') + d.getMinutes().toString();
-    let secondString = ((d.getSeconds() <= 9) ? '0' : '') + d.getSeconds().toString();
-    let time = hourString + minuteString + secondString;
-    return time;
-}
-
-/**
- * Calculates shift name according to given time
- * @param {string} time in HHMMSS & 24 hours format e.g. 180510  
  * @returns {string} Morning, Afternoon, Evening
  */
- function getGreeting(time) {
-    let hours = time.substring(0, 2);
-    let minutes = time.substring(2, 4);
-    let seconds = time.substring(4, 6);
-    time = parseInt(hours + minutes + seconds);
-    if (time <= 120000) return "morning";
-    else if (time <= 160000) return "afternoon";
-    else return "evening";
+ function getGreeting() {
+    let d = new Date(); // Current 
+    time = d.getHours();
+    if (time < 12) return "Morning";
+    else if (time < 16) return "Afternoon";
+    else return "Evening";
 }
 
 /**
@@ -121,7 +104,7 @@ async function updateBasicInfo(){
         todaysDate.innerHTML = `<i class="tio-date-range"></i> ${date}`
     }
 
-    var greeting = "Good " + getGreeting(getCurrentTime());
+    var greeting = "Good " + getGreeting();
 
     var welcomeName = document.getElementById('welcomeName')
     if (welcomeName && details.ownerName) {

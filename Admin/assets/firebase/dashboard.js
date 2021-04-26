@@ -8,26 +8,7 @@ firebase.auth().onAuthStateChanged( async (user) => {
         updateStatistics(data)
     }
 })
-
-/**
- * Updates the count cards on page load 
- */
- function updateCounts(weeks, totalCommission, totalSales){
-    const profit = (totalSales - totalCommission).toFixed(2)
-    var totalCount = 0
-    jQuery.each(weeks, (weekNum, details) => {
-      if(details && weekNum!="start"){
-        var weekCount = details.counter.reduce((a, b) => a + b, 0)
-        totalCount += weekCount
-      }
-    })
-  
-    document.getElementById('totalCount').innerHTML = totalCount
-    document.getElementById('totalCommission').innerHTML = '$ '+ totalCommission
-    document.getElementById('totalSales').innerHTML = '$ '+ totalSales
-    document.getElementById('profit').innerHTML = '$ '+ profit
-  }
-
+ 
 function updateStatistics(data) {
     let storeCount = 0,
         totalPlays = 0,
@@ -51,16 +32,16 @@ function updateStatistics(data) {
     });
     totalCommission = totalCommission.toFixed(2); //toFixed() converts a number into String 
     totalSales = totalSales.toFixed(2);
-    document.getElementById('total-stores').innerHTML = storeCount;
-    document.getElementById('total-plays').innerHTML = totalPlays;
-    document.getElementById('total-commission').innerHTML = '$ ' + totalCommission;
-    document.getElementById('total-sales').innerHTML = '$ ' + totalSales;
+    document.getElementById('totalStores').innerHTML = storeCount;
+    document.getElementById('totalPlays').innerHTML = totalPlays;
+    document.getElementById('totalCommission').innerHTML = '$ ' + totalCommission;
+    document.getElementById('totalSales').innerHTML = '$ ' + totalSales;
 }
 
 /**
  * Count Per Day of Current Week, from [Sun, Mon,... , Sat]
  * Current WeekNumber is calculated from current date 
- * @returns {Array} countPerDay Count per day of week, 0th pos:Sunday, ..., 6th pos:Saturday
+ * @returns {Array} Sum of counts for all stores per day of week, 0th pos:Sunday, ..., 6th pos:Saturday
  */
 async function getSumOfCountPerDayOfWeek(data, weekNum = 0) {
     const date = new Date() //Current Date
