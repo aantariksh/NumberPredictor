@@ -1,28 +1,73 @@
-firebase.auth().onAuthStateChanged((user) => {
+firebase.auth().onAuthStateChanged( async (user) => {
     if(user){
+        const UID = user.uid;
+        const snapshot = await firebase.database().ref(`Teqmo/Stores`).once('value')
+        const data = snapshot.val()
+        updateChart(data)
         updateBasicInfo()
+        updateStatistics(data)
     }
 })
+ 
+function updateStatistics(data) {
+    let storeCount = 0,
+        totalPlays = 0,
+        totalCommission = 0,
+        totalSales = 0;
+
+    jQuery.each(data, (storeUID, storeInfo) => {
+        storeCount++;
+        totalCommission += parseFloat(storeInfo.payment.totalCommission);
+        totalSales += parseFloat(storeInfo.payment.totalSales);
+        var totalCount = 0;
+        let weeks = storeInfo.payment.weeks;
+        jQuery.each(weeks, (weekNum, details) => {
+            if (details && weekNum != "start") {
+                var weekCount = details.counter.reduce((a, b) => a + b, 0)
+                totalCount += weekCount
+            }
+        })
+
+        totalPlays += totalCount;
+    });
+    totalCommission = totalCommission.toFixed(2); //toFixed() converts a number into String 
+    totalSales = totalSales.toFixed(2);
+    document.getElementById('totalStores').innerHTML = storeCount;
+    document.getElementById('totalPlays').innerHTML = totalPlays;
+    document.getElementById('totalCommission').innerHTML = '$ ' + totalCommission;
+    document.getElementById('totalSales').innerHTML = '$ ' + totalSales;
+}
 
 /**
  * Count Per Day of Current Week, from [Sun, Mon,... , Sat]
  * Current WeekNumber is calculated from current date 
- * @returns {Array} countPerDay Count per day of week, 0th pos:Sunday, ..., 6th pos:Saturday
+ * @returns {Array} Sum of counts for all stores per day of week, 0th pos:Sunday, ..., 6th pos:Saturday
  */
-async function getCountPerDayOfWeek(weekNum = 0){
+async function getSumOfCountPerDayOfWeek(data, weekNum = 0) {
     const date = new Date() //Current Date
     const currentWeek = getWeekNumber(date)
     const targetWeek = currentWeek - weekNum
+    console.log(weekNum)
+    let sumOfCount = [0, 0, 0, 0, 0, 0, 0];
 
-    // const UID = 'OHatm0qKa2Rf3DFnAj1Vq64Fcn62'
-    const UID = firebase.auth().currentUser.uid;
-    var snapshot = await firebase.database().ref(`Teqmo/Stores/${UID}/Payment/Weeks/${targetWeek}/counter`).once('value')
-    return snapshot.val()
+    jQuery.each(data, (storeUID, storeInfo) => {
+        let weeks = storeInfo.payment.weeks;
+        jQuery.each(weeks, (weekNum, details) => {
+            if (details && weekNum == targetWeek) {
+                let weekCount = details.counter;
+                for (let i = 0; i < 7; i++) {
+                    sumOfCount[i] += weekCount[i];
+                }
+            }
+        })
+    });
+
+    return sumOfCount
 }
 
-async function updateChart(){
-    var countThisWeek = await getCountPerDayOfWeek()
-    var countLastWeek = await getCountPerDayOfWeek(1)
+async function updateChart(data){
+    var countThisWeek = await getSumOfCountPerDayOfWeek(data,0)
+    var countLastWeek = await getSumOfCountPerDayOfWeek(data,1)
     
     var updatingChart = $.HSCore.components.HSChartJS.init($('#updatingData'));
     updatingChart.data.datasets[0].data = countThisWeek

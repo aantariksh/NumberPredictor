@@ -66,6 +66,18 @@ function getShiftName(shiftNumber){
     return "No Info Available"
 }
 
+
+/**
+ * @returns {string} Morning, Afternoon, Evening
+ */
+ function getGreeting() {
+    let d = new Date(); // Current 
+    time = d.getHours();
+    if (time < 12) return "Morning";
+    else if (time < 16) return "Afternoon";
+    else return "Evening";
+}
+
 /**
  * Updates the basic user info whatever is available on the page
  * Eg. Top left profile icon details
@@ -95,8 +107,11 @@ async function updateBasicInfo(){
         todaysDate.innerHTML = `<i class="tio-date-range"></i> ${date}`
     }
 
+    var greeting = "Good " + getGreeting();
+    
     var welcomeName = document.getElementById('welcomeName')
     if(welcomeName){
-        welcomeName.innerHTML = `Welcome, ${userName}!`
+        welcomeName.innerHTML = `${greeting}, ${userName}!`
     }
 }
+
