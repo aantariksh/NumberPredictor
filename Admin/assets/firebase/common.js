@@ -70,11 +70,13 @@ function getShiftName(shiftNumber){
  * Updates the basic user info whatever is available on the page
  * Eg. Top left profile icon details
  */
-function updateBasicInfo(){
-    // const UID = firebase.auth().currentUser.uid;
-    // TODO: Fetch and update user details
-    const userName = 'Mark Zuck'
-    const userEmail = 'mark@fb.com'
+async function updateBasicInfo(){
+    const UID = firebase.auth().currentUser.uid;
+    var snapshot = await firebase.database().ref(`Teqmo/Stores/${UID}/details`).once('value')
+    var details = snapshot.val()
+
+    const userName = details.ownerName ? details.ownerName : 'No Owner Name'
+    const userEmail = details.email ? details.email : 'No Valid Email'
 
     var profileName = document.getElementById('profileName')
     if(profileName){
