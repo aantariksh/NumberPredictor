@@ -16,6 +16,8 @@
     <!-- CSS Front Template -->
     <link rel="stylesheet" href="./assets/css/theme.min.css">
 
+    <!--Sweet Alert Library-->
+    <script src="./assets/vendor/sweetalert2@10.js"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
@@ -220,11 +222,11 @@
               <div class="card-body">
                 <div class="row justify-content-lg-between">
                   <div class="col-sm order-2 order-sm-1 mb-3">
-                    <img class="mb-2" src="./assets/img/logo-dark.png" style="height: 70px">
-                    <h1 class="text-primary">Number Predictor</h1>
+                    <img class="mb-w img-fluid" src="./assets/img/invoice_Top.JPG" style="height: auto">
+                    <!-- <h1 class="text-primary">Number Predictor</h1> -->
                   </div>
 
-                  <div class="col-sm-auto order-1 order-sm-2 text-sm-right mb-3">
+<!--                   <div class="col-sm-auto order-1 order-sm-2 text-sm-right mb-3">
                     <div class="mb-3">
                       <h2>Invoice #</h2>
                       <span class="d-block">3682303</span>
@@ -236,19 +238,20 @@
                       KW5 8NW, London<br>
                       United Kingdom
                     </address>
-                  </div>
+                  </div> -->
                 </div>
                 <!-- End Row -->
 
                 <!-- Bill To -->
                 <div class="row justify-content-md-between mb-3">
                   <div class="col-md">
-                    <h4>Bill to:</h4>
-                    <h4>Sara Williams</h4>
+                    <h4>To:</h4>
+                    <h4 id="ownerName">Owner Name Here</h4>
+                    <h5 id="storeName">Store Name Here</h5>
 
-                    <address>
-                      280 Suzanne Throughway,<br>
-                      Breannabury, OR 45801,<br>
+                    <address id="address">
+                      Address,<br>
+                      Here,<br>
                       United States
                     </address>
                   </div>
@@ -256,34 +259,44 @@
                   <div class="col-md text-md-right">
                     <dl class="row">
                       <dt class="col-sm-4 col-md">Invoice date:</dt>
-                      <dd class="col-sm-8 col-md-auto">03/10/2018</dd>
+                      <dd class="col-sm-8 col-md-auto" id="invoiceDate">[Invoice-Date]</dd>
                     </dl>
                     <dl class="row">
                       <dt class="col-sm-4 col-md">Due date:</dt>
-                      <dd class="col-sm-8 col-md-auto">03/11/2018</dd>
+                      <dd class="col-sm-8 col-md-auto" id="dueDate">[Due-Date]</dd>
                     </dl>
                   </div>
                 </div>
                 <!-- End Bill To -->
 
+                <div>
+                  <h2 class="text-center">Subject: Purchase Order for Web Services</h2>
+                  <h2 class="text-center">PURCHASE ORDER</h2> <br>
+                </div>
+
                 <!-- Table -->
                 <div class="table-responsive">
                   <table class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Item</th>
-                        <th>Quantity</th>
+                    <thead style="background-color: #ff27ac">
+                      <tr class="text-dark">
+                        <th>Day Range</th>
+                        <th>Count</th>
+                        <th>Sales</th>
                         <th>Rate</th>
                         <th class="table-column-right-aligned">Amount</th>
                       </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id="tableData">
                       <tr>
-                        <th>Total Sales</th>
+                        <td>Loading...</td>
+                        <!--will be deleted
+                        <th>19 Apr,2021 - 25 Apr, 2021</th>
                         <td>150</td>
-                        <td>1</td>
+                        <td>220</td>
+                        <td>50%</td>
                         <td class="table-column-right-aligned">$ 150</td>
+                        -->
                       </tr>
                     </tbody>
                   </table>
@@ -315,12 +328,10 @@
 
                 <!-- Contacts -->
                 <div class="mb-3">
-                  <h3>Thank you!</h3>
-                  <p>If you have any questions concerning this invoice, use the following contact information:</p>
+                  <h4>Thank you!</h4>
+                  <img class="mb-w img-fluid" src="./assets/img/invoice_Down.JPG" style="height: auto">
                 </div>
                 <!-- End Contacts -->
-
-                <p class="font-size-sm mb-0">&copy; 2021 TeqmoMedia.</p>
               </div>
             </div>
             <!-- End Card -->
@@ -367,6 +378,11 @@
       </div>
       <!-- End Footer -->
     </main>
+
+    <!--Firebase files-->
+    <script src="./assets/firebase/common.js"></script>
+    <script src="./assets/firebase/view-invoice.js"></script>
+
     <!-- ========== END MAIN CONTENT ========== -->
 
     <!-- JS Implementing Plugins -->
