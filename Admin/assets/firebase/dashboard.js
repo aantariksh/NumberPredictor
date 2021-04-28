@@ -47,6 +47,7 @@ async function getSumOfCountPerDayOfWeek(data, weekNum = 0) {
     const date = new Date() //Current Date
     const currentWeek = getWeekNumber(date)
     const targetWeek = currentWeek - weekNum
+ 
     let sumOfCount = [0, 0, 0, 0, 0, 0, 0];
 
     jQuery.each(data, (storeUID, storeInfo) => {
