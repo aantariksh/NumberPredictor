@@ -1,23 +1,31 @@
 firebase.auth().onAuthStateChanged((user) => {
     if(user){
+        updateInvoiceDate();
         listUnbilledWeeks();
-        updateBasicInfo()
+        updateBasicInfo();
     }
 })
+ 
+function updateInvoiceDate() {
+    let date = new Date()
+    const year = date.getFullYear();
+    const month = (1 + date.getMonth()).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    let invoiceDate = day + '-' + month + '-' + year;
+    document.getElementById('invoiceDate').value = invoiceDate;
+    document.getElementById('invoiceDate').disabled = true;
+}
 
 /**
  * Gives all the weeks, For which bill is not generated
  */
 async function listUnbilledWeeks() {
-    const snapshot = await firebase.database().ref(`Teqmo/Details/commissionRate`).once('value')
+    const snapshot = await firebase.database().ref(`Teqmo/Details/weeks`).once('value')
     const data = snapshot.val()
     let weeksDone = new Set();
     if (data) {
-        jQuery.each(data, (commission, weeks) => {
-            let tempArray = weeks.split(',')
-            for (let i=0; i<tempArray.length; i++) {
-                weeksDone.add(parseInt(tempArray[i]));
-            }
+        jQuery.each(data,(weekNum)=>{
+            weeksDone.add(parseInt(weekNum))
         })
     }
     let currentWeek = getWeekNumber(new Date()); //Current Week Number
@@ -46,23 +54,36 @@ async function generateBillForAllStores() {
     let weekNum = document.getElementById('select-week').value;
     let commissionRate = document.getElementById('commissionRate').value;
     let ticketValue = document.getElementById('ticketValue').value;
-
-    if (!weekNum) {
+    let invoiceDate = document.getElementById('invoiceDate').value;
+    let dueDate = document.getElementById('dueDate').value;
+    if (weekNum == 'select') {
         showFailError('Please select a week!')
+        return
     } else if (!commissionRate) {
         showFailError('Please enter Commission rate!')
+        return
     } else if (!ticketValue) {
         showFailError('Please enter Ticket value!')
+        return
+    }
+    else if(!dueDate){
+        showFailError('Please select due date!')
+        return
+    }
+    else if(dueDate && Math.ceil((new Date(dueDate)-new Date()) / (1000 * 60 * 60 * 24)) <= 1){
+        showFailError('Please select valid due date')
+        return
     }
     else if(commissionRate.includes('.') || parseInt(commissionRate)<0 || parseInt(commissionRate)>100){
         showFailError('Please, Enter Commission Rate between 0 to 100 without decimal point')
+        return
     }
-
     commissionRate = parseInt(commissionRate);
     ticketValue = parseFloat(ticketValue);
+    dueDate = dueDate.split("-").reverse().join("-");
 
-    savecommissionRate(weekNum.toString(), commissionRate);
-
+    saveBillDetails(weekNum,commissionRate,dueDate,invoiceDate,ticketValue);
+    
     await firebase.database().ref(`Teqmo/Stores`).get().then(function (snapshot) {
         const data = snapshot.val()
 
@@ -94,16 +115,17 @@ async function generateBillForAllStores() {
 }
 
 /**
- * Saves Commission rate for selected week 
+ * Saves Bill details for selected week 
  * This can be useful to check, if bill is already generated or not for that week
- * @param {String} weekNum week number of selected week 
- * @param {Number} commissionRate commission rate in %
  */
-function savecommissionRate(weekNum, commissionRate) {
-    firebase.database().ref(`Teqmo/Details/commissionRate/${commissionRate}`).get().then(function (snapshot) {
-        let data = (snapshot.exists()) ? `${snapshot.val()},${weekNum}` : weekNum;
-        firebase.database().ref(`Teqmo/Details/commissionRate`).child(commissionRate).set(data);
-    });
+function saveBillDetails(weekNum,commissionRate,dueDate,invoiceDate,ticketValue) {
+    console.log(weekNum,commissionRate,dueDate,invoiceDate,ticketValue)
+    firebase.database().ref(`Teqmo/Details/weeks`).child(weekNum).set({
+        "commissionRate":commissionRate,
+        "dueDate":dueDate,
+        "invoiceDate":invoiceDate,
+        "ticketValue":ticketValue
+    })
 }
 
 /**
