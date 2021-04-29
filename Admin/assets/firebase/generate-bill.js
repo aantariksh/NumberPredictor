@@ -8,10 +8,7 @@ firebase.auth().onAuthStateChanged((user) => {
  
 function updateInvoiceDate() {
     let date = new Date()
-    const year = date.getFullYear();
-    const month = (1 + date.getMonth()).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    let invoiceDate = day + '-' + month + '-' + year;
+    let invoiceDate = date.toDateString()
     document.getElementById('invoiceDate').value = invoiceDate;
     document.getElementById('invoiceDate').disabled = true;
 }
@@ -56,6 +53,7 @@ async function generateBillForAllStores() {
     let ticketValue = document.getElementById('ticketValue').value;
     let invoiceDate = document.getElementById('invoiceDate').value;
     let dueDate = document.getElementById('dueDate').value;
+    
     if (weekNum == 'select') {
         showFailError('Please select a week!')
         return
@@ -70,7 +68,7 @@ async function generateBillForAllStores() {
         showFailError('Please select due date!')
         return
     }
-    else if(dueDate && Math.ceil((new Date(dueDate)-new Date()) / (1000 * 60 * 60 * 24)) <= 1){
+    else if(dueDate && Math.ceil((new Date(dueDate).getTime()-new Date().getTime()) / (1000 * 60 * 60 * 24)) < 1){
         showFailError('Please select valid due date')
         return
     }
@@ -80,7 +78,7 @@ async function generateBillForAllStores() {
     }
     commissionRate = parseInt(commissionRate);
     ticketValue = parseFloat(ticketValue);
-    dueDate = dueDate.split("-").reverse().join("-");
+    dueDate = new Date(dueDate).toDateString()
 
     saveBillDetails(weekNum,commissionRate,dueDate,invoiceDate,ticketValue);
     

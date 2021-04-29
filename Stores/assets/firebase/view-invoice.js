@@ -58,7 +58,7 @@ async function generateInvoice(storeUID, weekNum) {
         let commissionRate = weekDetails.commissionRate
         let commission = ((sale * commissionRate) / 100).toFixed(2)
         let amountToPay = (sale - commission).toFixed(2)
-        //console.log(weekStartingDay,weekEndingDay,weekCount,weekSale,weekCommissionRate,amountToPay)
+        
         let tableRow = `<tr>
                         <td>${startingDay} - ${endingDay}</td>
                         <td>${playCount}</td>
@@ -87,7 +87,6 @@ function showFailError(msg) {
         })
         .then(function () {
             history.back()
-            //location.reload();
         });
 }
 
