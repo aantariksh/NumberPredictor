@@ -69,9 +69,9 @@ async function generateBillForAllStores() {
         return
     }
     else if(dueDate && Math.ceil((new Date(dueDate).getTime()-new Date().getTime()) / (1000 * 60 * 60 * 24)) < 1){
-        showFailError('Please select valid due date')
+        showFailError('Due date should be greater than invoice date!')
         return
-    }
+    } 
     else if(commissionRate.includes('.') || parseInt(commissionRate)<0 || parseInt(commissionRate)>100){
         showFailError('Please, Enter Commission Rate between 0 to 100 without decimal point')
         return
@@ -80,8 +80,6 @@ async function generateBillForAllStores() {
     ticketValue = parseFloat(ticketValue);
     dueDate = new Date(dueDate).toDateString()
 
-    saveBillDetails(weekNum,commissionRate,dueDate,invoiceDate,ticketValue);
-    
     await firebase.database().ref(`Teqmo/Stores`).get().then(function (snapshot) {
         const data = snapshot.val()
 
@@ -108,8 +106,13 @@ async function generateBillForAllStores() {
                 })
             }
         })
+    }).then(()=>{
+        saveBillDetails(weekNum,commissionRate,dueDate,invoiceDate,ticketValue);
+        showSuccessMsg()
+    }).catch((error)=>{
+        console.log(error)
+        showFailError('Something went wrong, please try again')
     });
-    showSuccessMsg()
 }
 
 /**
