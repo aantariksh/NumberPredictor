@@ -12,7 +12,7 @@ async function showStoresDetails(){
 
     storeOwnerInfo(data.details);
     storeReportCard(data.payment);
-    storeBillDetails(data.payment.weeks);
+    storeBillDetails(data.payment.weeks,storeUID);
 }
 
 /**
@@ -67,7 +67,7 @@ function storeReportCard(storePayment){
  * All the bills for all the weeks of that store from beginning
  * @param {Number} storeUID 
  */
-async function storeBillDetails(weeks){
+async function storeBillDetails(weeks,storeUID){
     const billStatusArray = ["Not generated","Pending","Paid"];
     const billStatusClasses = ["fail","warning","success"]; //For Icon & Colour
     let billDetailsData = []
@@ -90,11 +90,10 @@ async function storeBillDetails(weeks){
                 let billStatusHTML = `<span class="badge badge-soft-${billIconClass}">
                                     <span class="legend-indicator bg-${billIconClass}"></span>${billStatus}
                                     </span>`;
-                let invoiceIcon = `<a class="btn btn-sm btn-white" href="javascript:;" data-toggle="modal" data-target="#invoiceReceiptModal">
-                                    <i class="tio-receipt-outlined mr-1"></i> Invoice
-                                    </a>`;
+                let invoice = `<a class="btn btn-sm btn-white" href="invoice.html?storeUID=${storeUID}&weekID=${weekNum}">
+                <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`
                 
-                let row = [startDate, endDate, billStatusHTML, sales, commission, invoiceIcon];
+                let row = [startDate, endDate, billStatusHTML, sales, commission, invoice];
                 billDetailsData.unshift(row);   //Adding JSON at beginning
             }
         });
