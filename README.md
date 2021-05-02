@@ -9,4 +9,4 @@ Main repository for Number Predictor App
 2. Similary, Make sure a key having "string" data type exists in Teqmo/Stores/payment/weeks/ <br>  in this case we have "start":weekNum
 3. Keys must not contain '/', '.', '#', '$', '[',']' or any special characters e.g. Fractional values cannot be used as keys
 4. toFixed() method converts a number datatype into string datatype. So after calling toFixed(), Make sure to call paserInt()/parseFloat() before performing any arithmatical operation
- 
+5. test
