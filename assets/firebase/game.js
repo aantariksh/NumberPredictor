@@ -61,6 +61,7 @@ function generateNumbers(count){
         for(i=0; i<dig; i++){
             newNum += list[getRandomInt(0, list.length-1)]
         }
+        newNum = (parseInt(newNum[0])-1) + '-' + newNum + '-' + (parseInt(newNum[dig-1])-1)
         if(!numbers.includes(newNum)){
             numbers.push(newNum)
         }

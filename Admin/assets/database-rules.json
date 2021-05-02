@@ -1,0 +1,30 @@
+{
+  "rules":{
+     "Teqmo":{
+       "Details":{
+         ".read": true,
+         ".write": "auth.uid === '5NRlQnIpAUPJO4F7PJphNniwejk1'"
+       },
+       "Numbers":{
+         ".read": true,
+         ".write":true
+       },
+       "Stores":{
+          "$uid": {
+            ".read": "$uid === auth.uid || auth.uid === '5NRlQnIpAUPJO4F7PJphNniwejk1'",
+            ".write": "$uid === auth.uid || auth.uid === '5NRlQnIpAUPJO4F7PJphNniwejk1'"
+          },
+          ".read": "auth.uid === '5NRlQnIpAUPJO4F7PJphNniwejk1'",
+          ".write": "auth.uid === '5NRlQnIpAUPJO4F7PJphNniwejk1'"
+        },
+       "Winners":{
+          "$uid": {
+            ".read": "$uid === auth.uid || auth.uid === '5NRlQnIpAUPJO4F7PJphNniwejk1'",
+            ".write": "$uid === auth.uid || auth.uid === '5NRlQnIpAUPJO4F7PJphNniwejk1'"
+          },
+          ".read": "auth.uid === '5NRlQnIpAUPJO4F7PJphNniwejk1'",
+          ".write": "auth.uid === '5NRlQnIpAUPJO4F7PJphNniwejk1'"
+        }
+     }
+  }
+}

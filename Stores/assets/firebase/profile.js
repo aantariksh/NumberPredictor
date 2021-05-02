@@ -17,7 +17,7 @@ function readUserData(uid, email, creationTime) {
     document.getElementById("headerStoreName").innerHTML = data.storeName ? data.storeName : 'No Store Name'
     document.getElementById("headerState").innerHTML = data.state ? data.state : ''
     document.getElementById("headerCity").innerHTML = data.city ? data.city : 'No City Name'
-    document.getElementById("joinDate").innerHTML = creationTime.substr(0,16)
+    document.getElementById("joinDate").innerHTML = 'Joined: ' + creationTime.substr(0,16)
 
     document.getElementById("name").value = data.ownerName ? data.ownerName : 'No Name'
     document.getElementById("email").value = email

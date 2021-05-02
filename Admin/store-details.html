@@ -21,7 +21,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
     <!--Firebase Config-->
-    <Script src="./assets/firebase/auth.js"></Script>
+    <script src="./assets/firebase/auth.js"></script>
   </head>
 
   <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
@@ -93,7 +93,7 @@
           <div class="navbar-brand-wrapper justify-content-between">
             <!-- Logo -->
               <a class="navbar-brand" href="./index.html">
-                <img class="navbar-brand-logo" src="./assets/img/logo.png" alt="Logo">
+                <img class="navbar-brand-logo" src="./assets/img/logo-dark.png" alt="Logo">
                 <img class="navbar-brand-logo-mini" src="./assets/img/favicon.png" alt="Logo">
               </a>
             <!-- End Logo -->
@@ -232,102 +232,82 @@
         <div class="row">
           <div class="col-lg-8">
             <!-- Name Card -->
-            <div class="card mb-3 mb-lg-5 border-secondary shadow-lg">
+            <div class="card mb-3 mb-lg-5 border-primary shadow-lg">
               <div class="card-body">
-                <div class="d-flex align-items-center mb-5">
-                  <div class="avatar avatar-lg avatar-circle">
-                    <img class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
-                  </div>
-                  
+                <!-- Name starts -->
+                <div class="d-flex align-items-center">                  
                   <div class="mx-3">
                     <div class="d-flex mb-1">
-                      <h3 id="storeOwnerName" class="mb-0 mr-3">Hello!</h3>
+                      <h2 id="storeOwnerName" class="mb-0 mr-3">Hello!</h2>
                     </div>
                   </div>
                 </div>
+                <!-- End Name -->
+                <hr>
+                <!-- Report cards -->
+                <div class="row gx-lg-4">
+                  <div class="col-sm-6 col-lg-3">
+                    <div class="media">
+                      <div class="media-body">
+                        <h4 class="card-subtitle">Players</h4>
+                        <span class="card-title h2" id="totalCount">Loading...</span>
+                      </div>
+                      <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
+                        <i class="tio-group-equal"></i>
+                      </span>
+                    </div>
+                    <div class="d-lg-none"><hr></div>
+                  </div>
+  
+                  <div class="col-sm-6 col-lg-3 column-divider-sm">
+                    <div class="media">
+                      <div class="media-body">
+                        <h4 class="card-subtitle">Sales</h4>
+                        <span class="card-title h2" id="totalSales">Loading...</span>
+                      </div>
+                      <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
+                        <i class="tio-savings"></i>
+                      </span>
+                    </div>
+                    <div class="d-lg-none"><hr></div>
+                  </div>
+  
+                  <div class="col-sm-6 col-lg-3 column-divider-lg">
+                    <div class="media">
+                      <div class="media-body">
+                        <h4 class="card-subtitle">Commission</h4>
+                        <span class="card-title h2" id="totalCommission">Loading...</span>
+                      </div>
+                      <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
+                        <i class="tio-receipt-outlined"></i>
+                      </span>
+                    </div>
+                    <div class="d-sm-none"><hr></div>
+                  </div>
+                  <div class="col-sm-6 col-lg-3 column-divider-sm">
+                    <div class="media">
+                      <div class="media-body">
+                        <h4 class="card-subtitle">Profit</h4>
+                        <span class="card-title h2" id="totalProfit">Loading...</span>
+                      </div>
+                      <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
+                        <i class="tio-dollar"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Report Cards -->
               </div>
             </div>
             <!-- End Name Card -->
-        
-            <!-- Report cards -->
-            <div class="card card-body mb-3 mb-lg-5 border-secondary shadow-lg">
-              <div class="row gx-lg-4">
-                <div class="col-sm-6 col-lg-3">
-                  <div class="media">
-                    <div class="media-body">
-                      <h4 class="card-subtitle">Players</h4>
-                      <span class="card-title h1" id="totalCount">Loading...</span>
-                    </div>
-                    <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
-                      <i class="tio-group-equal"></i>
-                    </span>
-                  </div>
-                  <div class="d-lg-none"><hr></div>
-                </div>
-
-                <div class="col-sm-6 col-lg-3 column-divider-sm">
-                  <div class="media">
-                    <div class="media-body">
-                      <h4 class="card-subtitle">Sales</h4>
-                      <span class="card-title h1" id="totalSales">Loading...</span>
-                    </div>
-                    <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
-                      <i class="tio-savings"></i>
-                    </span>
-                  </div>
-                  <div class="d-lg-none"><hr></div>
-                </div>
-
-                <div class="col-sm-6 col-lg-3 column-divider-lg">
-                  <div class="media">
-                    <div class="media-body">
-                      <h4 class="card-subtitle">Commission</h4>
-                      <span class="card-title h1" id="totalCommission">Loading...</span>
-                    </div>
-                    <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
-                      <i class="tio-receipt-outlined"></i>
-                    </span>
-                  </div>
-                  <div class="d-sm-none"><hr></div>
-                </div>
-                <div class="col-sm-6 col-lg-3 column-divider-sm">
-                  <div class="media">
-                    <div class="media-body">
-                      <h4 class="card-subtitle">Profit</h4>
-                      <span class="card-title h1" id="totalProfit">Loading...</span>
-                    </div>
-                    <span class="icon icon-sm icon-soft-secondary icon-circle ml-3">
-                      <i class="tio-dollar"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Report Cards -->
 
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5 border-secondary shadow-lg">
+            <div class="card mb-3 mb-lg-5 border-primary shadow-lg">
               <!-- Header -->
               <div class="card-header">
                 <div class="row justify-content-between align-items-center flex-grow-1">
                   <div class="col-sm mb-3 mb-sm-0">
                     <h4 class="card-header-title">All Invoices</h4>
-                  </div>
-
-                  <div class="col-sm-auto">
-                    <!-- Datatable Info -->
-                    <div id="datatableCounterInfo" style="display: none;">
-                      <div class="d-flex align-items-center">
-                        <span class="font-size-sm mr-3">
-                          <span id="datatableCounter">0</span>
-                          Selected
-                        </span>
-                        <a class="btn btn-sm btn-outline-danger" href="javascript:;">
-                          <i class="tio-delete-outlined"></i> Delete
-                        </a>
-                      </div>
-                    </div>
-                    <!-- End Datatable Info -->
                   </div>
                 </div>
                 <!-- End Row -->
@@ -344,7 +324,7 @@
                     </span>
                   </div>
                   
-                  <input id="datatableSearch" type="search" class="form-control" placeholder="Search orders" aria-label="Search orders">
+                  <input id="datatableSearch" type="search" class="form-control" placeholder="Search Invoices" aria-label="Search Invoices">
                 </div>
                 <!-- End Input Group -->
               </div>
@@ -438,7 +418,7 @@
 
           <div class="col-lg-4">
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5 border-secondary shadow-lg">
+            <div class="card mb-3 mb-lg-5 border-primary shadow-lg">
               <!-- Header -->
               <div class="card-header">
                 <h2 class="card-header-title h5">Profile</h2>

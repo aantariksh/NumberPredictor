@@ -1,11 +1,10 @@
 firebase.auth().onAuthStateChanged( async (user) => {
     if(user){
-        const UID = user.uid;
         const snapshot = await firebase.database().ref(`Teqmo/Stores`).once('value')
         const data = snapshot.val()
         updateChart(data)
-        updateBasicInfo()
         updateStatistics(data)
+        updateBasicInfo()
     }
 })
  
@@ -67,12 +66,18 @@ async function updateChart(data){
     var countLastWeek = await getSumOfCountPerDayOfWeek(data,1)
     
     var updatingChart = $.HSCore.components.HSChartJS.init($('#updatingData'));
-    updatingChart.data.datasets[0].data = countThisWeek
-    updatingChart.data.datasets[1].data = countLastWeek
+    updatingChart.data.datasets[0].data = countLastWeek
+    updatingChart.data.datasets[1].data = countThisWeek
     updatingChart.update();
 
-    const totalThisWeek = countThisWeek.reduce((a, b) => a + b, 0)
-    const totalLastWeek = countLastWeek.reduce((a, b) => a + b, 0)
+    // Calculating the trend compared to the current day of past week 
+    const date = new Date()
+    const day = date.getDay()
+    let totalThisWeek = 0, totalLastWeek = 0
+    for(i=0; i<=day; i++){
+        totalThisWeek += countThisWeek[i]
+        totalLastWeek += countLastWeek[i]
+    }
     const increasePercentage = Math.ceil((totalThisWeek - totalLastWeek)*100/totalLastWeek)
 
     const countTrend = document.getElementById("countTrend")
