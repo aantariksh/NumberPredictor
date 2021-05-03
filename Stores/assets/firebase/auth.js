@@ -21,8 +21,14 @@ firebase.auth().onAuthStateChanged((user) => {
     var currentPage = currentPage[currentPage.length-1].split('.')[0]
 
     if (user && authPages.includes(currentPage)) {
-      window.location.href = '../index.html'
-    } 
+      if (user.emailVerified) {
+        //user signed in and email verified
+        window.location.href = '../index.html'
+       } else {
+        //user signed in but email not verified
+        window.location.href = '../email-verify.html'
+        }
+      } 
     else if(!user && !authPages.includes(currentPage)) {
       // User is NOT signed in, redirecting to auth page
       window.location.href = './auth/login.html'
@@ -87,4 +93,37 @@ function resetPassword(){
   const button = document.getElementById('resetButton')
   button.disabled = true
   button.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+}
+
+//Send Email Verification Link
+function verify(){
+  firebase.auth().onAuthStateChanged(function(user) {
+     if (user) {
+        user.sendEmailVerification().then(function(){
+          Swal.fire({
+            icon: 'success',
+            title: 'Email Sent',
+            text: 'Verification link has been shared with you on email!',
+          })
+          }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+      
+            console.log(errorCode, errorMessage);
+          });
+    }
+});
+}
+
+function pageCheck(){
+  firebase.auth().onAuthStateChanged((user) => {
+    if(user){
+      console.log(user.email)
+      document.getElementById('emailVerify').innerHTML = user.email;
+    }
+    if(user.emailVerified){
+      window.location.href = './index.html'
+    }
+  });
 }
