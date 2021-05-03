@@ -1157,7 +1157,9 @@ $.extend({
 
 $(document).on('ready', function () {
     // INITIALIZATION OF VERTICAL NAVBAR
-    var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
+    $('.js-navbar-vertical-aside').hsSideNav({
+        mobileOverlayClass: 'd-print-none'
+    });
     // INITIALIZATION OF USER PROFILE DROPDOWN
     $('.js-hs-unfold-invoker').each(function () {
         var unfold = new HSUnfold($(this)).init();

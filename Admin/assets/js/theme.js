@@ -1164,7 +1164,10 @@ if (isMini) {
 
 $(document).on("ready", function () {
     // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
-    var sidebar = $(".js-navbar-vertical-aside").hsSideNav();
+    var sidebar = $('.js-navbar-vertical-aside');
+    sidebar.hsSideNav({
+      mobileOverlayClass: 'd-print-none'
+    });
     // INITIALIZATION OF UNFOLD
     $(".js-hs-unfold-invoker").each(function () {
         var unfold = new HSUnfold($(this)).init();

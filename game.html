@@ -17,8 +17,22 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
     <!-- Firebase Config -->
     <script src="./assets/firebase/auth.js"></script>
+    <style>
+      #myVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -100;
+      }
+    </style>
   </head>
   <body>
+
+    <video autoplay muted loop id="myVideo">
+      <source src="./assets/videos/triangles.mp4" type="video/mp4">
+    </video>
 
     <!-- Previous Winning Number -->
     <div class="container text-center center" id="input">
@@ -37,7 +51,7 @@
         </div>
     </div>
 
-    <!-- Loading Video -->]
+    <!-- Loading Video -->
     <video autoplay muted loop id="loader" class="center" style="display: none">
       <source src="./assets/videos/loader.mp4" type="video/mp4" style="height: 100%; width:auto;"/>
     </video>
@@ -101,7 +115,7 @@
       <div class="col-lg-2"></div>
 
       <div class="col-12 text-center mt-4">
-        <h2>Time remaining: <span id="timer">10</span> secs</h2>
+        <h2 style="color:white">Time remaining: <span id="timer">10</span> secs</h2>
       </div>
     </div>
 

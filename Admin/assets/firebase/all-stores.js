@@ -11,7 +11,7 @@ async function showAllStores() {
 
   const snapshot = await firebase.database().ref("Teqmo/Stores").once("value");
   const data = snapshot.val()
-  console.log(data)
+  // console.log(data)
   if (data) {
     jQuery.each(data, function(storeUID, storeInfo) {
       if (storeInfo) {
