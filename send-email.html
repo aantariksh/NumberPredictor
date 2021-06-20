@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Number Predictor by TeqmoMedia</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./assets/img/favicon.png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/common.css" />
+    <!-- Virtual Keybaord -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+    <style>
+      .bg {
+        /* The image used */
+        background-image: url('./assets/img/background.jpg');
+        /* Full height */
+        height: 100%;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100vw 100vh;
+      }
+    </style>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <!-- Firebase Config -->
+    <script src="./assets/firebase/auth.js"></script>
+  </head>
+  <body class="bg">
+
+    <div class="container text-center center">
+      <!-- Greeting -->
+      <h1 style="color: var(--myYlw);">Thank you for playing with us!!</h1>
+      <h3 style="color: white;">In case you don't remember the numbers, let us send it to your inbox! </h3>
+      <br><br>
+      <!-- Input bar -->
+      <div class="mb-3" style="border-style: solid;border-width: 3px;border-color:  #17a2b8;">
+        <input type="email" class="input pl-4" placeholder="Enter your email address" style="width: 100%;line-height: 2em;font-size: 2em;">
+      </div>
+      <!-- Keyboard -->
+      <div class="simple-keyboard"></div>
+      <div class="mt-1">
+        <button class="btn btn-light" onclick="addService('@gmail.com')">@gmail.com</button>
+        <button class="btn btn-light" onclick="addService('@hotmail.com')">@hotmail.com</button>
+        <button class="btn btn-light" onclick="addService('@rediffmail.com')">@rediffmail.com</button>
+        <button class="btn btn-light" onclick="addService('@outlook.com')">@outlook.com</button>
+      </div>
+      <!-- Submit -->
+      <div class="mt-4">
+        <a class="btn btn-lg btn-warning" href="video-loop.html">Skip email</a>
+        <button class="btn btn-lg btn-success" onclick="sendEmail()">Submit email</button>
+      </div>
+    </div>
+
+    <!-- Vendor Js -->
+    <script src="./assets/vendor/jquery-3.5.1.slim.min.js"></script>
+    <script src="./assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="./assets/vendor/email.js"></script>
+    <!-- Custom Js -->
+    <script>
+      // Simple Keyboard
+      const Keyboard = window.SimpleKeyboard.default;
+      const myKeyboard = new Keyboard({
+        onChange: input => onChange(input),
+        onKeyPress: button => onKeyPress(button)
+      });
+      // Update simple-keyboard when input is changed directly
+      document.querySelector(".input").addEventListener("input", event => {
+        myKeyboard.setInput(event.target.value);
+      });
+      function onChange(input) {
+        document.querySelector(".input").value = input;
+      }
+      function onKeyPress(button) {
+        if (button === "{shift}" || button === "{lock}") handleShift();
+      }
+      function handleShift() {
+        let currentLayout = myKeyboard.options.layoutName;
+        let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+        myKeyboard.setOptions({
+          layoutName: shiftToggle
+        });
+      }
+
+      function addService(input) {
+        var value = myKeyboard.getInput() + input;
+        document.querySelector(".input").value = value;
+        myKeyboard.setInput(value);
+      }
+
+      async function sendEmail() {
+        // Init Email Js
+        emailjs.init('user_79vHtveIfenEerYeV35X1');
+        const to_email = document.querySelector(".input").value
+        const predictions = "1, 2, 3"
+        await emailjs.send("service_11hp1op","template_edoywaz", {
+            to_email,
+            predictions: 
+              sessionStorage.getItem('predictions').substring(2,) ||
+              "Aplogies, prediction can't be sent. Please report to store owner."
+        });
+        window.location.href = "video-loop.html"
+      }
+    </script>
+  </body>
+</html>

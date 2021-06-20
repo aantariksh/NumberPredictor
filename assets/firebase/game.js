@@ -30,11 +30,12 @@ function checkLength(ele){
  * Adds all the generated numbers to UI
  * @returns {Array} Array of all the generated numbers 
  */
-function generate(){
+function generate() {
     document.getElementById('input').style.display = 'none';
     document.getElementById('loader').style.display = 'block';
 
-    var numbers = generateNumbers(25)
+    var res = generateNumbers(25)
+    var numbers = res[0], predictions = res[1]
     for(i=0; i<5; i++){
         var result = ''
         for(j=0; j<5; j++){
@@ -49,7 +50,7 @@ function generate(){
         document.getElementById('output').style.display = ''; 
     }, 5000);
 
-    return numbers
+    return predictions
 }
 
 function generateNumbers(count){
@@ -57,6 +58,8 @@ function generateNumbers(count){
     let dig = document.getElementById('digits').value;
     let list = [0, 1, 6, 7, 8, 9, 3, 4, 2, 5].concat(inp.toString().split(''))
     let numbers = []
+    let predictions = ''
+
     while(numbers.length!=count){
         let newNum = ''
         for(i=0; i<dig; i++){
@@ -66,14 +69,16 @@ function generateNumbers(count){
         prevNumLeft = newNum[0]=="0" ? 9 : parseInt(newNum[0])-1
         nextNumRight = newNum[dig-1]=="9" ? 0 : parseInt(newNum[dig-1])+1
 
-        newNum = '<span class="extraDigit">' + prevNumLeft + '-</span>' 
+        var num = '<span class="extraDigit">' + prevNumLeft + '-</span>' 
                     + newNum + '<span class="extraDigit">-' + nextNumRight + '</span>'
-        if(!numbers.includes(newNum)){
-            numbers.push(newNum)
+        if(!numbers.includes(num)){
+            numbers.push(num)
         }
-    }
 
-    return numbers
+        predictions += `, ${prevNumLeft}-${newNum}-${nextNumRight}`
+    }
+    sessionStorage.setItem('predictions', predictions)
+    return [numbers, predictions]
 }
 
 function getRandomInt(min, max) {
@@ -96,7 +101,7 @@ function timer(seconds=15) {
 
             setTimeout(()=>{
                 document.getElementById("timer").innerHTML = "0";
-                window.location.href="video-loop.html"; //Going back once time gets over
+                window.location.href = "send-email.html";
             },2000);
         }
     }, 1000);
