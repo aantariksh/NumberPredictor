@@ -48,22 +48,34 @@ async function showAllStoresAllBills() {
         let billStatus = storeData.billStatus ? storeData.billStatus : -1;
         let total = storeData.weeklySales ? storeData.weeklySales : 'N/A';
         var statusLine
+        let mark = ``
         if (billStatus == 0) {
           statusLine = `<span class="badge badge-soft-secondary">
                                 <span class="legend-indicator bg-secondary"></span>Not Generated
                               </span>`
         } else if (billStatus == 1) {
-          statusLine = `<span class="badge badge-soft-warning">
+          statusLine = `<span id="${storeUID}${weekNum}Status" class="badge badge-soft-warning">
                                 <span class="legend-indicator bg-warning"></span>Pending
                               </span>`
-        } else {
+
+          mark = `<button id="${storeUID}${weekNum}" class="btn btn-sm btn-white" onclick="updateBillStatus('${storeUID}','${weekNum}',this.id)">
+              Mark Paid</button>`
+
+        } else if (billStatus == 2) {
           statusLine = `<span class="badge badge-soft-success">
                                 <span class="legend-indicator bg-success"></span>Paid
                               </span>`
         }
+        else{
+          statusLine = `<span class="badge">
+                                <span class="legend-indicator"></span>N/A
+                              </span>`
+        }
+
         let invoice = `<a class="btn btn-sm btn-white" href="invoice.html?storeUID=${storeUID}&weekID=${weekNum}">
             <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`
-        var temp = [storeName, startDate, endDate, statusLine, total, invoice]
+            
+        var temp = [storeName, startDate, endDate, statusLine, mark,total, invoice]
         dataSet.unshift(temp)
       })
     }
@@ -71,6 +83,17 @@ async function showAllStoresAllBills() {
   updateDataTable(dataSet)
 }
 
+function updateBillStatus(storeUID, weekNum, btnID) {
+  console.log(storeUID, weekNum, btnID)
+  firebase.database().ref(`Teqmo/Stores/${storeUID}/payment/weeks/${weekNum}`).update({
+    'billStatus': 2 //Paid
+  }).then(() => {
+    document.getElementById(btnID).innerHTML = `Paid <i class="tio-done mr-1"></i>`
+    document.getElementById(btnID + 'Status').innerHTML = `<span class="badge badge-soft-success">
+      <span class="legend-indicator bg-success"></span>Paid
+      </span>`
+  });
+}
 
 // INITIALIZATION OF DATATABLES
 function updateDataTable(dataSet) {
@@ -81,6 +104,7 @@ function updateDataTable(dataSet) {
             { title: "Start Date" },
             { title: "End Date" },
             { title: "Payment Status"},
+            { title: "Update Status"},
             { title: "Commission"},
             { title: "Invoice" }
         ],
