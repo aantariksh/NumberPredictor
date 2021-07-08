@@ -87,13 +87,19 @@ async function storeBillDetails(weeks,storeUID){
                     commission = details.commission ? details.commission : 'N/A';
                 }
 
-                let billStatusHTML = `<span class="badge badge-soft-${billIconClass}">
+                let billStatusHTML = `<span id="${storeUID}${weekNum}Status" class="badge badge-soft-${billIconClass}">
                                     <span class="legend-indicator bg-${billIconClass}"></span>${billStatus}
                                     </span>`;
+                
+                let mark = ``
+                if (details.billStatus == 1) {
+                    mark = `<button id="${storeUID}${weekNum}" class="btn btn-sm btn-white" onclick="updateBillStatus('${storeUID}','${weekNum}',this.id)">
+                    Mark Paid</button>`
+                }
                 let invoice = `<a class="btn btn-sm btn-white" href="invoice.html?storeUID=${storeUID}&weekID=${weekNum}">
                 <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`
                 
-                let row = [startDate, endDate, billStatusHTML, sales, commission, invoice];
+                let row = [startDate, endDate, billStatusHTML, mark, sales, commission, invoice];
                 billDetailsData.unshift(row);   //Adding JSON at beginning
             }
         });
@@ -102,6 +108,18 @@ async function storeBillDetails(weeks,storeUID){
         console.log('No week exists');
     }
     updateDataTable(billDetailsData);
+}
+
+function updateBillStatus(storeUID, weekNum, btnID) {
+    console.log(storeUID, weekNum, btnID)
+    firebase.database().ref(`Teqmo/Stores/${storeUID}/payment/weeks/${weekNum}`).update({
+        'billStatus': 2 //Paid
+    }).then(() => {
+        document.getElementById(btnID).innerHTML = `Paid <i class="tio-done mr-1"></i>`
+        document.getElementById(btnID + 'Status').innerHTML = `<span class="badge badge-soft-success">
+        <span class="legend-indicator bg-success"></span>Paid
+        </span>`
+    });
 }
 
 /**
@@ -121,6 +139,7 @@ function updateDataTable(dataSet){
           { title: "Start Date" },
           { title: "End Date" },
           { title: "Payment" },
+          { title: "Update Status" },
           { title: "Sales" },
           { title: "Commission" },
           { title: "Invoice" }
