@@ -13,46 +13,62 @@ firebase.auth().onAuthStateChanged((user) => {
  */
 async function showAllStoresAllBills() {
 
-    const snapshot = await firebase.database().ref(`Teqmo/Stores`).once('value')
-    const data = snapshot.val()
+  const snapshot = await firebase.database().ref(`Teqmo/Stores`).once('value')
+  const data = snapshot.val()
 
-    var dataSet = []
-    
-    jQuery.each(data, function(storeUID, details) {
+  let sortedByWeeks = {};
+  jQuery.each(data, function (storeUID, details) {
     if (details) {
-        jQuery.each(details.payment.weeks, function(weekNum, weekDetails) {
-            if (weekDetails && weekNum!="start") {
-                let storeName = details.details.storeName ? details.details.storeName : 'No Store Name';
-                let startDate = getDateFromWeek(weekNum, 0);
-                let endDate = getDateFromWeek(weekNum, 1);
-                let billStatus = weekDetails.billStatus;
-                let total = weekDetails.sales ? weekDetails.sales : 'N/A';
-                var statusLine
-                if(billStatus==0){
-                    statusLine = `<span class="badge badge-soft-secondary">
-                                    <span class="legend-indicator bg-secondary"></span>Not Generated
-                                  </span>`
-                }
-                else if (billStatus==1){
-                    statusLine = `<span class="badge badge-soft-warning">
-                                    <span class="legend-indicator bg-warning"></span>Pending
-                                  </span>`
-                }
-                else {
-                    statusLine = `<span class="badge badge-soft-success">
-                                    <span class="legend-indicator bg-success"></span>Paid
-                                  </span>`
-                }
-                let invoice = `<a class="btn btn-sm btn-white" href="invoice.html?storeUID=${storeUID}&weekID=${weekNum}">
-                <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`
-
-                var temp = [storeName,startDate,endDate,statusLine,total,invoice]
-                dataSet.unshift(temp)
-                }
-            })
+      jQuery.each(details.payment.weeks, function (weekNum, weekDetails) {
+        if (weekDetails && weekNum != "start") {
+          let storeData = {
+            "storeName": details.details.storeName,
+            "billStatus": weekDetails.billStatus, // Not checking if data is undefined or not, as It will be checked later
+            "weeklySales": weekDetails.sales
+          };
+          if (sortedByWeeks[weekNum]) {
+            sortedByWeeks[weekNum][storeUID] = storeData;
+          } else {
+            sortedByWeeks[weekNum] = {
+              [storeUID]: storeData
+            };
+          }
         }
-    })
-    updateDataTable(dataSet)
+      })
+    }
+  })
+
+  let dataSet = []
+  jQuery.each(sortedByWeeks, function (weekNum, allStores) {
+    if (allStores) {
+      jQuery.each(allStores, function (storeUID, storeData) {
+        let storeName = storeData.storeName ? storeData.storeName : 'No Store Name';
+        let startDate = getDateFromWeek(weekNum, 0);
+        let endDate = getDateFromWeek(weekNum, 1);
+        let billStatus = storeData.billStatus ? storeData.billStatus : -1;
+        let total = storeData.weeklySales ? storeData.weeklySales : 'N/A';
+        var statusLine
+        if (billStatus == 0) {
+          statusLine = `<span class="badge badge-soft-secondary">
+                                <span class="legend-indicator bg-secondary"></span>Not Generated
+                              </span>`
+        } else if (billStatus == 1) {
+          statusLine = `<span class="badge badge-soft-warning">
+                                <span class="legend-indicator bg-warning"></span>Pending
+                              </span>`
+        } else {
+          statusLine = `<span class="badge badge-soft-success">
+                                <span class="legend-indicator bg-success"></span>Paid
+                              </span>`
+        }
+        let invoice = `<a class="btn btn-sm btn-white" href="invoice.html?storeUID=${storeUID}&weekID=${weekNum}">
+            <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`
+        var temp = [storeName, startDate, endDate, statusLine, total, invoice]
+        dataSet.unshift(temp)
+      })
+    }
+  })
+  updateDataTable(dataSet)
 }
 
 
