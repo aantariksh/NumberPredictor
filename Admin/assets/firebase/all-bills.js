@@ -24,7 +24,7 @@ async function showAllStoresAllBills() {
           let storeData = {
             "storeName": details.details.storeName,
             "billStatus": weekDetails.billStatus, // Not checking if data is undefined or not, as It will be checked later
-            "weeklySales": weekDetails.sales
+            "weeklyCommission": weekDetails.commission
           };
           if (sortedByWeeks[weekNum]) {
             sortedByWeeks[weekNum][storeUID] = storeData;
@@ -46,7 +46,7 @@ async function showAllStoresAllBills() {
         let startDate = getDateFromWeek(weekNum, 0);
         let endDate = getDateFromWeek(weekNum, 1);
         let billStatus = storeData.billStatus || -1;
-        let total = storeData.weeklySales || 'N/A';
+        let total = storeData.weeklyCommission || 'N/A';
         var statusLine
         let mark = ``
         if (billStatus == 0) {
