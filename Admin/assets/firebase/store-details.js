@@ -20,17 +20,17 @@ async function showStoresDetails(){
  * @param {object} storeDetails object available at 'Teqmo/Stores/UID/details'
  */
 function storeOwnerInfo(storeDetails){
-    let ownerName = storeDetails.ownerName ? storeDetails.ownerName : 'No Name'
+    let ownerName = storeDetails.ownerName || 'No Name'
 
-    let email = storeDetails.email ? storeDetails.email : 'Email not available'
-    let phone = storeDetails.phone ? storeDetails.phone : 'No Data'
+    let email = storeDetails.email || 'Email not available'
+    let phone = storeDetails.phone || 'No Data'
     let contactInfo =` <li><i class="tio-online mr-2"></i>${email}</li>
             <li><i class="tio-android-phone-vs mr-2"></i>${phone}</li>`;
     
-    let city = storeDetails.city ? storeDetails.city : 'No City'
-    let state = storeDetails.state ? storeDetails.state : 'No Sate'
-    let companyName = storeDetails.companyName ? storeDetails.companyName : 'No Company Name'
-    let storeName = storeDetails.storeName ? storeDetails.storeName : 'No Store Name'
+    let city = storeDetails.city || 'No City'
+    let state = storeDetails.state || 'No Sate'
+    let companyName = storeDetails.companyName || 'No Company Name'
+    let storeName = storeDetails.storeName || 'No Store Name'
     let storeInfo = `<li><i class="tio-user-outlined mr-2"></i>${storeName}</li>
                     <li><i class="tio-briefcase-outlined mr-2"></i>${companyName}</li>
                     <li><i class="tio-city mr-2"></i>${city}, ${state}</li>`;
@@ -46,8 +46,8 @@ function storeOwnerInfo(storeDetails){
  * @param {object} storePayment object available at 'Teqmo/Stores/UID/payment'
  */
 function storeReportCard(storePayment){
-    const totalSales = storePayment.totalSales ? storePayment.totalSales : 0
-    const totalCommission = storePayment.totalCommission ? storePayment.totalCommission : 0
+    const totalSales = storePayment.totalSales || 0
+    const totalCommission = storePayment.totalCommission || 0
     const totalProfit = totalSales - totalCommission
     let totalCount =  0
     jQuery.each(storePayment.weeks, function(weekNum, details) {
@@ -75,7 +75,6 @@ async function storeBillDetails(weeks,storeUID){
     if(weeks){
         jQuery.each(weeks, function(weekNum, details) {
             if (details && weekNum!='start') {
-                // console.log(weekNum, details)
                 let startDate = getDateFromWeek(weekNum, 0); //From Common function's File
                 let endDate = getDateFromWeek(weekNum, 1);
                 let billStatus = billStatusArray[0], billIconClass = billStatusClasses[0]
@@ -83,8 +82,8 @@ async function storeBillDetails(weeks,storeUID){
                 if (details.billStatus) {
                     billStatus = billStatusArray[details.billStatus];
                     billIconClass = billStatusClasses[details.billStatus];
-                    sales = details.sales ? details.sales : 'N/A';
-                    commission = details.commission ? details.commission : 'N/A';
+                    sales = details.sales || 'N/A';
+                    commission = details.commission || 'N/A';
                 }
 
                 let billStatusHTML = `<span id="${storeUID}${weekNum}Status" class="badge badge-soft-${billIconClass}">
@@ -94,7 +93,7 @@ async function storeBillDetails(weeks,storeUID){
                 let mark = ``
                 if (details.billStatus == 1) {
                     mark = `<button id="${storeUID}${weekNum}" class="btn btn-sm btn-white" onclick="updateBillStatus('${storeUID}','${weekNum}',this.id)">
-                    Mark Paid</button>`
+                    Paid</button>`
                 }
                 let invoice = `<a class="btn btn-sm btn-white" href="invoice.html?storeUID=${storeUID}&weekID=${weekNum}">
                 <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`

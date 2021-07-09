@@ -42,11 +42,11 @@ async function showAllStoresAllBills() {
   jQuery.each(sortedByWeeks, function (weekNum, allStores) {
     if (allStores) {
       jQuery.each(allStores, function (storeUID, storeData) {
-        let storeName = storeData.storeName ? storeData.storeName : 'No Store Name';
+        let storeName = storeData.storeName || 'No Store Name';
         let startDate = getDateFromWeek(weekNum, 0);
         let endDate = getDateFromWeek(weekNum, 1);
-        let billStatus = storeData.billStatus ? storeData.billStatus : -1;
-        let total = storeData.weeklySales ? storeData.weeklySales : 'N/A';
+        let billStatus = storeData.billStatus || -1;
+        let total = storeData.weeklySales || 'N/A';
         var statusLine
         let mark = ``
         if (billStatus == 0) {
@@ -59,7 +59,7 @@ async function showAllStoresAllBills() {
                               </span>`
 
           mark = `<button id="${storeUID}${weekNum}" class="btn btn-sm btn-white" onclick="updateBillStatus('${storeUID}','${weekNum}',this.id)">
-              Mark Paid</button>`
+              Paid</button>`
 
         } else if (billStatus == 2) {
           statusLine = `<span class="badge badge-soft-success">
@@ -75,7 +75,7 @@ async function showAllStoresAllBills() {
         let invoice = `<a class="btn btn-sm btn-white" href="invoice.html?storeUID=${storeUID}&weekID=${weekNum}">
             <i class="tio-receipt-outlined mr-1"></i> Invoice</a>`
             
-        var temp = [storeName, startDate, endDate, statusLine, mark,total, invoice]
+        var temp = [storeName, startDate, endDate, statusLine, mark, total, invoice]
         dataSet.unshift(temp)
       })
     }
