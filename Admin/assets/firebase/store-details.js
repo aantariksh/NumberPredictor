@@ -119,6 +119,12 @@ function updateBillStatus(btnID) {
         document.getElementById(btnID + 'Status').innerHTML = `<span class="badge badge-soft-success">
         <span class="legend-indicator bg-success"></span>Paid
         </span>`
+    }).catch((error) => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `Something went bad, Please try again`,
+        })
     });
 }
 
