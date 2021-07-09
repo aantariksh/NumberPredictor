@@ -54,11 +54,11 @@ async function showAllStoresAllBills() {
                                 <span class="legend-indicator bg-secondary"></span>Not Generated
                               </span>`
         } else if (billStatus == 1) {
-          statusLine = `<span id="${storeUID}${weekNum}Status" class="badge badge-soft-warning">
+          statusLine = `<span id="${storeUID}-${weekNum}Status" class="badge badge-soft-warning">
                                 <span class="legend-indicator bg-warning"></span>Pending
                               </span>`
 
-          mark = `<button id="${storeUID}${weekNum}" class="btn btn-sm btn-white" onclick="updateBillStatus('${storeUID}','${weekNum}',this.id)">
+          mark = `<button id="${storeUID}-${weekNum}" class="btn btn-sm btn-white" onclick="updateBillStatus(this.id)">
               Paid</button>`
 
         } else if (billStatus == 2) {
@@ -83,8 +83,9 @@ async function showAllStoresAllBills() {
   updateDataTable(dataSet)
 }
 
-function updateBillStatus(storeUID, weekNum, btnID) {
-  console.log(storeUID, weekNum, btnID)
+function updateBillStatus(btnID) {
+  let storeUID = btnID.split('-')[0]
+  let weekNum = btnID.split('-')[1]
   firebase.database().ref(`Teqmo/Stores/${storeUID}/payment/weeks/${weekNum}`).update({
     'billStatus': 2 //Paid
   }).then(() => {
