@@ -86,13 +86,13 @@ async function storeBillDetails(weeks,storeUID){
                     commission = details.commission || 'N/A';
                 }
 
-                let billStatusHTML = `<span id="${storeUID}${weekNum}Status" class="badge badge-soft-${billIconClass}">
+                let billStatusHTML = `<span id="${storeUID}-${weekNum}Status" class="badge badge-soft-${billIconClass}">
                                     <span class="legend-indicator bg-${billIconClass}"></span>${billStatus}
                                     </span>`;
                 
                 let mark = ``
                 if (details.billStatus == 1) {
-                    mark = `<button id="${storeUID}${weekNum}" class="btn btn-sm btn-white" onclick="updateBillStatus('${storeUID}','${weekNum}',this.id)">
+                    mark = `<button id="${storeUID}-${weekNum}" class="btn btn-sm btn-white" onclick="updateBillStatus(this.id)">
                     Paid</button>`
                 }
                 let invoice = `<a class="btn btn-sm btn-white" href="invoice.html?storeUID=${storeUID}&weekID=${weekNum}">
@@ -109,8 +109,9 @@ async function storeBillDetails(weeks,storeUID){
     updateDataTable(billDetailsData);
 }
 
-function updateBillStatus(storeUID, weekNum, btnID) {
-    console.log(storeUID, weekNum, btnID)
+function updateBillStatus(btnID) {
+    let storeUID = btnID.split('-')[0]
+    let weekNum = btnID.split('-')[1]
     firebase.database().ref(`Teqmo/Stores/${storeUID}/payment/weeks/${weekNum}`).update({
         'billStatus': 2 //Paid
     }).then(() => {
