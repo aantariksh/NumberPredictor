@@ -99,12 +99,15 @@
         // Init Email Js
         emailjs.init('user_79vHtveIfenEerYeV35X1');
         const to_email = document.querySelector(".input").value
-        const predictions = "1, 2, 3"
+        const predictions = {}
+        var i = 1
+        sessionStorage.getItem('predictions').split(', ').forEach(pred => {
+          predictions[`key${i}`] = pred
+          i += 1
+        });
         await emailjs.send("service_11hp1op","template_edoywaz", {
             to_email,
-            predictions: 
-              sessionStorage.getItem('predictions').substring(2,) ||
-              "Aplogies, prediction can't be sent. Please report to store owner."
+            ...predictions
         });
         window.location.href = "video-loop.html"
       }

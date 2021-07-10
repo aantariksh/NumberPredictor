@@ -77,6 +77,7 @@ function generateNumbers(count){
 
         predictions += `, ${prevNumLeft}-${newNum}-${nextNumRight}`
     }
+    predictions = predictions.substring(2,)
     sessionStorage.setItem('predictions', predictions)
     return [numbers, predictions]
 }

@@ -6,43 +6,33 @@
     <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css" />
     <title>Number Predictor by TeqmoMedia</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="./assets/img/favicon.png">
-    
+    <link rel="shortcut icon" href="./assets/img/favicon.png" />
+    <link rel="stylesheet" href="assets/css/background-video.css">
+
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
     <!-- Firebase Config -->
     <script src="./assets/firebase/auth.js"></script>
-    
+
     <style>
-      * {
-        box-sizing: border-box;
-      }
       body {
-        margin: 0;
         font-family: Arial;
         font-size: 17px;
         background-color: salmon;
-      }
-      #myVideo {
-        position: fixed;
-        right: 0;
-        top: -20%;
-        min-width: 100%;
-        min-height: 100%;
-        z-index: -100;
       }
       .swal2-title, .swal2-content {color: #fff !important;}
       .swal2-popup{border: solid 4px white !important;}
     </style>
   </head>
   <body>
-    <div style="text-align: center" onclick="checkLockStatus()">
-      <video autoplay muted loop id="myVideo">
-        <source src="./assets/videos/video.mp4" type="video/mp4" />
-        Your browser does not support HTML5 video.
-      </video>
+    <div class="video-background" onclick="checkLockStatus()">
+      <div class="video-foreground">
+        <iframe
+          src="https://www.youtube.com/embed/aDSth_Myhi8?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&playlist=aDSth_Myhi8"
+          frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
 
     <script src="./assets/vendor/sweetalert2@10.js"></script>

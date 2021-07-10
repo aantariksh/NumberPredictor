@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./assets/vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/common.css">
     <link rel="stylesheet" href="./assets/css/dialPad.css">
+    <link rel="stylesheet" href="./assets/css/background-video.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Firebase -->
@@ -19,14 +20,6 @@
     <!-- Firebase Config -->
     <script src="./assets/firebase/auth.js"></script>
     <style>
-      .myVideo {
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-        z-index: -100;
-      }
       .bg {
         color: white;
         /* The image used */
@@ -110,14 +103,22 @@
     </div>
 
     <!-- Loading Video -->
-    <video autoplay muted id="loader" class="myVideo" style="display: none">
-      <source src="./assets/videos/loader.mp4" type="video/mp4"/>
-    </video>
+    <div class="video-background" id="loader" style="display: none">
+      <div class="video-foreground">
+        <iframe
+          src="https://www.youtube.com/embed/Hhuxgj6O0yY?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&playlist=Hhuxgj6O0yY"
+          frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
 
     <!-- Results Video -->
-    <video autoplay muted loop id="results" class="myVideo" style="display: none">
-      <source src="./assets/videos/results.mp4" type="video/mp4"/>
-    </video>
+    <div class="video-background" id="results" style="display: none">
+      <div class="video-foreground">
+        <iframe
+          src="https://www.youtube.com/embed/5gtiGrqVwvk?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&playlist=5gtiGrqVwvk"
+          frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
 
     <!-- Results -->
     <div class="container-fluid row text-center center" id='output' style="display: none">
