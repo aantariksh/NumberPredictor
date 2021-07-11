@@ -48,7 +48,7 @@ function generate() {
         // getElementById('output'). removeAttribute("style");
         document.getElementById('results').style.display = ''; 
         document.getElementById('output').style.display = ''; 
-    }, 5000);
+    }, 10500);
 
     return predictions
 }
